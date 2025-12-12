@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  background-color: #05060a;
+  color: #f5f6fa;
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, #13213a 0%, transparent 30%),
+    radial-gradient(circle at 80% 10%, #0e2d2c 0%, transparent 25%),
+    linear-gradient(135deg, #07080d 0%, #0c101a 60%, #0b0c12 100%);
+}
+
+h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7ee0b8;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.subhead {
+  color: #aab3c6;
+  max-width: 640px;
+  line-height: 1.4;
+}
+
+.bridge-card {
+  background: rgba(17, 20, 29, 0.9);
+  border: 1px solid rgba(126, 224, 184, 0.15);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  padding: 22px;
+  backdrop-filter: blur(16px);
+}
+
+.bridge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+label {
+  display: block;
+  color: #c3cad8;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+select,
+input[type='number'],
+input[type='text'] {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f5f6fa;
+  font-size: 15px;
+}
+
+select:focus,
+input:focus {
+  outline: 2px solid rgba(126, 224, 184, 0.4);
+}
+
+.muted {
+  color: #8d95a8;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-shell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-shell input {
+  flex: 1;
+}
+
+.ghost {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #f5f6fa;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.ghost:hover {
+  border-color: rgba(126, 224, 184, 0.5);
+  transform: translateY(-1px);
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.pill-grid div {
+  background: linear-gradient(135deg, rgba(64, 224, 208, 0.12), rgba(12, 24, 24, 0.2));
+  border: 1px solid rgba(64, 224, 208, 0.25);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.pill-grid strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+.banner {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(64, 224, 208, 0.1);
+  border: 1px solid rgba(64, 224, 208, 0.3);
+  color: #c4ffeb;
+}
+
+.banner.error {
+  background: rgba(238, 99, 99, 0.12);
+  border-color: rgba(238, 99, 99, 0.4);
+  color: #ffd6d6;
+}
+
+.banner.success {
+  background: rgba(126, 224, 184, 0.12);
+  border-color: rgba(126, 224, 184, 0.4);
+  color: #d8ffee;
+}
+
+.banner a {
+  color: #7ee0b8;
+  text-decoration: none;
+}
+
+.primary {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #40e0d0, #7ee0b8);
+  color: #0a0c12;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.primary:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(64, 224, 208, 0.25);
+}
+
+.footnote {
+  margin-top: 12px;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bridge-card {
+    padding: 18px;
+  }
+}

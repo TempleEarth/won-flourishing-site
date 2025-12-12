@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
 
 .map-page {
-  --map-bg: #0f172a;
-  --map-card: #0b1224;
-  --map-panel: #0f1a31;
-  --map-text: #e9edf5;
-  --map-muted: #9da7ba;
-  --map-accent: #72f2c0;
-  --map-border: #1f2a46;
-  --map-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-  background: radial-gradient(circle at 20% 20%, rgba(114, 242, 192, 0.15), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(132, 94, 247, 0.18), transparent 36%),
+  --map-bg: hsl(40 20% 98%);
+  --map-card: #ffffff;
+  --map-panel: #f7f5ef;
+  --map-text: hsl(150 40% 10%);
+  --map-muted: hsl(150 20% 40%);
+  --map-accent: hsl(142 60% 35%);
+  --map-border: hsl(150 20% 90%);
+  --map-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  background: radial-gradient(circle at 20% 20%, rgba(64, 224, 208, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(59, 201, 219, 0.12), transparent 36%),
     var(--map-bg);
   color: var(--map-text);
   min-height: 100vh;

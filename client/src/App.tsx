@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import MapPage from "@/pages/Map";
+import BridgePage from "@/pages/Bridge";
 import NotFound from "@/pages/not-found";
 
 // Router component scoped to the Vite base path (GitHub Pages needs the repo name prefix)
@@ -17,6 +18,7 @@ function AppRouter() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/map" component={MapPage} />
+        <Route path="/bridge" component={BridgePage} />
         <Route component={NotFound} />
       </Switch>
     </WouterRouter>
