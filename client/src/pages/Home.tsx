@@ -44,7 +44,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/20">
       <div
         className={`transition-all duration-700 ${
-          atBottom " "opacity-0 translate-y-6 pointer-events-none" : "opacity-100"
+          atBottom ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100"
         }`}
       >
         {/* Navigation */}
