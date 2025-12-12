@@ -74,6 +74,11 @@ function BridgeForm() {
   const [lastTx, setLastTx] = useState<string | null>(null);
 
   const sourceChain = chainByKey[fromKey];
+  const chainById = useMemo(
+    () => Object.fromEntries(supportedChains.map((c) => [c.chainId, c])),
+    []
+  );
+  const activeChain = chainId ? chainById[chainId] : null;
   const destinationChain = chainByKey[toKey];
   const tokenSymbol = sourceChain.tokenSymbol || "WON";
 
@@ -299,7 +304,35 @@ function BridgeForm() {
             <Link href="/" className="bridge-nav-link">
               <- Back home
             </Link>
-            <ConnectButton />
+            <div className="flex items-center gap-2">
+              <ConnectButton />
+              {activeChain && (
+                <button
+                  type="button"
+                  className="bridge-nav-link"
+                  onClick={async () => {
+                    if (!(window as any).ethereum) return;
+                    try {
+                      await (window as any).ethereum.request({
+                        method: "wallet_watchAsset",
+                        params: {
+                          type: "ERC20",
+                          options: {
+                            address: activeChain.oftAddress,
+                            symbol: activeChain.tokenSymbol || "WON",
+                            decimals: 18
+                          }
+                        }
+                      });
+                    } catch (err) {
+                      console.error("wallet_watchAsset failed", err);
+                    }
+                  }}
+                >
+                  Add WON to wallet
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
