@@ -51,7 +51,7 @@ export default function Home() {
         <nav className="fixed top-0 left-0 right-0 z-50 glass border-b-0">
           <div className="container mx-auto px-6 h-20 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v" alt="We Won Logo" className="w-8 h-8 rounded-full object-cover" />
+              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="We Won Logo" className="w-8 h-8 rounded-full object-cover" />
               <span className="font-display font-bold text-xl tracking-tight">We Won</span>
             </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -163,14 +163,10 @@ export default function Home() {
               className="grid md:grid-cols-2 gap-16 items-center"
             >
               <div>
-                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Eco-Villages in Motion</h2>
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Ecovillages in Motion</h2>
                 <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-                  <p>
-                    Andrew Sealy stewards 45 acres of heirloom native cacao trees in Costa Rica, grown for ceremonial settings and tended by a yoga instructor who lives the practice.
-                  </p>
-                  <p>
-                    These eco-villages are the living proof that abundance compounds when we connect land, ritual, and regenerative economics.
-                  </p>
+                  <p>Our services focus on one ecovillage at a time to put it into motion by creating its cryptocurrency in a proven and abundant system that we organically network from community to community.</p>
+                  <p>Each launch is built for the next village to plug in, compounding trust, liquidity, and shared tools so regenerative teams can focus on their land and people.</p>
                 </div>
 
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -191,17 +187,23 @@ export default function Home() {
 
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80"
-                  alt="Plant flourishing in eco-village"
+                  src="https://plum-deep-cougar-254.mypinata.cloud/ipfs/bafkreihrpkgveailxlgekjdzpswa6nf2vsbaxbnoplkxsvpwrb52zgriwe"
+                  alt="Andrew Zealy tending cacao in the ecovillage"
                   className="aspect-square w-full rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 object-cover"
                   loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute -bottom-10 -left-10 glass p-8 rounded-2xl max-w-xs shadow-xl hidden md:block">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="font-bold text-sm">Cacao & Ceremony</span>
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="h-10 w-10 rounded-full bg-primary/15 text-primary font-display font-bold grid place-items-center">
+                      AZ
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-lg">Andrew Zealy</p>
+                      <p className="text-xs uppercase tracking-[0.2em] text-primary/80">Quantum Cacao</p>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium">45 acres of heirloom cacao | Yoga-led stewardship</p>
+                  <p className="text-sm font-medium leading-relaxed">Yoga instructor and steward of cacao farm, founder of Quantum Cacao.</p>
                 </div>
               </div>
             </motion.div>
@@ -292,86 +294,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Striga Card */}
-        <section id="striga-card" className="py-20 bg-gradient-to-r from-secondary/40 via-white to-secondary/10">
-          <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Striga Card Widget</p>
-              <h3 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-                Spend your impact yield with Striga
-              </h3>
-              <p className="text-lg text-muted-foreground">
-                Bring the Striga Card experience directly into the landing page so contributors can tap-to-pay with the same yield their transfers generate.
-              </p>
-              <div className="space-y-3 text-muted-foreground">
-                {[
-                  "Instant virtual card preview right on the page.",
-                  "Fund with WON and route yield while you spend.",
-                  "Built for on-the-go eco-village organizers and travelers."
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-base">
-                    <CheckCircle className="w-5 h-5 text-primary" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://striga.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-primary text-primary-foreground px-5 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 inline-flex items-center gap-2"
-                >
-                  Launch Striga Card <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://striga.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white border border-border px-5 py-3 rounded-full font-semibold hover:border-primary/50 transition-colors"
-                >
-                  View card details
-                </a>
-              </div>
-            </div>
-
-            <div className="glass border border-primary/20 bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-2xl">
-              <div className="flex items-center gap-3 mb-5">
-                <img
-                  src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
-                  alt="We Won Logo"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Powered by Striga</p>
-                  <p className="font-display font-semibold text-lg">We Won x Striga Card</p>
-                </div>
-              </div>
-              <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary text-white p-6 shadow-xl space-y-6">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm opacity-80">Impact Spending</span>
-                  <span className="text-xs uppercase tracking-[0.18em]">Virtual</span>
-                </div>
-                <div className="text-3xl font-bold tracking-wide">**** 8024</div>
-                <div className="flex justify-between text-sm opacity-80">
-                  <div>
-                    <div className="uppercase tracking-[0.2em] text-[11px]">Cardholder</div>
-                    <div className="font-semibold">You + WON</div>
-                  </div>
-                  <div>
-                    <div className="uppercase tracking-[0.2em] text-[11px]">Expiry</div>
-                    <div className="font-semibold">12/27</div>
-                  </div>
-                </div>
-                <div className="h-12 rounded-xl bg-white/15" />
-              </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                Activate or manage the card in-line, then jump to striga.com for KYC and issuance. The widget keeps the flow native to the site.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Tokenization */}
         <section id="tokenization" className="py-24 relative overflow-hidden">
           <div className="container mx-auto px-6">
@@ -416,7 +338,7 @@ export default function Home() {
               <div className="col-span-1 md:col-span-2">
                 <div className="flex items-center gap-3 mb-6">
                   <img
-                    src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                    src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
                     alt="We Won Logo"
                     className="w-10 h-10 rounded-full object-cover"
                   />
@@ -445,6 +367,9 @@ export default function Home() {
                   <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
                 </ul>
               </div>
+            </div>
+            <div className="mt-16 text-center">
+              <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight">Explore the New Earth</h1>
             </div>
             <div className="border-t border-white/10 mt-16 pt-8 text-center text-white/30 text-sm">
               (c) 2024 Won Flourishing Network. All rights reserved.

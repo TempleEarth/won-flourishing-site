@@ -9,13 +9,13 @@ export default function StablecoinPage() {
         <div className="bridge-header">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <img src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v" alt="We Won Logo" className="w-9 h-9 rounded-full object-cover" />
-              <span className="font-display font-bold text-xl">We Won</span>
+              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="Mutiraon Logo" className="w-9 h-9 rounded-full object-cover" />
+              <span className="font-display font-bold text-xl">Mutiraon</span>
             </div>
-            <p className="bridge-eyebrow">Stable Plus</p>
-            <h1 className="bridge-title">Impact assets, plain language</h1>
+            <p className="bridge-eyebrow">Mutiraon Stable</p>
+            <h1 className="bridge-title">Mint Mutiraon, plain language</h1>
             <p className="bridge-subhead">
-              Inspired by Mutiraon and simplified so anyone can follow: every unit is backed by easy-to-name impact assets like eco-villages, clean energy, and carbon, and held at a steady $1 floor.
+              Mint Mutiraon (not WON) so every unit is framed as a clear, impact-backed stable: eco-villages, clean energy, and carbon, all held to a steady $1 floor.
             </p>
           </div>
           <div className="bridge-nav-links">
@@ -91,7 +91,7 @@ export default function StablecoinPage() {
                 placeholder="250"
                 min="0"
               />
-              <p className="bridge-muted">See how many impact-backed stable units you mint from that deposit.</p>
+              <p className="bridge-muted">See how many Mutiraon units you mint from that deposit.</p>
             </div>
           </div>
 

@@ -758,7 +758,7 @@ export default function MapPage() {
       <header className="map-header">
         <div className="map-title-block flex items-center gap-3">
           <img
-            src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+            src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
             alt="We Won Logo"
             className="w-10 h-10 rounded-full object-cover"
           />

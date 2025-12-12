@@ -41,7 +41,7 @@ export default function Buy() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <img
-                src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
                 alt="We Won Logo"
                 className="w-9 h-9 rounded-full object-cover"
               />
