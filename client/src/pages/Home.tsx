@@ -439,7 +439,7 @@ export default function Home() {
       {/* Map Reveal on bottom scroll */}
       <div
         className={`fixed inset-0 z-40 bg-background transition-opacity duration-700 ${
-          atBottom " "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          atBottom ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="absolute top-4 right-4 z-50">
