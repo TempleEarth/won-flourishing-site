@@ -6,6 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import MapPage from "@/pages/Map";
 import BridgePage from "@/pages/Bridge";
+import Buy from "@/pages/Buy";
+import StablecoinPage from "@/pages/Stablecoin";
+import TokenizationPage from "@/pages/Tokenization";
 import NotFound from "@/pages/not-found";
 
 // Router component scoped to the Vite base path (GitHub Pages needs the repo name prefix)
@@ -19,6 +22,9 @@ function AppRouter() {
         <Route path="/" component={Home} />
         <Route path="/map" component={MapPage} />
         <Route path="/bridge" component={BridgePage} />
+        <Route path="/buy" component={Buy} />
+        <Route path="/stablecoin" component={StablecoinPage} />
+        <Route path="/tokenization" component={TokenizationPage} />
         <Route component={NotFound} />
       </Switch>
     </WouterRouter>

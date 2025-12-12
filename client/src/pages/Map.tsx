@@ -6,6 +6,7 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster";
 import "./map.css";
+import { Leaf } from "lucide-react";
 
 type Category = { color: string; label: string };
 
@@ -756,11 +757,10 @@ export default function MapPage() {
   return (
     <div className="map-page">
       <header className="map-header">
-        <div className="map-title-block">
-          <div className="map-badge">
-            <span className="map-dot" style={{ backgroundColor: "#72f2c0" }} />
-            Layer 0 discovery
-          </div>
+        <div className="map-title-block flex items-center gap-3">
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white">
+            <Leaf className="w-5 h-5" />
+          </span>
           <h1>Global Regenerative Ecosystem Map</h1>
           <p>
             Live directory of regenerative communities, tools, and network

@@ -31,6 +31,7 @@ export default function Home() {
   const parallaxX = useTransform(x, [-200, 200], [-24, 24]);
 
   useEffect(() => {
+    document.title = "We Won — Shared Flourishing";
     const onScroll = () => {
       setShowJoin(window.scrollY > 20);
       const nearBottom =
@@ -57,7 +58,7 @@ export default function Home() {
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                 <Leaf className="w-5 h-5 text-white" />
               </div>
-              <span className="font-display font-bold text-xl tracking-tight">Won</span>
+              <span className="font-display font-bold text-xl tracking-tight">We Won</span>
             </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               <Link href="/map" className="hover:text-primary transition-colors">
@@ -66,10 +67,11 @@ export default function Home() {
               <Link href="/bridge" className="hover:text-primary transition-colors">
                 Bridge
               </Link>
-              <a href="#foundation" className="hover:text-primary transition-colors">Foundation</a>
-              <a href="#impact" className="hover:text-primary transition-colors">Impact</a>
-              <a href="#stablecoin" className="hover:text-primary transition-colors">Stablecoin</a>
-              <a href="#tokenization" className="hover:text-primary transition-colors">Tokenization</a>
+              <Link href="/buy" className="hover:text-primary transition-colors">
+                Buy WON
+              </Link>
+              <Link href="/stablecoin" className="hover:text-primary transition-colors">Stablecoin</Link>
+              <Link href="/tokenization" className="hover:text-primary transition-colors">Tokenization</Link>
             </div>
             {showJoin && (
               <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-medium text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
@@ -102,10 +104,10 @@ export default function Home() {
               className="max-w-3xl flex flex-col"
               style={{ gap: "21px" }}
             >
-              <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Elegant motion, regenerative outcomes
-              </motion.div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              Regenerative coordination
+            </div>
 
               <motion.h1 variants={fadeIn} className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-foreground">
                 The Currency of <span className="text-gradient">Shared Flourishing</span>
@@ -134,6 +136,12 @@ export default function Home() {
                 >
                   Launch Bridge <ArrowUpRight className="w-5 h-5" />
                 </Link>
+                <Link
+                  href="/buy"
+                  className="bg-primary/10 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/20 transition-all flex items-center gap-2 border border-primary/20"
+                >
+                  Buy WON <ArrowUpRight className="w-5 h-5" />
+                </Link>
               </motion.div>
             </motion.div>
 
@@ -143,15 +151,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.9, delay: 0.15 } }}
             >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/40">
-                <img
-                  src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
-                  alt="People who have WON smiling"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/40 bg-gradient-to-br from-primary/20 via-white to-chart-3/20" />
             </motion.div>
           </div>
         </section>
@@ -193,50 +193,12 @@ export default function Home() {
               </div>
 
               <div className="relative">
-                <div className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
-                  <img
-                    src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80"
-                    alt="Andrew Sealy on cacao land"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                <div className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 bg-gradient-to-br from-primary/15 via-white to-chart-3/20" />
                 <div className="absolute -bottom-10 -left-10 glass p-8 rounded-2xl max-w-xs shadow-xl hidden md:block">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="flex -space-x-3">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="w-10 h-10 rounded-full bg-slate-200 border-2 border-white" />
-                      ))}
-                    </div>
                     <span className="font-bold text-sm">Cacao & Ceremony</span>
                   </div>
                   <p className="text-sm font-medium">45 acres of heirloom cacao | Yoga-led stewardship</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-20 grid md:grid-cols-2 gap-12 items-center"
-            >
-              <div className="order-2 md:order-1">
-                <h3 className="font-display text-3xl font-bold mb-4">Joy is the signal</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Smiling faces are the metric that matters. Every eco-village we connect should feel lighter, safer, and more alive.
-                </p>
-              </div>
-              <div className="order-1 md:order-2">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                  <img
-                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
-                    alt="Smiling community"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
                 </div>
               </div>
             </motion.div>
@@ -270,7 +232,7 @@ export default function Home() {
                   <h3 className="font-display text-2xl font-bold mb-4">{card.title}</h3>
                   <p className="text-white/60 leading-relaxed">{card.desc}</p>
                   <div className="mt-8 flex items-center gap-2 text-sm font-bold uppercase tracking-wider opacity-50">
-                    <ArrowUpRight className="w-4 h-4" /> Impact Verified
+                    Impact Verified
                   </div>
                 </motion.div>
               ))}
@@ -298,9 +260,9 @@ export default function Home() {
               <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
                   { step: "01", title: "Assets & Chains", desc: "Backed by USDC, DAI, and native LSTs across Ethereum, Arbitrum, Base, Optimism, and Avalanche.", reveal: true },
-                  { step: "02", title: "Magic: Transfer Fee", desc: "Arbitrage bots pay the fee that funds regeneration. They race to close price gaps; we route the yield.", reveal: false },
+                  { step: "02", title: "Magic: Transfer Fee", desc: "Arbitrage bots pay the fee that funds regeneration. They race to close price gaps; we route the yield.", reveal: true },
                   { step: "03", title: "Pricing Mechanics", desc: "Backed at $1.00. Price can rise but never drops below $1.00. Over time it becomes mathematically harder to approach $1 even if every asset outside locked pools sold.", reveal: true },
-                  { step: "04", title: "The Vision", desc: "Your one-time gift of giving yourself an asset that appreciates also funds a world of abundance on a world tour tokenizing and connecting eco villages.", reveal: false }
+                  { step: "04", title: "The Vision", desc: "Your one-time gift of giving yourself an asset that appreciates also funds a world of abundance on a world tour tokenizing and connecting eco villages.", reveal: true }
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -368,7 +330,7 @@ export default function Home() {
               <div className="col-span-1 md:col-span-2">
                 <div className="flex items-center gap-2 mb-6">
                   <Leaf className="w-6 h-6 text-primary" />
-                  <span className="font-display font-bold text-2xl">Won</span>
+                  <span className="font-display font-bold text-2xl">We Won</span>
                 </div>
                 <p className="text-white/50 max-w-sm mb-8 text-[17px] leading-relaxed">
                   We already have what we need. The choice is to coordinate differently—letting abundance circulate through trust.
@@ -378,9 +340,8 @@ export default function Home() {
               <div>
                 <h4 className="font-bold mb-6 text-white text-2xl">Platform</h4>
                 <ul className="space-y-4 text-white/60 text-[17px] leading-relaxed">
-                  <li><a href="#" className="hover:text-primary transition-colors">Foundation</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Stablecoin</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Tokenization</a></li>
+                  <li><Link href="/stablecoin" className="hover:text-primary transition-colors">Stablecoin</Link></li>
+                  <li><Link href="/tokenization" className="hover:text-primary transition-colors">Tokenization</Link></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Governance</a></li>
                 </ul>
               </div>
@@ -408,7 +369,18 @@ export default function Home() {
           atBottom ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
+        <div className="absolute top-4 right-4 z-50">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold shadow-lg"
+          >
+            Back to site
+          </button>
+        </div>
         <MapPage />
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-muted-foreground">
+          Scroll or tap “Back to site” to return up.
+        </div>
       </div>
     </div>
   );

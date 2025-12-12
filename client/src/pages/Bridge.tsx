@@ -37,6 +37,7 @@ import {
 import { erc20Abi, oftAbi } from "@/lib/layerzeroAbi";
 import "@rainbow-me/rainbowkit/styles.css";
 import "./bridge.css";
+import { Leaf } from "lucide-react";
 
 type MessagingFee = { nativeFee: bigint; lzTokenFee: bigint };
 
@@ -279,6 +280,12 @@ function BridgeForm() {
       <div className="bridge-page">
         <div className="bridge-header">
           <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white">
+                <Leaf className="w-4 h-4" />
+              </span>
+              <span className="font-display font-bold text-xl">We Won</span>
+            </div>
             <p className="bridge-eyebrow">LayerZero OFT Bridge</p>
             <h1 className="bridge-title">Move liquidity anywhere.</h1>
             <p className="bridge-subhead">
@@ -461,12 +468,6 @@ function BridgeForm() {
               : "Bridge tokens"}
           </button>
 
-          <div className="bridge-footnote">
-            <p className="bridge-muted">
-              Uses LayerZero v2 OFT send with executor gas {gasLimit} and
-              slippage guard of {slippage}%.
-            </p>
-          </div>
         </div>
       </div>
     </div>
