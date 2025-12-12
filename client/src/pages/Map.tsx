@@ -6,7 +6,6 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster";
 import "./map.css";
-import { Leaf } from "lucide-react";
 
 type Category = { color: string; label: string };
 
@@ -758,9 +757,11 @@ export default function MapPage() {
     <div className="map-page">
       <header className="map-header">
         <div className="map-title-block flex items-center gap-3">
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white">
-            <Leaf className="w-5 h-5" />
-          </span>
+          <img
+            src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+            alt="We Won Logo"
+            className="w-10 h-10 rounded-full object-cover"
+          />
           <h1>Global Regenerative Ecosystem Map</h1>
           <p>
             Live directory of regenerative communities, tools, and network
@@ -769,7 +770,7 @@ export default function MapPage() {
         </div>
         <div className="map-actions">
           <Link href="/" className="map-link">
-            ← Back home
+            <- Back home
           </Link>
           <button
             className="map-link map-toggle"

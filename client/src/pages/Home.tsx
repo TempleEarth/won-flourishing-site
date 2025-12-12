@@ -1,9 +1,8 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
-  Leaf,
   Shield,
   Users,
   Coins,
@@ -27,11 +26,8 @@ const stagger = {
 export default function Home() {
   const [showJoin, setShowJoin] = useState(false);
   const [atBottom, setAtBottom] = useState(false);
-  const x = useMotionValue(0);
-  const parallaxX = useTransform(x, [-200, 200], [-24, 24]);
 
   useEffect(() => {
-    document.title = "We Won — Shared Flourishing";
     const onScroll = () => {
       setShowJoin(window.scrollY > 20);
       const nearBottom =
@@ -48,16 +44,14 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/20">
       <div
         className={`transition-all duration-700 ${
-          atBottom ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100"
+          atBottom " "opacity-0 translate-y-6 pointer-events-none" : "opacity-100"
         }`}
       >
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 glass border-b-0">
           <div className="container mx-auto px-6 h-20 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" />
-              </div>
+              <img src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v" alt="We Won Logo" className="w-8 h-8 rounded-full object-cover" />
               <span className="font-display font-bold text-xl tracking-tight">We Won</span>
             </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -82,10 +76,7 @@ export default function Home() {
         </nav>
 
         {/* Hero Section */}
-        <section
-          className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-          onMouseMove={(e) => x.set(e.clientX - window.innerWidth / 2)}
-        >
+        <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               src={heroBg}
@@ -96,7 +87,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
           </div>
 
-          <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="container mx-auto px-6 relative z-10 max-w-5xl">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -104,11 +95,6 @@ export default function Home() {
               className="max-w-3xl flex flex-col"
               style={{ gap: "21px" }}
             >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Regenerative coordination
-            </div>
-
               <motion.h1 variants={fadeIn} className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-foreground">
                 The Currency of <span className="text-gradient">Shared Flourishing</span>
               </motion.h1>
@@ -143,15 +129,17 @@ export default function Home() {
                   Buy WON <ArrowUpRight className="w-5 h-5" />
                 </Link>
               </motion.div>
-            </motion.div>
-
-            <motion.div
-              className="relative w-full"
-              style={{ x: parallaxX }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.9, delay: 0.15 } }}
-            >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/40 bg-gradient-to-br from-primary/20 via-white to-chart-3/20" />
+              <motion.div
+                variants={fadeIn}
+                className="glass border border-primary/30 bg-white/60 backdrop-blur-md p-6 rounded-2xl max-w-xl shadow-xl"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">
+                  Magic: Transfer Fee
+                </p>
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                  Arbitrage bots pay the fee that funds regeneration. They race to close price gaps; we route the yield.
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -169,7 +157,7 @@ export default function Home() {
                 <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Eco-Villages in Motion</h2>
                 <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    Andrew Sealy stewards 45 acres of heirloom native cacao trees in Costa Rica—grown for ceremonial settings, tended by a yoga instructor who lives the practice.
+                    Andrew Sealy stewards 45 acres of heirloom native cacao trees in Costa Rica, grown for ceremonial settings and tended by a yoga instructor who lives the practice.
                   </p>
                   <p>
                     These eco-villages are the living proof that abundance compounds when we connect land, ritual, and regenerative economics.
@@ -193,7 +181,13 @@ export default function Home() {
               </div>
 
               <div className="relative">
-                <div className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 bg-gradient-to-br from-primary/15 via-white to-chart-3/20" />
+                <img
+                  src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6"auto=format&fit=crop&w=1200&q=80"
+                  alt="Plant flourishing in eco-village"
+                  className="aspect-square w-full rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="absolute -bottom-10 -left-10 glass p-8 rounded-2xl max-w-xs shadow-xl hidden md:block">
                   <div className="flex items-center gap-4 mb-4">
                     <span className="font-bold text-sm">Cacao & Ceremony</span>
@@ -267,14 +261,14 @@ export default function Home() {
                   <div
                     key={i}
                     className={`bg-white p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow group ${
-                      item.reveal ? "overflow-hidden relative" : ""
+                      item.reveal " "overflow-hidden relative" : ""
                     }`}
                   >
                     <span className="text-6xl font-display font-bold text-black/5 mb-4 block">{item.step}</span>
                     <h3 className="font-display text-xl font-bold mb-3">{item.title}</h3>
                     <p
                       className={`text-muted-foreground transition-all duration-200 ${
-                        item.reveal ? "opacity-0 group-hover:opacity-100 translate-y-2" : ""
+                        item.reveal " "opacity-0 group-hover:opacity-100 translate-y-2" : ""
                       }`}
                     >
                       {item.desc}
@@ -282,6 +276,81 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Striga Card */}
+        <section id="striga-card" className="py-20 bg-gradient-to-r from-secondary/40 via-white to-secondary/10">
+          <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Striga Card Widget</p>
+              <h3 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+                Spend your impact yield with Striga
+              </h3>
+              <p className="text-lg text-muted-foreground">
+                Bring the Striga Card experience directly into the landing page so contributors can tap-to-pay with the same yield their transfers generate.
+              </p>
+              <div className="space-y-3 text-muted-foreground">
+                {[
+                  "Instant virtual card preview right on the page.",
+                  "Fund with WON and route yield while you spend.",
+                  "Built for on-the-go eco-village organizers and travelers."
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-base">
+                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://striga.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-primary text-primary-foreground px-5 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 inline-flex items-center gap-2"
+                >
+                  Launch Striga Card <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <button className="bg-white border border-border px-5 py-3 rounded-full font-semibold hover:border-primary/50 transition-colors">
+                  View card details
+                </button>
+              </div>
+            </div>
+
+            <div className="glass border border-primary/20 bg-white/70 backdrop-blur-lg p-6 rounded-3xl shadow-2xl">
+              <div className="flex items-center gap-3 mb-5">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                  alt="We Won Logo"
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Powered by Striga</p>
+                  <p className="font-display font-semibold text-lg">We Won x Striga Card</p>
+                </div>
+              </div>
+              <div className="rounded-2xl bg-gradient-to-r from-primary to-secondary text-white p-6 shadow-xl space-y-6">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm opacity-80">Impact Spending</span>
+                  <span className="text-xs uppercase tracking-[0.18em]">Virtual</span>
+                </div>
+                <div className="text-3xl font-bold tracking-wide">**** 8024</div>
+                <div className="flex justify-between text-sm opacity-80">
+                  <div>
+                    <div className="uppercase tracking-[0.2em] text-[11px]">Cardholder</div>
+                    <div className="font-semibold">You + WON</div>
+                  </div>
+                  <div>
+                    <div className="uppercase tracking-[0.2em] text-[11px]">Expiry</div>
+                    <div className="font-semibold">12/27</div>
+                  </div>
+                </div>
+                <div className="h-12 rounded-xl bg-white/15" />
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Activate or manage the card in-line, then jump to striga.com for KYC and issuance. The widget keeps the flow native to the site.
+              </p>
             </div>
           </div>
         </section>
@@ -328,12 +397,16 @@ export default function Home() {
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-4 gap-12">
               <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center gap-2 mb-6">
-                  <Leaf className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-3 mb-6">
+                  <img
+                    src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                    alt="We Won Logo"
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
                   <span className="font-display font-bold text-2xl">We Won</span>
                 </div>
                 <p className="text-white/50 max-w-sm mb-8 text-[17px] leading-relaxed">
-                  We already have what we need. The choice is to coordinate differently—letting abundance circulate through trust.
+                  We already have what we need. The choice is to coordinate differently, letting abundance circulate through trust.
                 </p>
               </div>
 
@@ -357,7 +430,7 @@ export default function Home() {
               </div>
             </div>
             <div className="border-t border-white/10 mt-16 pt-8 text-center text-white/30 text-sm">
-              Ac 2024 Won Flourishing Network. All rights reserved.
+              (c) 2024 Won Flourishing Network. All rights reserved.
             </div>
           </div>
         </footer>
@@ -366,7 +439,7 @@ export default function Home() {
       {/* Map Reveal on bottom scroll */}
       <div
         className={`fixed inset-0 z-40 bg-background transition-opacity duration-700 ${
-          atBottom ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          atBottom " "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="absolute top-4 right-4 z-50">
@@ -379,7 +452,7 @@ export default function Home() {
         </div>
         <MapPage />
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-muted-foreground">
-          Scroll or tap “Back to site” to return up.
+          Scroll or tap "Back to site" to return up.
         </div>
       </div>
     </div>

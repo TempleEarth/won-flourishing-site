@@ -1,58 +1,16 @@
 import { LiFiWidget, type WidgetConfig } from "@lifi/widget";
 import { useMemo } from "react";
 import { Link } from "wouter";
+import { chainByKey, supportedChains } from "@/lib/layerzeroChains";
 import "./bridge.css";
 
-type Network =
-  | "ethereum"
-  | "arbitrum"
-  | "base"
-  | "bsc"
-  | "celo"
-  | "gnosis"
-  | "linea"
-  | "monad"
-  | "optimism"
-  | "scroll"
-  | "avalanche"
-  | "sonic";
-
-const addresses: Record<Network, string> = {
-  ethereum: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  arbitrum: "0x35aa94781FAcf8cAB70CBc7Fac6FccB4ECF346b5",
-  base: "0xec229Ce2A929c0418bAa91DC9b74e69490254c33",
-  bsc: "0xb78C7A882CE6E9Ec941B693FE8CAc10BD572f45B",
-  celo: "0x2a9Ea5A9209531d47d1269e95F66939795b35daC",
-  gnosis: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  linea: "0x7aA13f5978566878B97fd3b8f7586DEce121B6A9",
-  monad: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  optimism: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  scroll: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  avalanche: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
-  sonic: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2"
-};
-
-const supportedChains = [
-  { chainId: 1, key: "ethereum" },
-  { chainId: 42161, key: "arbitrum" },
-  { chainId: 8453, key: "base" },
-  { chainId: 56, key: "bsc" },
-  { chainId: 42220, key: "celo" },
-  { chainId: 100, key: "gnosis" },
-  { chainId: 59144, key: "linea" },
-  { chainId: 143, key: "monad" },
-  { chainId: 10, key: "optimism" },
-  { chainId: 534352, key: "scroll" },
-  { chainId: 43114, key: "avalanche" },
-  { chainId: 146, key: "sonic" }
-] as const;
-
 export default function Buy() {
+  const wonSymbol = chainByKey.ethereum.tokenSymbol || "WON";
   const toTokens = useMemo(
     () =>
-      supportedChains.map((c) => ({
-        address: addresses[c.key],
-        chainId: c.chainId
+      supportedChains.map((chain) => ({
+        address: chain.oftAddress,
+        chainId: chain.chainId
       })),
     []
   );
@@ -61,16 +19,16 @@ export default function Buy() {
     integrator: "WON",
     variant: "wide",
     appearance: "light",
-    toChain: 1,
-    toToken: addresses.ethereum,
+    toChain: chainByKey.ethereum.chainId,
+    toToken: chainByKey.ethereum.oftAddress,
     chains: { allow: supportedChains.map((c) => c.chainId) },
     tokens: {
       include: toTokens.map((token) => ({
         address: token.address,
         chainId: token.chainId,
         decimals: 18,
-        symbol: "WON",
-        name: "WON",
+        symbol: wonSymbol,
+        name: wonSymbol,
         priceUSD: "0"
       }))
     }
@@ -81,6 +39,14 @@ export default function Buy() {
       <div className="bridge-page">
         <div className="bridge-header">
           <div>
+            <div className="flex items-center gap-2 mb-2">
+              <img
+                src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                alt="We Won Logo"
+                className="w-9 h-9 rounded-full object-cover"
+              />
+              <span className="font-display font-bold text-xl">We Won</span>
+            </div>
             <p className="bridge-eyebrow">Acquire WON</p>
             <h1 className="bridge-title">Buy WON across chains</h1>
             <p className="bridge-subhead">
@@ -89,7 +55,7 @@ export default function Buy() {
           </div>
           <div className="bridge-nav-links">
             <Link href="/" className="bridge-nav-link">
-              ← Back home
+              <- Back home
             </Link>
             <Link href="/bridge" className="bridge-nav-link">
               Bridge

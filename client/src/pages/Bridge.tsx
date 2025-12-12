@@ -37,7 +37,6 @@ import {
 import { erc20Abi, oftAbi } from "@/lib/layerzeroAbi";
 import "@rainbow-me/rainbowkit/styles.css";
 import "./bridge.css";
-import { Leaf } from "lucide-react";
 
 type MessagingFee = { nativeFee: bigint; lzTokenFee: bigint };
 
@@ -76,6 +75,7 @@ function BridgeForm() {
 
   const sourceChain = chainByKey[fromKey];
   const destinationChain = chainByKey[toKey];
+  const tokenSymbol = sourceChain.tokenSymbol || "WON";
 
   useEffect(() => {
     if (fromKey === toKey) {
@@ -281,9 +281,11 @@ function BridgeForm() {
         <div className="bridge-header">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white">
-                <Leaf className="w-4 h-4" />
-              </span>
+              <img
+                src="https://gateway.pinata.cloud/ipfs/QmaMTBq3xaZqxW63ynsoA9mCbYWKuRx9S7SXnE4uwVMB2v"
+                alt="We Won Logo"
+                className="w-9 h-9 rounded-full object-cover"
+              />
               <span className="font-display font-bold text-xl">We Won</span>
             </div>
             <p className="bridge-eyebrow">LayerZero OFT Bridge</p>
@@ -295,7 +297,7 @@ function BridgeForm() {
           </div>
           <div className="bridge-nav-links">
             <Link href="/" className="bridge-nav-link">
-              ← Back home
+              <- Back home
             </Link>
             <ConnectButton />
           </div>
@@ -320,8 +322,10 @@ function BridgeForm() {
                 Balance:{" "}
                 {balanceQuery.data !== undefined
                   ? formatUnits(balanceQuery.data, decimals)
-                  : "..."}{" "}
-                {sourceChain.nativeCurrency.symbol}
+                  : address
+                  ? "..."
+                  : "Connect wallet"}{" "}
+                {tokenSymbol}
               </p>
             </div>
             <div>
@@ -414,7 +418,7 @@ function BridgeForm() {
               <p className="bridge-muted">Expected receive</p>
               <strong>
                 {minAmountLD
-                  ? `${formatUnits(minAmountLD, decimals)} tokens`
+                  ? `${formatUnits(minAmountLD, decimals)} ${tokenSymbol}`
                   : "..."}
               </strong>
             </div>

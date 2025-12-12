@@ -21,6 +21,7 @@ export type LayerZeroChain = {
   lzChain: string;
   chainId: number;
   oftAddress: Address;
+  tokenSymbol: string;
   nativeCurrency: {
     name: string;
     symbol: string;
@@ -42,6 +43,7 @@ const baseChains: BaseChain[] = [
     chainId: 1,
     lzEid: 30101,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://ethereum-rpc.publicnode.com"],
     blockExplorer: "https://etherscan.io"
@@ -53,6 +55,7 @@ const baseChains: BaseChain[] = [
     chainId: 42161,
     lzEid: 30110,
     oftAddress: "0x35aa94781FAcf8cAB70CBc7Fac6FccB4ECF346b5",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://arb1.arbitrum.io/rpc"],
     blockExplorer: "https://arbiscan.io"
@@ -64,6 +67,7 @@ const baseChains: BaseChain[] = [
     chainId: 8453,
     lzEid: 30184,
     oftAddress: "0xec229Ce2A929c0418bAa91DC9b74e69490254c33",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://mainnet.base.org"],
     blockExplorer: "https://basescan.org"
@@ -75,6 +79,7 @@ const baseChains: BaseChain[] = [
     chainId: 56,
     lzEid: 30102,
     oftAddress: "0xb78C7A882CE6E9Ec941B693FE8CAc10BD572f45B",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Binance Coin", symbol: "BNB", decimals: 18 },
     rpcUrls: ["https://bsc-dataseed.binance.org"],
     blockExplorer: "https://bscscan.com"
@@ -86,6 +91,7 @@ const baseChains: BaseChain[] = [
     chainId: 42220,
     lzEid: 30125,
     oftAddress: "0x2a9Ea5A9209531d47d1269e95F66939795b35daC",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Celo", symbol: "CELO", decimals: 18 },
     rpcUrls: ["https://forno.celo.org"],
     blockExplorer: "https://celoscan.io"
@@ -97,6 +103,7 @@ const baseChains: BaseChain[] = [
     chainId: 100,
     lzEid: 30145,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "xDAI", symbol: "XDAI", decimals: 18 },
     rpcUrls: ["https://rpc.gnosischain.com"],
     blockExplorer: "https://gnosisscan.io"
@@ -108,6 +115,7 @@ const baseChains: BaseChain[] = [
     chainId: 59144,
     lzEid: 30183,
     oftAddress: "0x7aA13f5978566878B97fd3b8f7586DEce121B6A9",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://rpc.linea.build"],
     blockExplorer: "https://lineascan.build"
@@ -119,6 +127,7 @@ const baseChains: BaseChain[] = [
     chainId: 143,
     lzEid: 30390,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
     rpcUrls: ["https://rpc.monad.xyz"],
     blockExplorer: "https://explorer.monad.xyz"
@@ -130,6 +139,7 @@ const baseChains: BaseChain[] = [
     chainId: 10,
     lzEid: 30111,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://mainnet.optimism.io"],
     blockExplorer: "https://optimistic.etherscan.io"
@@ -141,6 +151,7 @@ const baseChains: BaseChain[] = [
     chainId: 534352,
     lzEid: 30214,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
     rpcUrls: ["https://rpc.scroll.io"],
     blockExplorer: "https://scrollscan.com"
@@ -152,6 +163,7 @@ const baseChains: BaseChain[] = [
     chainId: 43114,
     lzEid: 30106,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Avalanche", symbol: "AVAX", decimals: 18 },
     rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
     blockExplorer: "https://snowtrace.io"
@@ -163,6 +175,7 @@ const baseChains: BaseChain[] = [
     chainId: 146,
     lzEid: 30332,
     oftAddress: "0x1F440fB7dab4D3b27617f8e5b4855B476FDd95a2",
+    tokenSymbol: "WON",
     nativeCurrency: { name: "Sonic", symbol: "S", decimals: 18 },
     rpcUrls: ["https://rpc.soniclabs.com"],
     blockExplorer: "https://sonicscan.org"

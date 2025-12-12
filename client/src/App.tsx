@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -32,6 +33,10 @@ function AppRouter() {
 }
 
 function App() {
+  useEffect(() => {
+    document.title = "We Won";
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
