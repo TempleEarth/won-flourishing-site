@@ -237,23 +237,25 @@ export default function Home() {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute -bottom-10 -left-10 glass p-8 rounded-2xl max-w-xs shadow-xl hidden md:block">
-                  <div className="flex items-center gap-4 mb-3">
+                <div className="absolute -bottom-10 -left-10 glass p-6 rounded-2xl max-w-xs shadow-xl hidden md:block">
+                  <div className="flex items-center gap-3 mb-2">
                     <div className="h-10 w-10 rounded-full bg-primary/15 text-primary font-display font-bold grid place-items-center">
                       AS
                     </div>
                     <div>
-                      <p className="font-display font-semibold text-lg">Andrew Sealy</p>
-                      <p className="text-xs uppercase tracking-[0.2em] text-primary/80">Quantum Cacao</p>
+                      <p className="font-display font-semibold text-base leading-tight">Andrew Sealy</p>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-primary/80 leading-tight">Quantum Cacao</p>
                     </div>
                   </div>
-                  <p className="text-sm font-medium leading-relaxed">Yoga instructor and steward of cacao farm, founder of Quantum Cacao.</p>
+                  <p className="text-xs md:text-sm font-medium leading-snug max-w-[230px]">
+                    Yoga instructor and steward of cacao farm, founder of Quantum Cacao.
+                  </p>
                 </div>
-                <div className="absolute -bottom-6 left-40 glass p-3 rounded-xl shadow-lg hidden md:block">
+                <div className="absolute -bottom-4 left-40 glass p-2 rounded-xl shadow-lg hidden md:block">
                   <img
                     src="https://plum-deep-cougar-254.mypinata.cloud/ipfs/bafkreihrpkgveailxlgekjdzpswa6nf2vsbaxbnoplkxsvpwrb52zgriwe"
                     alt="Andrew Sealy"
-                    className="w-28 h-28 rounded-lg object-cover"
+                    className="w-24 h-24 rounded-lg object-cover"
                     loading="lazy"
                     decoding="async"
                   />
@@ -415,7 +417,6 @@ export default function Home() {
                 <h4 className="font-bold mb-6 text-white text-2xl">Community</h4>
                 <ul className="space-y-4 text-white/60 text-[17px] leading-relaxed">
                   <li><a href="https://t.me/templeearth" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Telegram</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Twitter</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Github</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
                 </ul>
