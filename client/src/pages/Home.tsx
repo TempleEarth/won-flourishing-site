@@ -26,13 +26,14 @@ const stagger = {
 export default function Home() {
   const [showJoin, setShowJoin] = useState(false);
   const [atBottom, setAtBottom] = useState(false);
+  const MAP_REVEAL_OFFSET = 260;
 
   useEffect(() => {
     const onScroll = () => {
       setShowJoin(window.scrollY > 20);
       const nearBottom =
         window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 40;
+        document.documentElement.scrollHeight - MAP_REVEAL_OFFSET;
       setAtBottom(nearBottom);
     };
     onScroll();
@@ -157,6 +158,45 @@ export default function Home() {
           </div>
         </section>
 
+        {/* WON ROI */}
+        <section className="py-20 bg-secondary/20">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
+                  ROI: How WON grows
+                </p>
+                <h3 className="font-display text-4xl md:text-5xl font-bold leading-tight mb-4">
+                  Regenerative umbrella that lifts the WON price.
+                </h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Each project tokenized contributes a percent fee and liquidity to the shared pool. Staking and DEX activity stack on top, letting Andrew Sealy and every steward see upside as more ecovillages launch.
+                </p>
+              </div>
+              <div className="space-y-6">
+                <div className="glass p-5 rounded-2xl border border-border">
+                  <p className="text-sm font-semibold text-primary mb-1">Project fees + liquidity</p>
+                  <p className="text-muted-foreground">
+                    Every tokenized project routes a small percent fee and LP contribution into the WON umbrella pool. More launches = deeper liquidity = higher price support.
+                  </p>
+                </div>
+                <div className="glass p-5 rounded-2xl border border-border">
+                  <p className="text-sm font-semibold text-primary mb-1">Staking & DEX fees</p>
+                  <p className="text-muted-foreground">
+                    Staked WON and paired DEX liquidity earn trading fees; even a 0.3% pool with modest volume compounds yearly yield back to holders and the regen treasury.
+                  </p>
+                </div>
+                <div className="glass p-5 rounded-2xl border border-border">
+                  <p className="text-sm font-semibold text-primary mb-1">Compounding flywheel</p>
+                  <p className="text-muted-foreground">
+                    Fees, LP rewards, and staking yields recycle into new tokenizations and buy pressure, reinforcing the regenerative loop instead of extractive drift.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Eco-Villages Section */}
         <section id="foundation" className="py-24 md:py-32 relative">
           <div className="container mx-auto px-6">
@@ -200,10 +240,10 @@ export default function Home() {
                 <div className="absolute -bottom-10 -left-10 glass p-8 rounded-2xl max-w-xs shadow-xl hidden md:block">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="h-10 w-10 rounded-full bg-primary/15 text-primary font-display font-bold grid place-items-center">
-                      AZ
+                      AS
                     </div>
                     <div>
-                      <p className="font-display font-semibold text-lg">Andrew Zealy</p>
+                      <p className="font-display font-semibold text-lg">Andrew Sealy</p>
                       <p className="text-xs uppercase tracking-[0.2em] text-primary/80">Quantum Cacao</p>
                     </div>
                   </div>
@@ -212,7 +252,7 @@ export default function Home() {
                 <div className="absolute -bottom-6 left-40 glass p-3 rounded-xl shadow-lg hidden md:block">
                   <img
                     src="https://plum-deep-cougar-254.mypinata.cloud/ipfs/bafkreihrpkgveailxlgekjdzpswa6nf2vsbaxbnoplkxsvpwrb52zgriwe"
-                    alt="Andrew Zealy"
+                    alt="Andrew Sealy"
                     className="w-28 h-28 rounded-lg object-cover"
                     loading="lazy"
                     decoding="async"
@@ -389,6 +429,7 @@ export default function Home() {
             </div>
           </div>
         </footer>
+        <div className="h-28 md:h-36" aria-hidden />
       </div>
 
       {/* Map Reveal on bottom scroll */}
