@@ -9,13 +9,13 @@ export default function StablecoinPage() {
         <div className="bridge-header">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="Mutiraon Logo" className="w-9 h-9 rounded-full object-cover" />
-              <span className="font-display font-bold text-xl">Mutiraon</span>
+              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="Impact stablecoin logo" className="w-9 h-9 rounded-full object-cover" />
+              <span className="font-display font-bold text-xl">Impact Stablecoin Builder</span>
             </div>
-            <p className="bridge-eyebrow">Mutiraon Stable</p>
-            <h1 className="bridge-title">Mint Mutiraon, plain language</h1>
+            <p className="bridge-eyebrow">Mutiraon-inspired</p>
+            <h1 className="bridge-title">Create your own impact-backed stable</h1>
             <p className="bridge-subhead">
-              Mint Mutiraon (not WON) so every unit is framed as a clear, impact-backed stable: eco-villages, clean energy, and carbon, all held to a steady $1 floor.
+              Use the Mutiraon blueprint to spin up a custom stablecoin backed by the impact assets you choose—eco-villages, clean energy, carbon, or your own categories.
             </p>
           </div>
           <div className="bridge-nav-links">
@@ -41,13 +41,7 @@ export default function StablecoinPage() {
             <div>
               <h3 className="bridge-title" style={{ fontSize: "24px" }}>What backs it</h3>
               <p className="bridge-muted" style={{ marginTop: 8 }}>
-                Impact assets you can point to: carbon tons, solar and microgrid revenue, eco-village upgrades. Held across trusted chains like Ethereum and Base, with receipts you can read.
-              </p>
-            </div>
-            <div>
-              <h3 className="bridge-title" style={{ fontSize: "24px" }}>How the $1 floor holds</h3>
-              <p className="bridge-muted" style={{ marginTop: 8 }}>
-                Starts at $1. Arbitrage bots keep prices aligned and pay a small transfer fee whenever they move fast. That fee flows to regeneration, making it harder for price to drift down.
+                Pick impact assets you can point to: carbon tons, solar and microgrid revenue, eco-village upgrades. Held across trusted chains with receipts you can read.
               </p>
             </div>
           </div>
@@ -65,7 +59,7 @@ export default function StablecoinPage() {
             <div>
               <p className="bridge-muted">Impact Focus</p>
               <strong>
-                Every transaction helps fund eco-villages and regenerative projects around the world, keeping the Mutiraon clarity but aimed at real-world improvements.
+                Every transaction helps fund eco-villages and regenerative projects around the world. You define the mix; we keep the wording simple.
               </strong>
               <p className="bridge-muted" style={{ marginTop: 8 }}>
                 You pick the bucket; we publish the proof and keep the wording simple.
@@ -75,36 +69,36 @@ export default function StablecoinPage() {
 
           <div className="bridge-input-row" style={{ marginTop: 22 }}>
             <div className="bridge-field">
-              <label className="bridge-label">Your name</label>
+              <label className="bridge-label">Stablecoin name</label>
               <input
                 type="text"
                 className="bridge-input"
-                placeholder="e.g., Amina or River Collective"
+                placeholder="e.g., Cacao Reserve Dollar"
               />
-              <p className="bridge-muted">We put your name on the receipt, just like Mutiraon keeps things personal.</p>
+              <p className="bridge-muted">Give your stable a human-readable name your community recognizes.</p>
             </div>
             <div className="bridge-field">
-              <label className="bridge-label">Impact amount (USD)</label>
+              <label className="bridge-label">Symbol</label>
               <input
-                type="number"
+                type="text"
                 className="bridge-input"
-                placeholder="250"
-                min="0"
+                placeholder="e.g., CRD"
               />
-              <p className="bridge-muted">See how many Mutiraon units you mint from that deposit.</p>
+              <p className="bridge-muted">3–5 letters that pair with your reserves (see Mutiraon repo for patterns).</p>
             </div>
           </div>
 
           <div className="bridge-input-row" style={{ marginTop: 12 }}>
             <div className="bridge-field">
-              <label className="bridge-label">Choose asset bucket</label>
+              <label className="bridge-label">Impact backing (mix)</label>
               <select className="bridge-select">
                 <option>Eco-village upgrades</option>
                 <option>Carbon and biodiversity credits</option>
                 <option>Community micro-grids</option>
                 <option>Water and soil restoration</option>
+                <option>Custom basket (add your own)</option>
               </select>
-              <p className="bridge-muted">Pick the impact lane your mint supports.</p>
+              <p className="bridge-muted">Set the mix that collateralizes your stablecoin.</p>
             </div>
             <div className="bridge-field">
               <label className="bridge-label">Transfer fee destination</label>
@@ -113,6 +107,29 @@ export default function StablecoinPage() {
                 <ArrowRight className="w-4 h-4 text-primary" />
               </div>
               <p className="bridge-muted">Bots race to balance price; their fee keeps the regeneration pool topped up.</p>
+            </div>
+          </div>
+
+          <div className="bridge-input-row" style={{ marginTop: 12 }}>
+            <div className="bridge-field">
+              <label className="bridge-label">Reserve chains</label>
+              <select className="bridge-select">
+                <option>Ethereum + Base</option>
+                <option>Base + Optimism</option>
+                <option>Arbitrum + Ethereum</option>
+                <option>Custom chain set</option>
+              </select>
+              <p className="bridge-muted">Pick which chains custody the reserves; see the Mutiraon repo for deployment scripts.</p>
+            </div>
+            <div className="bridge-field">
+              <label className="bridge-label">Target supply (optional)</label>
+              <input
+                type="number"
+                className="bridge-input"
+                placeholder="e.g., 1,000,000"
+                min="0"
+              />
+              <p className="bridge-muted">Rough cap or initial mint size for your launch cohort.</p>
             </div>
           </div>
         </div>

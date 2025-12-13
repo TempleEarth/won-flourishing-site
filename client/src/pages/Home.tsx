@@ -68,12 +68,14 @@ export default function Home() {
               <Link href="/tokenization" className="hover:text-primary transition-colors">Tokenization</Link>
             </div>
             {showJoin && (
-              <Link
-                href="/buy"
+              <a
+                href="https://t.me/templeearth"
+                target="_blank"
+                rel="noreferrer"
                 className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-medium text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
               >
                 Join the Movement
-              </Link>
+              </a>
             )}
           </div>
         </nav>
@@ -131,12 +133,14 @@ export default function Home() {
                 >
                   Launch Bridge <ArrowUpRight className="w-5 h-5" />
                 </Link>
-                <Link
-                  href="/buy"
+                <a
+                  href="https://t.me/templeearth"
+                  target="_blank"
+                  rel="noreferrer"
                   className="bg-primary/10 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/20 transition-all flex items-center gap-2 border border-primary/20"
                 >
-                  Buy WON <ArrowUpRight className="w-5 h-5" />
-                </Link>
+                  Join the Movement <ArrowUpRight className="w-5 h-5" />
+                </a>
               </motion.div>
               <motion.div
                 variants={fadeIn}
@@ -187,8 +191,8 @@ export default function Home() {
 
               <div className="relative">
                 <img
-                  src="https://plum-deep-cougar-254.mypinata.cloud/ipfs/bafkreihrpkgveailxlgekjdzpswa6nf2vsbaxbnoplkxsvpwrb52zgriwe"
-                  alt="Andrew Zealy tending cacao in the ecovillage"
+                  src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80"
+                  alt="Plant flourishing in eco-village"
                   className="aspect-square w-full rounded-[2rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700 object-cover"
                   loading="lazy"
                   decoding="async"
@@ -204,6 +208,15 @@ export default function Home() {
                     </div>
                   </div>
                   <p className="text-sm font-medium leading-relaxed">Yoga instructor and steward of cacao farm, founder of Quantum Cacao.</p>
+                </div>
+                <div className="absolute -bottom-6 left-40 glass p-3 rounded-xl shadow-lg hidden md:block">
+                  <img
+                    src="https://plum-deep-cougar-254.mypinata.cloud/ipfs/bafkreihrpkgveailxlgekjdzpswa6nf2vsbaxbnoplkxsvpwrb52zgriwe"
+                    alt="Andrew Zealy"
+                    className="w-28 h-28 rounded-lg object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -361,7 +374,7 @@ export default function Home() {
               <div>
                 <h4 className="font-bold mb-6 text-white text-2xl">Community</h4>
                 <ul className="space-y-4 text-white/60 text-[17px] leading-relaxed">
-                  <li><a href="#" className="hover:text-primary transition-colors">Discord</a></li>
+                  <li><a href="https://t.me/templeearth" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Telegram</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Twitter</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Github</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
