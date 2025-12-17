@@ -36,11 +36,11 @@ const flows: Flow[] = [
     ]
   },
   {
-    title: "Fair-trade Cacao Batch (ERC-6960)",
-    desc: "Tokenize a cacao batch with layered certifications and who stewarded it.",
+    title: "Fair-trade Redeemable Land-Base-Backed Value Systems Batch (ERC-6960)",
+    desc: "Tokenize a redeemable, interchangeable land-base-backed value systems batch with layered certifications and who stewarded it.",
     cta: "Issue batch token",
     fields: [
-      { label: "Batch name", placeholder: "Cacao - Valley Lot #12" },
+      { label: "Batch name", placeholder: "Land-Base Value System - Valley Lot #12" },
       { label: "Farmer / co-op", placeholder: "Bribri Collective" },
       { label: "Amount (kg)", type: "number", placeholder: "500" },
       {

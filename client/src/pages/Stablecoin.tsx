@@ -73,7 +73,7 @@ export default function StablecoinPage() {
               <input
                 type="text"
                 className="bridge-input"
-                placeholder="e.g., Cacao Reserve Dollar"
+                placeholder="e.g., Land-Base-Backed Reserve Dollar"
               />
               <p className="bridge-muted">Give your stable a human-readable name your community recognizes.</p>
             </div>

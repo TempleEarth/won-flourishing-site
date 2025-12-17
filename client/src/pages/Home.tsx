@@ -170,7 +170,7 @@ export default function Home() {
                   Regenerative umbrella that lifts the WON price.
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Each project tokenized contributes a percent fee and liquidity to the shared pool. Staking and DEX activity stack on top, letting Andrew Sealy and every steward see upside as more ecovillages launch.
+                  Each project tokenized contributes a percent fee and liquidity to the shared pool. Staking and DEX activity stack on top, letting communities of impact and every steward see upside as more ecovillages launch.
                 </p>
               </div>
               <div className="space-y-6">
@@ -215,7 +215,7 @@ export default function Home() {
 
                 <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { icon: Shield, title: "Stewardship", desc: "Ceremonial cacao cultivated with care." },
+                    { icon: Shield, title: "Stewardship", desc: "Redeemable, interchangeable land-base-backed value systems stewarded with care." },
                     { icon: Users, title: "Community", desc: "Yoga-led presence, neighbors included." },
                     { icon: Coins, title: "Reciprocity", desc: "Value loops back into the soil and people." },
                     { icon: Activity, title: "Vitality", desc: "Movement, ritual, and daily practice." }
@@ -244,11 +244,11 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-display font-semibold text-base leading-tight">Andrew Sealy</p>
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-primary/80 leading-tight">Quantum Cacao</p>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-primary/80 leading-tight">Quantum Land Base</p>
                     </div>
                   </div>
                   <p className="text-xs md:text-sm font-medium leading-snug max-w-[230px]">
-                    Yoga instructor and steward of cacao farm, founder of Quantum Cacao.
+                    Yoga instructor and steward of land-base-backed value systems, founder of Quantum Land Base.
                   </p>
                 </div>
                 <div className="absolute -bottom-4 left-40 glass p-2 rounded-xl shadow-lg hidden md:block">
@@ -368,7 +368,7 @@ export default function Home() {
                 <div className="space-y-6">
                   {[
                     { title: "Carbon Credit Vault (ERC-4626)", desc: "Users deposit credits; yield is reinvested to accumulate more." },
-                    { title: "Fair-trade Cacao Batch (ERC-6960)", desc: "Ownership stays in core layer, certifications in extension layer." },
+                    { title: "Fair-trade Redeemable Land-Base-Backed Value Systems Batch (ERC-6960)", desc: "Ownership stays in core layer, certifications in extension layer." },
                     { title: "Automated Donations (ERC-995)", desc: "Social token routes fee on each transfer to verified beneficiaries." },
                     { title: "Abundant Liquidity Pools", desc: "Abundant liquidity pools powered by an abundant stream of funding from WON holders." }
                   ].map((item, i) => (
