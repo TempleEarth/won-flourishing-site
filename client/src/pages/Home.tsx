@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: BUSL-1.1
+/**
+ * Copyright (c) 2024 Temple Earth
+ *
+ * Entire stack is licensed under BUSL-1.1. Production use requires a license
+ * agreement; see /LICENSE and docs/LICENSING.md.
+ */
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
@@ -358,6 +365,100 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Licensing */}
+        <section id="licensing" className="py-24 md:py-32 bg-secondary/30 border-t border-border/60">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-14 items-start">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
+                  Licensing & Alignment
+                </p>
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  Stewarded core. Open integrations.
+                </h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Our Liquity-inspired Forkonomics model keeps the Won stack coordinated under a single BUSL-1.1 license. Production use requires an agreement; non-production exploration is free. Change License: GPL-2.0-or-later on January 1, 2029.
+                </p>
+
+                <div className="mt-6 space-y-3 text-sm text-muted-foreground">
+                  {[
+                    "One license across the stack: BUSL-1.1 (Change License: GPL-2.0-or-later on 1/1/2029).",
+                    "Additional Use Grant: None. Production deployments require a license agreement with Temple Earth.",
+                    "Friendly fork program expects security audits for modifications plus alignment allocations to original users."
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-3 items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <a
+                    href="mailto:licensing@templeearth.cc"
+                    className="bg-primary text-primary-foreground px-5 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
+                  >
+                    Request Production License <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="mailto:licensing@templeearth.cc?subject=Friendly%20Fork%20Program"
+                    className="border border-border px-5 py-3 rounded-full font-semibold text-sm hover:border-primary/60 hover:text-primary transition-colors inline-flex items-center gap-2"
+                  >
+                    Join Friendly Forks <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <p className="text-sm text-muted-foreground mt-4">
+                  See docs/LICENSING.md in the repo for full parameters and stewardship expectations.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    title: "Entire Stack",
+                    badge: "BUSL-1.1",
+                    desc: "Production license required. Change License: GPL-2.0-or-later on 1/1/2029.",
+                    icon: Shield
+                  },
+                  {
+                    title: "Non-Production Use",
+                    badge: "Allowed",
+                    desc: "Testing, audits, and development are permitted without a production agreement.",
+                    icon: Activity
+                  },
+                  {
+                    title: "Friendly Forks",
+                    badge: "Stewarded",
+                    desc: "Audits required for modifications; alignment drops for original users.",
+                    icon: Coins
+                  },
+                  {
+                    title: "Contact",
+                    badge: "Licensing",
+                    desc: "Reach out at licensing@templeearth.cc to request production access.",
+                    icon: Users
+                  }
+                ].map((card, i) => (
+                  <div
+                    key={i}
+                    className="glass p-5 rounded-2xl border border-border hover:border-primary/50 transition-all shadow-sm"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <card.icon className="w-6 h-6 text-primary" />
+                      <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+                        {card.badge}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold mb-2">{card.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

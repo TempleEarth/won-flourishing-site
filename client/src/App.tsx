@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: BUSL-1.1
+/**
+ * Copyright (c) 2024 Temple Earth
+ *
+ * Entire stack is licensed under BUSL-1.1. Production use requires a license
+ * agreement; see /LICENSE and docs/LICENSING.md.
+ */
 import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { queryClient } from "./lib/queryClient";

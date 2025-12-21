@@ -20,6 +20,17 @@ type MapNode = {
 };
 
 const categories: Record<string, Category> = {
+  // Platform lenses
+  "Restor.eco": { color: "#10b981", label: "Restor.eco" },
+  "Karma HQ": { color: "#f97316", label: "Karma HQ / Grants" },
+  "Giveth.io": { color: "#a855f7", label: "Giveth.io" },
+  "Toucan Protocol": { color: "#0ea5e9", label: "Toucan Protocol" },
+  Coorest: { color: "#f43f5e", label: "Coorest" },
+  Nori: { color: "#6b7280", label: "Nori (archived)" },
+  "Regen Network": { color: "#22c55e", label: "Regen Network" },
+  KlimaDAO: { color: "#14b8a6", label: "KlimaDAO" },
+  Terra0: { color: "#6366f1", label: "Terra0" },
+  // Legacy community lenses
   ReFi: { color: "#3bc9db", label: "ReFi / Climate DeFi" },
   Indigenous: { color: "#f59f00", label: "Indigenous / Ancestral" },
   Tech: { color: "#845ef7", label: "Tech / DeSci" },
@@ -31,6 +42,207 @@ const categories: Record<string, Category> = {
 };
 
 const nodes: MapNode[] = [
+  // Platform-tagged sample sites
+  {
+    id: "RST-001",
+    name: "Youth Pawa Mangroves",
+    type: "Restor.eco",
+    location: "Mombasa, Kenya",
+    lat: -4.04,
+    lng: 39.62,
+    desc: "Community-led mangrove restoration targeting 50+ hectares with CBEMR."
+  },
+  {
+    id: "RST-002",
+    name: "The Kilimanjaro Project",
+    type: "Restor.eco",
+    location: "Kilimanjaro, Tanzania",
+    lat: -3.0674,
+    lng: 37.3556,
+    desc: "Forest protection and reforestation around Kilimanjaro with mobile MRV."
+  },
+  {
+    id: "RST-003",
+    name: "AERF Myforest Program",
+    type: "Restor.eco",
+    location: "Western Ghats, India",
+    lat: 17.72,
+    lng: 73.65,
+    desc: "Incentive-based forest restoration and sacred grove conservation."
+  },
+  {
+    id: "RST-004",
+    name: "Instituto Terra",
+    type: "Restor.eco",
+    location: "Minas Gerais, Brazil",
+    lat: -19.5,
+    lng: -42.5,
+    desc: "Atlantic Forest watershed restoration with 3M+ native trees planted."
+  },
+  {
+    id: "RST-005",
+    name: "Ecopore Amazon",
+    type: "Restor.eco",
+    location: "Rondonia, Brazil",
+    lat: -10.8,
+    lng: -65,
+    desc: "Agroforestry and watershed protection restoring 2,500+ hectares."
+  },
+  {
+    id: "RST-006",
+    name: "Uru Uru Lake",
+    type: "Restor.eco",
+    location: "Oruro, Bolivia",
+    lat: -18.9,
+    lng: -67,
+    desc: "Indigenous youth using totora rafts to absorb heavy metals from the lake."
+  },
+  {
+    id: "RST-007",
+    name: "Terraformation",
+    type: "Restor.eco",
+    location: "Hawaii, USA",
+    lat: 19.8968,
+    lng: -155.5828,
+    desc: "Seed-to-carbon accelerator funding biodiverse reforestation cohorts."
+  },
+  {
+    id: "KHQ-002",
+    name: "Barichara Regeneration Fund",
+    type: "Karma HQ",
+    location: "Barichara, Colombia",
+    lat: 6.6333,
+    lng: -73.2167,
+    desc: "Bioregional regenerative economy prototype; also listed on Giveth."
+  },
+  {
+    id: "GIV-002",
+    name: "ReFi Phangan",
+    type: "Giveth.io",
+    location: "Koh Phangan, Thailand",
+    lat: 9.7489,
+    lng: 100.0295,
+    desc: "Island community hub funding regenerative initiatives via crypto donations."
+  },
+  {
+    id: "GIV-003",
+    name: "Territorial Regeneration Barichara",
+    type: "Giveth.io",
+    location: "Barichara, Colombia",
+    lat: 6.6333,
+    lng: -73.2167,
+    desc: "Bioregional regeneration led by local stewards and Giveth supporters."
+  },
+  {
+    id: "GIV-004",
+    name: "Regeneration in War (Ukraine)",
+    type: "Giveth.io",
+    location: "Ukraine",
+    lat: 48.3794,
+    lng: 31.1656,
+    desc: "Permaculture-driven soil restoration and food security in conflict zones."
+  },
+  {
+    id: "GIV-005",
+    name: "Tota Sacred Lake",
+    type: "Giveth.io",
+    location: "Boyaca, Colombia",
+    lat: 5.55,
+    lng: -72.9,
+    desc: "Water and soil regeneration for a sacred lake via a permaculture biohub."
+  },
+  {
+    id: "TOU-001",
+    name: "BC Biocarbon",
+    type: "Toucan Protocol",
+    location: "McBride, Canada",
+    lat: 53.3017,
+    lng: -120.1682,
+    desc: "Biochar producer turning forestry residues into CORCs and CHAR credits."
+  },
+  {
+    id: "TOU-002",
+    name: "American BioCarbon",
+    type: "Toucan Protocol",
+    location: "Louisiana, USA",
+    lat: 30.1699,
+    lng: -91.1468,
+    desc: "Biochar from sugarcane bagasse; thermal and electric energy co-product."
+  },
+  {
+    id: "COO-001",
+    name: "Spanish Fig Orchard",
+    type: "Coorest",
+    location: "Zaragoza, Spain",
+    lat: 41.6488,
+    lng: -0.8891,
+    desc: "NFTree-backed fig orchard with 5,500 trees and local farmer jobs."
+  },
+  {
+    id: "COO-003",
+    name: "315 Guild Forest",
+    type: "Coorest",
+    location: "Mohawk, USA",
+    lat: 42.997,
+    lng: -75.0043,
+    desc: "Native-species reforestation on reclaimed land with 11,500 trees planned."
+  },
+  {
+    id: "NOR-001",
+    name: "Harborview Farms",
+    type: "Nori",
+    location: "Maryland, USA",
+    lat: 39.0458,
+    lng: -76.6413,
+    desc: "Soil carbon pioneer sequestering 8,000+ tonnes via cover crops and rotation."
+  },
+  {
+    id: "NOR-002",
+    name: "Knuth Farms",
+    type: "Nori",
+    location: "Nebraska, USA",
+    lat: 42.0667,
+    lng: -95.05,
+    desc: "Minimal tillage and diversified rotations on 2,200 acres of cropland."
+  },
+  {
+    id: "RGN-002",
+    name: "Sharamentsa Jaguar Credits",
+    type: "Regen Network",
+    location: "Pastaza, Ecuador",
+    lat: -2.5,
+    lng: -77,
+    desc: "Indigenous-led jaguar habitat protection with blockchain-verified credits."
+  },
+  {
+    id: "RGN-003",
+    name: "Philipson Estate Blaston",
+    type: "Regen Network",
+    location: "Leicestershire, UK",
+    lat: 52.517,
+    lng: -0.85,
+    desc: "Regenerative agriculture generating GHG benefit ecocredits on 267 hectares."
+  },
+  {
+    id: "TER-001",
+    name: "Terra0 Autonomous Forest",
+    type: "Terra0",
+    location: "Brandenburg, Germany",
+    lat: 52.4611,
+    lng: 13.8397,
+    desc: "DAO-governed forest parcels sold as NFTs with biotope certification."
+  },
+  {
+    id: "KLI-001",
+    name: "Rimba Raya Reserve",
+    type: "KlimaDAO",
+    location: "Kalimantan, Indonesia",
+    lat: -2.9,
+    lng: 111.5,
+    desc: "REDD+ forest protection for orangutan habitat; credits bridged via KlimaDAO."
+  },
+
+  // Legacy community nodes (kept as requested)
   {
     id: "refi-berlin",
     name: "ReFi DAO Berlin",
@@ -38,8 +250,7 @@ const nodes: MapNode[] = [
     location: "Berlin, Germany",
     lat: 52.52,
     lng: 13.405,
-    desc:
-      "Climate DeFi builders prototyping credit instruments with local regen projects."
+    desc: "Climate DeFi builders prototyping credit instruments with local regen projects."
   },
   {
     id: "greenpill-denver",
@@ -48,8 +259,7 @@ const nodes: MapNode[] = [
     location: "Denver, USA",
     lat: 39.7392,
     lng: -104.9903,
-    desc:
-      "Community of regen founders, active at ETHDenver and year-round meetups."
+    desc: "Community of regen founders, active at ETHDenver and year-round meetups."
   },
   {
     id: "regen-network",
@@ -67,8 +277,7 @@ const nodes: MapNode[] = [
     location: "Cali, Colombia",
     lat: 3.4516,
     lng: -76.532,
-    desc:
-      "Rainforest guardians channeling carbon income directly to forest communities."
+    desc: "Rainforest guardians channeling carbon income directly to forest communities."
   },
   {
     id: "dao-universe-mx",
@@ -77,8 +286,7 @@ const nodes: MapNode[] = [
     location: "Mexico City, Mexico",
     lat: 19.4326,
     lng: -99.1332,
-    desc:
-      "Network state guild coordinating DAO services across LATAM."
+    desc: "Network state guild coordinating DAO services across LATAM."
   },
   {
     id: "klima-athens",
@@ -87,8 +295,7 @@ const nodes: MapNode[] = [
     location: "Athens, Greece",
     lat: 37.9838,
     lng: 23.7275,
-    desc:
-      "KlimaDAO-inspired carbon circle experimenting with local offsets."
+    desc: "KlimaDAO-inspired carbon circle experimenting with local offsets."
   },
   {
     id: "celo-nairobi",
@@ -97,8 +304,7 @@ const nodes: MapNode[] = [
     location: "Nairobi, Kenya",
     lat: -1.2921,
     lng: 36.8219,
-    desc:
-      "Mobile-first regen finance pilots with farming cooperatives."
+    desc: "Mobile-first regen finance pilots with farming cooperatives."
   },
   {
     id: "regen-ledger",
@@ -107,8 +313,7 @@ const nodes: MapNode[] = [
     location: "Portland, USA",
     lat: 45.5122,
     lng: -122.6587,
-    desc:
-      "Protocol engineering for ecological data attestation and MRV."
+    desc: "Protocol engineering for ecological data attestation and MRV."
   },
   {
     id: "refi-spring-lisbon",
@@ -117,8 +322,7 @@ const nodes: MapNode[] = [
     location: "Lisbon, Portugal",
     lat: 38.7223,
     lng: -9.1393,
-    desc:
-      "Regenerative startup studio blending public goods funding and DeSci tooling."
+    desc: "Regenerative startup studio blending public goods funding and DeSci tooling."
   },
   {
     id: "native-land",
@@ -127,8 +331,7 @@ const nodes: MapNode[] = [
     location: "Vancouver, Canada",
     lat: 49.2827,
     lng: -123.1207,
-    desc:
-      "Interactive indigenous territory map providing baseline cultural context."
+    desc: "Interactive indigenous territory map providing baseline cultural context."
   },
   {
     id: "digital-democracy",
@@ -137,8 +340,7 @@ const nodes: MapNode[] = [
     location: "San Francisco, USA",
     lat: 37.7749,
     lng: -122.4194,
-    desc:
-      "Mapeo creators supporting frontline partners in low-connectivity environments."
+    desc: "Mapeo creators supporting frontline partners in low-connectivity environments."
   },
   {
     id: "mapeo-quito",
@@ -147,8 +349,7 @@ const nodes: MapNode[] = [
     location: "Quito, Ecuador",
     lat: -0.1807,
     lng: -78.4678,
-    desc:
-      "City-level pilot connecting Mapeo tools to Andean indigenous mapping."
+    desc: "City-level pilot connecting Mapeo tools to Andean indigenous mapping."
   },
   {
     id: "openforest-ghana",
@@ -157,8 +358,7 @@ const nodes: MapNode[] = [
     location: "Accra, Ghana",
     lat: 5.6037,
     lng: -0.187,
-    desc:
-      "Forest monitoring and community reporting using open geospatial stacks."
+    desc: "Forest monitoring and community reporting using open geospatial stacks."
   },
   {
     id: "waorani",
@@ -167,8 +367,7 @@ const nodes: MapNode[] = [
     location: "Pastaza, Ecuador",
     lat: -1.45,
     lng: -78.5,
-    desc:
-      "Community-led mapping project protecting Waorani territory and rivers."
+    desc: "Community-led mapping project protecting Waorani territory and rivers."
   },
   {
     id: "suriname-terrastories",
@@ -177,8 +376,7 @@ const nodes: MapNode[] = [
     location: "Paramaribo, Suriname",
     lat: 5.852,
     lng: -55.2038,
-    desc:
-      "Story mapping with Matawai communities preserving oral histories."
+    desc: "Story mapping with Matawai communities preserving oral histories."
   },
   {
     id: "maori-tech",
@@ -187,8 +385,7 @@ const nodes: MapNode[] = [
     location: "Auckland, Aotearoa",
     lat: -36.8485,
     lng: 174.7633,
-    desc:
-      "Indigenous technologists weaving tikanga with web-native governance."
+    desc: "Indigenous technologists weaving tikanga with web-native governance."
   },
   {
     id: "auroville",
@@ -197,8 +394,7 @@ const nodes: MapNode[] = [
     location: "Tamil Nadu, India",
     lat: 12.0065,
     lng: 79.8109,
-    desc:
-      "Long-running intentional community experimenting with regenerative living."
+    desc: "Long-running intentional community experimenting with regenerative living."
   },
   {
     id: "tamera",
@@ -207,8 +403,7 @@ const nodes: MapNode[] = [
     location: "Alentejo, Portugal",
     lat: 37.6556,
     lng: -8.5839,
-    desc:
-      "Solar village demonstrating water retention landscapes and peace research."
+    desc: "Solar village demonstrating water retention landscapes and peace research."
   },
   {
     id: "findhorn",
@@ -217,8 +412,7 @@ const nodes: MapNode[] = [
     location: "Moray, Scotland",
     lat: 57.649,
     lng: -3.6,
-    desc:
-      "Pioneer ecovillage linking spiritual ecology with local stewardship."
+    desc: "Pioneer ecovillage linking spiritual ecology with local stewardship."
   },
   {
     id: "prospera",
@@ -227,8 +421,7 @@ const nodes: MapNode[] = [
     location: "Roatan, Honduras",
     lat: 16.317,
     lng: -86.538,
-    desc:
-      "Charter city experimenting with alternative governance and ownership."
+    desc: "Charter city experimenting with alternative governance and ownership."
   },
   {
     id: "network-miami",
@@ -237,8 +430,7 @@ const nodes: MapNode[] = [
     location: "Miami, USA",
     lat: 25.7617,
     lng: -80.1918,
-    desc:
-      "Connector group from Telegram chats bridging ReFi and climate tech."
+    desc: "Connector group from Telegram chats bridging ReFi and climate tech."
   },
   {
     id: "network-berlin",
@@ -247,8 +439,7 @@ const nodes: MapNode[] = [
     location: "Berlin, Germany",
     lat: 52.52,
     lng: 13.405,
-    desc:
-      "Active WhatsApp hub coordinating IRL meetups and hack nights."
+    desc: "Active WhatsApp hub coordinating IRL meetups and hack nights."
   },
   {
     id: "network-lagos",
@@ -257,8 +448,7 @@ const nodes: MapNode[] = [
     location: "Lagos, Nigeria",
     lat: 6.5244,
     lng: 3.3792,
-    desc:
-      "Grassroots connector network for regen founders across West Africa."
+    desc: "Grassroots connector network for regen founders across West Africa."
   },
   {
     id: "network-cape-town",
@@ -267,8 +457,7 @@ const nodes: MapNode[] = [
     location: "Cape Town, South Africa",
     lat: -33.9249,
     lng: 18.4241,
-    desc:
-      "Regional ReFi cluster linking ocean, agri, and on-chain communities."
+    desc: "Regional ReFi cluster linking ocean, agri, and on-chain communities."
   },
   {
     id: "network-nairobi",
@@ -277,8 +466,7 @@ const nodes: MapNode[] = [
     location: "Nairobi, Kenya",
     lat: -1.2864,
     lng: 36.8172,
-    desc:
-      "Connector map of Telegram groups around smallholder regen pilots."
+    desc: "Connector map of Telegram groups around smallholder regen pilots."
   },
   {
     id: "network-medellin",
@@ -287,8 +475,7 @@ const nodes: MapNode[] = [
     location: "Medellin, Colombia",
     lat: 6.2442,
     lng: -75.5812,
-    desc:
-      "Density of DeSci and public goods hackers visible via chat activity."
+    desc: "Density of DeSci and public goods hackers visible via chat activity."
   },
   {
     id: "network-sydney",
@@ -297,8 +484,7 @@ const nodes: MapNode[] = [
     location: "Sydney, Australia",
     lat: -33.8688,
     lng: 151.2093,
-    desc:
-      "APAC cluster mixing climate activism and regenerative startups."
+    desc: "APAC cluster mixing climate activism and regenerative startups."
   },
   {
     id: "network-manila",
@@ -307,8 +493,7 @@ const nodes: MapNode[] = [
     location: "Manila, Philippines",
     lat: 14.5995,
     lng: 120.9842,
-    desc:
-      "SEA coordination node translating regen playbooks for local orgs."
+    desc: "SEA coordination node translating regen playbooks for local orgs."
   },
   {
     id: "network-bangalore",
@@ -317,8 +502,7 @@ const nodes: MapNode[] = [
     location: "Bengaluru, India",
     lat: 12.9716,
     lng: 77.5946,
-    desc:
-      "Community chat featuring DeSci labs and earth observation engineers."
+    desc: "Community chat featuring DeSci labs and earth observation engineers."
   },
   {
     id: "restor-site-1",
@@ -327,8 +511,7 @@ const nodes: MapNode[] = [
     location: "Manaus, Brazil",
     lat: -3.119,
     lng: -60.0217,
-    desc:
-      "Large-scale reforestation initiative restoring Amazon biodiversity."
+    desc: "Large-scale reforestation initiative restoring Amazon biodiversity."
   },
   {
     id: "restor-site-2",
@@ -337,8 +520,7 @@ const nodes: MapNode[] = [
     location: "Dakar, Senegal",
     lat: 14.7167,
     lng: -17.4677,
-    desc:
-      "African-led initiative to combat desertification across Sahel."
+    desc: "African-led initiative to combat desertification across Sahel."
   },
   {
     id: "restor-site-3",
@@ -347,8 +529,7 @@ const nodes: MapNode[] = [
     location: "Bali, Indonesia",
     lat: -8.4095,
     lng: 115.1889,
-    desc:
-      "Community-driven coral reef restoration using Biorock technology."
+    desc: "Community-driven coral reef restoration using Biorock technology."
   },
   {
     id: "restor-site-4",
@@ -357,8 +538,7 @@ const nodes: MapNode[] = [
     location: "Addis Ababa, Ethiopia",
     lat: 9.145,
     lng: 40.4897,
-    desc:
-      "Restoring highland wetlands to improve water security and agriculture."
+    desc: "Restoring highland wetlands to improve water security and agriculture."
   },
   {
     id: "restor-site-5",
@@ -367,8 +547,7 @@ const nodes: MapNode[] = [
     location: "Ho Chi Minh City, Vietnam",
     lat: 10.8231,
     lng: 106.6297,
-    desc:
-      "Mangrove forests protecting coastlines and sequestering carbon."
+    desc: "Mangrove forests protecting coastlines and sequestering carbon."
   },
   {
     id: "agartha-2",
@@ -377,8 +556,7 @@ const nodes: MapNode[] = [
     location: "Chiapas, Mexico",
     lat: 16.8481,
     lng: -92.283,
-    desc:
-      "Sustainable living community focused on permaculture and education."
+    desc: "Sustainable living community focused on permaculture and education."
   },
   {
     id: "gen-ecovillage-1",
@@ -387,8 +565,7 @@ const nodes: MapNode[] = [
     location: "Black Mountain, USA",
     lat: 35.6064,
     lng: -82.2587,
-    desc:
-      "Permaculture-based community in the Appalachian Mountains."
+    desc: "Permaculture-based community in the Appalachian Mountains."
   },
   {
     id: "gen-ecovillage-2",
@@ -397,8 +574,7 @@ const nodes: MapNode[] = [
     location: "Linden, Germany",
     lat: 52,
     lng: 14,
-    desc:
-      "Eco-community emphasizing natural building and organic farming."
+    desc: "Eco-community emphasizing natural building and organic farming."
   },
   {
     id: "wwoof-france",
@@ -407,8 +583,7 @@ const nodes: MapNode[] = [
     location: "Paris, France",
     lat: 48.8566,
     lng: 2.3522,
-    desc:
-      "Worldwide Opportunities on Organic Farms host sites across France."
+    desc: "Worldwide Opportunities on Organic Farms host sites across France."
   },
   {
     id: "transition-towns",
@@ -417,8 +592,7 @@ const nodes: MapNode[] = [
     location: "Totnes, UK",
     lat: 50.4329,
     lng: -3.6851,
-    desc:
-      "Resilience-building initiatives in local communities."
+    desc: "Resilience-building initiatives in local communities."
   },
   {
     id: "regen-australia",
@@ -427,8 +601,7 @@ const nodes: MapNode[] = [
     location: "Melbourne, Australia",
     lat: -37.8136,
     lng: 144.9631,
-    desc:
-      "Regenerative agriculture and finance projects down under."
+    desc: "Regenerative agriculture and finance projects down under."
   },
   {
     id: "indigenous-brazil",
@@ -437,8 +610,7 @@ const nodes: MapNode[] = [
     location: "Para, Brazil",
     lat: -7,
     lng: -52,
-    desc:
-      "Indigenous-led conservation of Amazon rainforest territories."
+    desc: "Indigenous-led conservation of Amazon rainforest territories."
   },
   {
     id: "desci-europe",
@@ -447,8 +619,7 @@ const nodes: MapNode[] = [
     location: "Zurich, Switzerland",
     lat: 47.3769,
     lng: 8.5417,
-    desc:
-      "Decentralized science initiatives fostering open research."
+    desc: "Decentralized science initiatives fostering open research."
   },
   {
     id: "carbon-credits-africa",
@@ -457,8 +628,7 @@ const nodes: MapNode[] = [
     location: "Johannesburg, South Africa",
     lat: -26.2041,
     lng: 28.0473,
-    desc:
-      "Platform for African carbon credit projects and verification."
+    desc: "Platform for African carbon credit projects and verification."
   },
   {
     id: "permaculture-asia",
@@ -467,8 +637,7 @@ const nodes: MapNode[] = [
     location: "Kathmandu, Nepal",
     lat: 27.7172,
     lng: 85.324,
-    desc:
-      "Regional network promoting permaculture design and training."
+    desc: "Regional network promoting permaculture design and training."
   },
   {
     id: "open-data-earth",
@@ -477,8 +646,7 @@ const nodes: MapNode[] = [
     location: "London, UK",
     lat: 51.5074,
     lng: -0.1278,
-    desc:
-      "Open geospatial data for environmental monitoring and restoration."
+    desc: "Open geospatial data for environmental monitoring and restoration."
   },
   {
     id: "network-tokyo",
@@ -487,8 +655,7 @@ const nodes: MapNode[] = [
     location: "Tokyo, Japan",
     lat: 35.6895,
     lng: 139.6917,
-    desc:
-      "Urban regeneration and sustainability hubs in East Asia."
+    desc: "Urban regeneration and sustainability hubs in East Asia."
   },
   {
     id: "biodiversity-hotspot",
@@ -497,8 +664,7 @@ const nodes: MapNode[] = [
     location: "Cape Town, South Africa",
     lat: -33.9249,
     lng: 18.4241,
-    desc:
-      "Biodiversity hotspot with community conservation efforts."
+    desc: "Biodiversity hotspot with community conservation efforts."
   },
   {
     id: "refi-india",
@@ -507,8 +673,7 @@ const nodes: MapNode[] = [
     location: "Mumbai, India",
     lat: 19.076,
     lng: 72.8777,
-    desc:
-      "Blockchain-based solutions for sustainable development in India."
+    desc: "Blockchain-based solutions for sustainable development in India."
   },
   {
     id: "ecovillage-africa",
@@ -517,8 +682,7 @@ const nodes: MapNode[] = [
     location: "Nairobi, Kenya",
     lat: -1.2921,
     lng: 36.8219,
-    desc:
-      "African ecovillage focusing on agroecology and youth empowerment."
+    desc: "African ecovillage focusing on agroecology and youth empowerment."
   },
   {
     id: "dudley-leggett-org",
@@ -527,8 +691,7 @@ const nodes: MapNode[] = [
     location: "London, UK",
     lat: 51.5074,
     lng: -0.1278,
-    desc:
-      "Dudley Leggett's organization promoting regenerative practices in urban planning and community building."
+    desc: "Dudley Leggett's organization promoting regenerative practices in urban planning and community building."
   },
   {
     id: "julia-becker-org",
@@ -537,8 +700,7 @@ const nodes: MapNode[] = [
     location: "Berlin, Germany",
     lat: 52.52,
     lng: 13.405,
-    desc:
-      "Julia Becker's initiative on a mission of regeneration, focusing on sustainable tech and community networks."
+    desc: "Julia Becker's initiative on a mission of regeneration, focusing on sustainable tech and community networks."
   },
   {
     id: "tree-willard-org",
@@ -547,8 +709,7 @@ const nodes: MapNode[] = [
     location: "California, USA",
     lat: 36.7783,
     lng: -119.4179,
-    desc:
-      "Tree Willard's work with Water Unity Networks on water stewardship and cultural spirit in indigenous communities."
+    desc: "Tree Willard's work with Water Unity Networks on water stewardship and cultural spirit in indigenous communities."
   },
   {
     id: "katie-hillborn-org",
@@ -557,8 +718,7 @@ const nodes: MapNode[] = [
     location: "Kermode Park, Canada",
     lat: 54,
     lng: -129,
-    desc:
-      "Katie Hillborn's NextGen Stewardship projects in indigenous land protection and youth empowerment."
+    desc: "Katie Hillborn's NextGen Stewardship projects in indigenous land protection and youth empowerment."
   },
   {
     id: "victor-vorski-org",
@@ -567,8 +727,7 @@ const nodes: MapNode[] = [
     location: "Sydney, Australia",
     lat: -33.8688,
     lng: 151.2093,
-    desc:
-      "Victor Vorski's building of regenerative ecosystems through tech and community-driven solutions."
+    desc: "Victor Vorski's building of regenerative ecosystems through tech and community-driven solutions."
   },
   {
     id: "elena-keller-org",
@@ -577,8 +736,7 @@ const nodes: MapNode[] = [
     location: "Moscow, Russia",
     lat: 55.7558,
     lng: 37.6173,
-    desc:
-      "Elena Keller's mission for positive planetary transitions via collaborative networks."
+    desc: "Elena Keller's mission for positive planetary transitions via collaborative networks."
   },
   {
     id: "marcelo-shama-org",
@@ -587,8 +745,7 @@ const nodes: MapNode[] = [
     location: "Sao Paulo, Brazil",
     lat: -23.5505,
     lng: -46.6333,
-    desc:
-      "Marcelo Shama's Gaia HUB for unified regenerative living and earth stewardship."
+    desc: "Marcelo Shama's Gaia HUB for unified regenerative living and earth stewardship."
   },
   {
     id: "scarlet-ai-org",
@@ -597,8 +754,7 @@ const nodes: MapNode[] = [
     location: "Global (Remote)",
     lat: 0,
     lng: 0,
-    desc:
-      "Relational AI unified network by Scarlet for positive impact in AI-driven regeneration."
+    desc: "Relational AI unified network by Scarlet for positive impact in AI-driven regeneration."
   },
   {
     id: "brad-nye-org",
@@ -607,8 +763,7 @@ const nodes: MapNode[] = [
     location: "San Francisco, USA",
     lat: 37.7749,
     lng: -122.4194,
-    desc:
-      "Brad Nye's administrative role in regenerative ecosystems and community coordination."
+    desc: "Brad Nye's administrative role in regenerative ecosystems and community coordination."
   },
   {
     id: "jess-allen-org",
@@ -617,8 +772,7 @@ const nodes: MapNode[] = [
     location: "New York, USA",
     lat: 40.7128,
     lng: -74.006,
-    desc:
-      "Jess Allen Glowacki's work on glowing regenerative finance and impact projects."
+    desc: "Jess Allen Glowacki's work on glowing regenerative finance and impact projects."
   },
   {
     id: "starseed-village",
@@ -627,8 +781,7 @@ const nodes: MapNode[] = [
     location: "Lake Atitlan, Guatemala",
     lat: 14.742,
     lng: -91.155,
-    desc:
-      "Regenerative starseed community fostering positive impact, spiritual ecology, and sustainable living in Guatemala."
+    desc: "Regenerative starseed community fostering positive impact, spiritual ecology, and sustainable living in Guatemala."
   }
 ];
 
@@ -640,7 +793,7 @@ function buildPopup(node: MapNode) {
         <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${color};"></span>
         <strong>${node.name}</strong>
       </div>
-      <div style="color:#3c475f;font-size:12px;margin-bottom:6px;">${node.location} • ${node.type}</div>
+      <div style="color:#3c475f;font-size:12px;margin-bottom:6px;">${node.location} - ${node.type}</div>
       <div style="color:#1c2335;font-size:13px;line-height:1.4;">${node.desc}</div>
     </div>
   `;
@@ -666,7 +819,7 @@ export default function MapPage() {
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18,
-      attribution: "© OpenStreetMap contributors"
+      attribution: "(c) OpenStreetMap contributors"
     }).addTo(map);
 
     const clusterGroup = L.markerClusterGroup({
@@ -762,11 +915,8 @@ export default function MapPage() {
             alt="We Won Logo"
             className="w-10 h-10 rounded-full object-cover"
           />
-          <h1>Global Regenerative Ecosystem Map</h1>
-          <p>
-            Live directory of regenerative communities, tools, and network
-            signals.
-          </p>
+          <h1>Land-Based Regenerative Projects</h1>
+          <p>Sample of mapped sites across Restor.eco, Giveth, Karma HQ, Toucan, and more.</p>
         </div>
         <div className="map-actions">
           <Link href="/" className="map-link">
@@ -785,7 +935,7 @@ export default function MapPage() {
         <aside className={`map-sidebar ${sidebarOpen ? "open" : ""}`}>
           <div className="map-stats">
             <span className="map-count">
-              {filteredNodes.length} active nodes
+              {filteredNodes.length} mapped projects
             </span>
             <span className="map-pill">{regionLabel}</span>
           </div>
