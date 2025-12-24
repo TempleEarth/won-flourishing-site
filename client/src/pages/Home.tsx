@@ -66,6 +66,9 @@ export default function Home() {
               <Link href="/map" className="hover:text-primary transition-colors">
                 Map
               </Link>
+              <Link href="/trust-graph" className="hover:text-primary transition-colors">
+                Trust Graph
+              </Link>
               <Link href="/bridge" className="hover:text-primary transition-colors">
                 Bridge
               </Link>

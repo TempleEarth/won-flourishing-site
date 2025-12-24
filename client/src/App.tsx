@@ -17,6 +17,7 @@ import BridgePage from "@/pages/Bridge";
 import Buy from "@/pages/Buy";
 import StablecoinPage from "@/pages/Stablecoin";
 import TokenizationPage from "@/pages/Tokenization";
+import TrustGraphPage from "@/pages/TrustGraph";
 import NotFound from "@/pages/not-found";
 
 // Router component scoped to the Vite base path (GitHub Pages needs the repo name prefix)
@@ -29,6 +30,7 @@ function AppRouter() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/map" component={MapPage} />
+        <Route path="/trust-graph" component={TrustGraphPage} />
         <Route path="/bridge" component={BridgePage} />
         <Route path="/buy" component={Buy} />
         <Route path="/stablecoin" component={StablecoinPage} />
