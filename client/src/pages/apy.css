@@ -1,0 +1,125 @@
+.apy-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.apy-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.apy-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(64, 224, 208, 0.12);
+  border: 1px solid rgba(64, 224, 208, 0.25);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.apy-title {
+  font-size: clamp(24px, 3vw, 32px);
+  margin: 4px 0 6px;
+}
+
+.apy-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(64, 224, 208, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 600;
+}
+
+.apy-stat small {
+  font-size: 12px;
+  color: var(--bridge-muted);
+}
+
+.apy-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.apy-active {
+  border-color: rgba(64, 224, 208, 0.75);
+  box-shadow: 0 8px 16px rgba(64, 224, 208, 0.2);
+}
+
+.apy-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.apy-bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.apy-bar-label span {
+  display: block;
+  font-size: 13px;
+  color: var(--bridge-muted);
+}
+
+.apy-bar-label strong {
+  font-size: 15px;
+}
+
+.apy-bar-track {
+  background: rgba(12, 24, 24, 0.06);
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.apy-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(64, 224, 208, 0.7), rgba(126, 224, 184, 1));
+  border-radius: 999px;
+}
+
+.apy-actions {
+  gap: 14px;
+}
+
+.apy-actions .bridge-primary,
+.apy-actions .apy-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.apy-secondary {
+  width: 100%;
+}
+
+.apy-data-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--bridge-border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+@media (max-width: 960px) {
+  .apy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .apy-bar-row {
+    grid-template-columns: 1fr;
+  }
+}

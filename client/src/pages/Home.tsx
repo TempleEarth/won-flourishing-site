@@ -69,6 +69,9 @@ export default function Home() {
               <Link href="/bridge" className="hover:text-primary transition-colors">
                 Bridge
               </Link>
+              <Link href="/apy" className="hover:text-primary transition-colors">
+                APY Calculator
+              </Link>
               <Link href="/buy" className="hover:text-primary transition-colors">
                 Buy WON
               </Link>
