@@ -112,6 +112,12 @@ export default function Home() {
               <Link href="/projects/submit" className="hover:text-primary transition-colors">
                 Submit Project
               </Link>
+              <Link href="/dashboard" className="hover:text-primary transition-colors">
+                Dashboard
+              </Link>
+              <Link href="/trust-graph" className="hover:text-primary transition-colors">
+                Trust Graph
+              </Link>
               <Link href="/bridge" className="hover:text-primary transition-colors">
                 Bridge
               </Link>
@@ -124,9 +130,18 @@ export default function Home() {
               <Link href="/stake" className="hover:text-primary transition-colors">
                 Stake
               </Link>
-              <Link href="/stablecoin" className="hover:text-primary transition-colors">Stablecoin</Link>
-              <Link href="/tokenization" className="hover:text-primary transition-colors">Tokenization</Link>
-              <Link href="/prioritization" className="hover:text-primary transition-colors">Prioritization</Link>
+              <Link href="/marketplace" className="hover:text-primary transition-colors">
+                Marketplace
+              </Link>
+              <Link href="/stablecoin" className="hover:text-primary transition-colors">
+                Stablecoin
+              </Link>
+              <Link href="/tokenization" className="hover:text-primary transition-colors">
+                Tokenization
+              </Link>
+              <Link href="/prioritization" className="hover:text-primary transition-colors">
+                Prioritization
+              </Link>
             </div>
             {showJoin && (
               <a
