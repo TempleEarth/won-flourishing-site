@@ -66,6 +66,9 @@ export default function Home() {
               <Link href="/map" className="hover:text-primary transition-colors">
                 Map
               </Link>
+              <Link href="/dashboard" className="hover:text-primary transition-colors">
+                Dashboard
+              </Link>
               <Link href="/bridge" className="hover:text-primary transition-colors">
                 Bridge
               </Link>
