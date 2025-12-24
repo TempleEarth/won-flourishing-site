@@ -6,6 +6,7 @@ import "./bridge.css";
 
 export default function Buy() {
   const wonSymbol = chainByKey.ethereum.tokenSymbol || "WON";
+  const alcorUrl = "https://proton.alcor.exchange/analytics/tokens/won-w3won";
   const toTokens = useMemo(
     () =>
       supportedChains.map((chain) => ({
@@ -63,8 +64,47 @@ export default function Buy() {
           </div>
         </div>
 
-        <div className="bridge-card" style={{ padding: "0", overflow: "hidden" }}>
-          <LiFiWidget {...config} />
+        <div className="bridge-buy-grid">
+          <section className="bridge-card bridge-buy-card">
+            <div className="bridge-buy-header">
+              <div>
+                <p className="bridge-eyebrow">Proton Exchange</p>
+                <h2 className="bridge-title">Buy WON on Alcor</h2>
+                <p className="bridge-subhead">
+                  Connect your Proton wallet and trade WON directly on the Alcor DEX.
+                </p>
+              </div>
+              <a
+                href={alcorUrl}
+                className="bridge-nav-link"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open in Alcor
+              </a>
+            </div>
+            <div className="bridge-embed">
+              <iframe
+                title="WON on Alcor Exchange"
+                src={alcorUrl}
+                loading="lazy"
+                allow="clipboard-read; clipboard-write"
+              />
+            </div>
+          </section>
+
+          <section className="bridge-card bridge-buy-card" style={{ padding: "0", overflow: "hidden" }}>
+            <div className="bridge-buy-header" style={{ padding: "22px 22px 0" }}>
+              <div>
+                <p className="bridge-eyebrow">Cross-chain</p>
+                <h2 className="bridge-title">Buy WON across chains</h2>
+                <p className="bridge-subhead">
+                  Use LiFi to bridge and swap into WON from Ethereum, L2s, and alt L1s.
+                </p>
+              </div>
+            </div>
+            <LiFiWidget {...config} />
+          </section>
         </div>
       </div>
     </div>
