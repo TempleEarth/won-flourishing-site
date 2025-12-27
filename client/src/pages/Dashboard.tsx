@@ -97,6 +97,12 @@ export default function DashboardPage() {
     [wallets]
   );
 
+  const { whitelistedWallets, belowThresholdWallets } = useMemo(() => {
+    const whitelisted = sortedWallets.filter((wallet) => wallet.won >= MINIMUM_WON);
+    const below = sortedWallets.filter((wallet) => wallet.won < MINIMUM_WON);
+    return { whitelistedWallets: whitelisted, belowThresholdWallets: below };
+  }, [sortedWallets]);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -181,28 +187,52 @@ export default function DashboardPage() {
               </div>
             )}
 
-            <div className="bridge-grid" style={{ marginTop: "16px" }}>
-              {sortedWallets.map((wallet) => {
-                const whitelisted = wallet.won >= MINIMUM_WON;
-
-                return (
-                  <div
-                    key={`${wallet.account}-${wallet.won}`}
-                    className="bg-white border border-border rounded-2xl p-5 shadow-sm"
-                  >
-                    <p className="text-sm font-semibold text-primary">{wallet.account}</p>
-                    <p className="text-base font-semibold mt-2">
-                      Balance: {formatNumber(wallet.won)} WON
-                    </p>
-                    <p className="bridge-muted">Source: On-chain snapshot</p>
-                    <div className={`bridge-banner ${whitelisted ? "success" : "error"}`}>
-                      {whitelisted
-                        ? "Whitelisted for launchpad access."
-                        : "Below the auto-whitelist threshold."}
+            <div className="space-y-6" style={{ marginTop: "16px" }}>
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-lg font-semibold text-foreground">Whitelisted wallets</h2>
+                  <span className="text-sm text-muted-foreground">
+                    {formatNumber(whitelistedWallets.length)} wallets
+                  </span>
+                </div>
+                <div className="bridge-grid">
+                  {whitelistedWallets.map((wallet) => (
+                    <div
+                      key={`${wallet.account}-${wallet.won}`}
+                      className="bg-white border border-border rounded-2xl p-5 shadow-sm"
+                    >
+                      <p className="text-sm font-semibold text-primary">{wallet.account}</p>
+                      <p className="text-base font-semibold mt-2">
+                        Balance: {formatNumber(wallet.won)} WON
+                      </p>
+                      <p className="bridge-muted">Source: On-chain snapshot</p>
                     </div>
-                  </div>
-                );
-              })}
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-lg font-semibold text-foreground">Below threshold</h2>
+                  <span className="text-sm text-muted-foreground">
+                    {formatNumber(belowThresholdWallets.length)} wallets
+                  </span>
+                </div>
+                <div className="bridge-grid">
+                  {belowThresholdWallets.map((wallet) => (
+                    <div
+                      key={`${wallet.account}-${wallet.won}`}
+                      className="bg-white border border-border rounded-2xl p-5 shadow-sm"
+                    >
+                      <p className="text-sm font-semibold text-primary">{wallet.account}</p>
+                      <p className="text-base font-semibold mt-2">
+                        Balance: {formatNumber(wallet.won)} WON
+                      </p>
+                      <p className="bridge-muted">Source: On-chain snapshot</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {!loading && sortedWallets.length === 0 && (
