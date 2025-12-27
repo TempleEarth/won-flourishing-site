@@ -1,7 +1,17 @@
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { erc20Abi, parseUnits, type Address } from "viem";
+import {
+  useAccount,
+  useChainId,
+  useReadContract,
+  useWaitForTransactionReceipt,
+  useWriteContract
+} from "wagmi";
 import { Link, useLocation } from "wouter";
 import SiteLayout from "@/components/SiteLayout";
+import { supportedChains } from "@/lib/layerzeroChains";
 import "./bridge.css";
 
 type Region = {
@@ -74,6 +84,8 @@ const formatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
+const STAKING_VAULT_ADDRESS = (import.meta.env.VITE_WON_STAKING_VAULT ?? "").trim();
+
 export default function StakePage() {
   const [location] = useLocation();
   const search = location.split("?")[1] ?? "";
@@ -82,10 +94,63 @@ export default function StakePage() {
     ? regionParam
     : regions[0].id;
   const [selectedRegion, setSelectedRegion] = useState(resolvedRegion);
+  const [stakeAmount, setStakeAmount] = useState("");
+  const [stakeError, setStakeError] = useState<string | null>(null);
+  const { openConnectModal } = useConnectModal();
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+  const activeChain = useMemo(
+    () => supportedChains.find((chain) => chain.chainId === chainId) ?? supportedChains[0],
+    [chainId]
+  );
+  const tokenAddress = activeChain?.oftAddress;
+  const stakingVaultAddress = useMemo(
+    () => (STAKING_VAULT_ADDRESS || tokenAddress) as Address | undefined,
+    [tokenAddress]
+  );
+  const { data: tokenDecimals } = useReadContract({
+    address: tokenAddress,
+    abi: erc20Abi,
+    functionName: "decimals",
+    chainId: activeChain?.chainId,
+    query: { enabled: Boolean(tokenAddress) }
+  });
+  const { data: stakeHash, isPending, writeContract } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+    hash: stakeHash
+  });
 
   useEffect(() => {
     setSelectedRegion(resolvedRegion);
   }, [resolvedRegion]);
+
+  const handleStake = async () => {
+    if (!isConnected) {
+      openConnectModal?.();
+      return;
+    }
+    const parsedAmount = Number(stakeAmount);
+    if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) {
+      setStakeError("Enter a valid stake amount.");
+      return;
+    }
+    if (!tokenAddress || !stakingVaultAddress) {
+      setStakeError("Select a supported network to stake WON.");
+      return;
+    }
+    setStakeError(null);
+    try {
+      writeContract({
+        address: tokenAddress,
+        abi: erc20Abi,
+        functionName: "transfer",
+        args: [stakingVaultAddress, parseUnits(stakeAmount, tokenDecimals ?? 18)]
+      });
+    } catch (error) {
+      console.error(error);
+      setStakeError("Unable to submit the stake transaction. Please try again.");
+    }
+  };
 
   return (
     <SiteLayout>
@@ -129,6 +194,8 @@ export default function StakePage() {
                   className="bridge-input"
                   placeholder="e.g., 12,500"
                   min="0"
+                  value={stakeAmount}
+                  onChange={(event) => setStakeAmount(event.target.value)}
                 />
                 <button type="button" className="bridge-ghost">
                   Max
@@ -156,14 +223,47 @@ export default function StakePage() {
           </div>
 
           <div className="bridge-input-row" style={{ marginTop: 10 }}>
-            <button className="bridge-primary" type="button">
-              Connect & stake WON
+            <button
+              className="bridge-primary"
+              type="button"
+              onClick={handleStake}
+              disabled={isPending || isConfirming}
+            >
+              {isConnected ? "Stake WON" : "Connect & stake WON"}
             </button>
             <div className="bridge-banner" style={{ marginTop: 0 }}>
-              Powered by Proton contracts on XPR. Staking does not remove WON from your ownership,
-              and rewards may be earned depending on distribution schedules.
+              {isConnected
+                ? `Connected: ${address?.slice(0, 6)}...${address?.slice(-4)} · ${activeChain.displayName}`
+                : "Connect your wallet to stake WON on a supported network."}
             </div>
           </div>
+
+          {stakeError && (
+            <div className="bridge-banner error" style={{ marginTop: 12 }}>
+              {stakeError}
+            </div>
+          )}
+          {isPending && (
+            <div className="bridge-banner" style={{ marginTop: 12 }}>
+              Wallet signature requested. Confirm the stake transaction in your wallet.
+            </div>
+          )}
+          {isConfirming && (
+            <div className="bridge-banner" style={{ marginTop: 12 }}>
+              Staking transaction submitted. Waiting for confirmations...
+            </div>
+          )}
+          {isSuccess && (
+            <div className="bridge-banner success" style={{ marginTop: 12 }}>
+              Stake confirmed on-chain.
+            </div>
+          )}
+          {stakingVaultAddress && (
+            <p className="bridge-muted" style={{ marginTop: 8 }}>
+              Staking vault: {stakingVaultAddress.slice(0, 6)}...
+              {stakingVaultAddress.slice(-4)}
+            </p>
+          )}
 
           <div className="bridge-grid" style={{ marginTop: 20 }}>
             {regions.map((region) => {

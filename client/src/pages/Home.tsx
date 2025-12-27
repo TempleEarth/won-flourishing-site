@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import heroBg from "@assets/generated_images/hero_background_showing_digital_abundance_merging_with_nature.webp";
 import tokenImg from "@assets/generated_images/tokenization_concept_art.webp";
-import MapPage from "@/pages/Map";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -77,16 +76,10 @@ const supporterTiers = [
 
 export default function Home() {
   const [showJoin, setShowJoin] = useState(false);
-  const [atBottom, setAtBottom] = useState(false);
-  const MAP_REVEAL_OFFSET = 260;
 
   useEffect(() => {
     const onScroll = () => {
       setShowJoin(window.scrollY > 20);
-      const nearBottom =
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - MAP_REVEAL_OFFSET;
-      setAtBottom(nearBottom);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -95,11 +88,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/20">
-      <div
-        className={`transition-all duration-700 ${
-          atBottom ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100"
-        }`}
-      >
+      <div className="transition-all duration-700 opacity-100">
         {/* Navigation */}
         <SiteHeader showJoin={showJoin} />
 
@@ -146,12 +135,6 @@ export default function Home() {
                 >
                   Learn How It Works
                 </a>
-                <Link
-                  href="/map"
-                  className="bg-foreground/80 text-background px-8 py-4 rounded-full font-bold text-lg hover:bg-foreground transition-all flex items-center gap-2"
-                >
-                  View the Map <ArrowUpRight className="w-5 h-5" />
-                </Link>
                 <a
                   href="https://t.me/templeearth"
                   target="_blank"
@@ -280,58 +263,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Impact Card */}
-        <section className="py-20 bg-foreground text-background">
-          <div className="container mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">WON Card</p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-                Spend your impact rewards anywhere.
-              </h2>
-              <p className="text-lg text-white/80 leading-relaxed">
-                A dedicated WON card is being prepared so supporters can spend wherever Visa and Mastercard are accepted while keeping rewards on-chain. Balances draw from your WON holdings; impact remains auditable.
-              </p>
-              <div className="flex flex-wrap gap-3 text-sm text-white/80">
-                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">On-chain balance funding</span>
-                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">Visa / Mastercard acceptance</span>
-                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">Impact rewards preserved</span>
-              </div>
-            </div>
-            <div className="glass bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl text-background">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.2em] text-primary">WON Impact Card</p>
-                  <p className="text-2xl font-display font-bold">Preview</p>
-                </div>
-                <div className="text-right text-sm text-white/70">
-                  <p>Card Network</p>
-                  <p className="font-semibold text-white">Visa / Mastercard</p>
-                </div>
-              </div>
-              <div className="rounded-2xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground p-6 shadow-xl">
-                <div className="flex items-center justify-between">
-                  <div className="font-display text-2xl font-bold">WON</div>
-                  <div className="text-sm">Impact Balance</div>
-                </div>
-                <div className="mt-6 text-3xl font-bold tracking-wide">4,820 WON</div>
-                <div className="mt-8 flex items-center justify-between text-sm">
-                  <div>
-                    <p className="opacity-80">Name</p>
-                    <p className="font-semibold">We Won Steward</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="opacity-80">Valid</p>
-                    <p className="font-semibold">12/30</p>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-6 text-sm text-white/70">
-                Load from WON, spend globally, and keep regenerative impact in view.
-              </p>
             </div>
           </div>
         </section>
@@ -470,6 +401,58 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Impact Card */}
+        <section className="py-20 bg-foreground text-background">
+          <div className="container mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+            <div className="space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">WON Card</p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+                Spend your impact rewards anywhere.
+              </h2>
+              <p className="text-lg text-white/80 leading-relaxed">
+                A dedicated WON card is being prepared so supporters can spend wherever Visa and Mastercard are accepted while keeping rewards on-chain. Balances draw from your WON holdings; impact remains auditable.
+              </p>
+              <div className="flex flex-wrap gap-3 text-sm text-white/80">
+                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">On-chain balance funding</span>
+                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">Visa / Mastercard acceptance</span>
+                <span className="px-3 py-2 rounded-full bg-white/10 border border-white/20">Impact rewards preserved</span>
+              </div>
+            </div>
+            <div className="glass bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl text-background">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-primary">WON Impact Card</p>
+                  <p className="text-2xl font-display font-bold">Preview</p>
+                </div>
+                <div className="text-right text-sm text-white/70">
+                  <p>Card Network</p>
+                  <p className="font-semibold text-white">Visa / Mastercard</p>
+                </div>
+              </div>
+              <div className="rounded-2xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground p-6 shadow-xl">
+                <div className="flex items-center justify-between">
+                  <div className="font-display text-2xl font-bold">WON</div>
+                  <div className="text-sm">Impact Balance</div>
+                </div>
+                <div className="mt-6 text-3xl font-bold tracking-wide">4,820 WON</div>
+                <div className="mt-8 flex items-center justify-between text-sm">
+                  <div>
+                    <p className="opacity-80">Name</p>
+                    <p className="font-semibold">We Won Steward</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="opacity-80">Valid</p>
+                    <p className="font-semibold">12/30</p>
+                  </div>
+                </div>
+              </div>
+              <p className="mt-6 text-sm text-white/70">
+                Load from WON, spend globally, and keep regenerative impact in view.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Licensing */}
         <section id="licensing" className="py-24 md:py-32 bg-secondary/30 border-t border-border/60">
           <div className="container mx-auto px-6">
@@ -567,26 +550,6 @@ export default function Home() {
         {/* Footer */}
         <SiteFooter />
         <div className="h-28 md:h-36" aria-hidden />
-      </div>
-
-      {/* Map Reveal on bottom scroll */}
-      <div
-        className={`fixed inset-0 z-40 bg-background transition-opacity duration-700 ${
-          atBottom ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="absolute top-4 right-4 z-50">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold shadow-lg"
-          >
-            Back to site
-          </button>
-        </div>
-        <MapPage />
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-muted-foreground">
-          Scroll or tap "Back to site" to return up.
-        </div>
       </div>
     </div>
   );
