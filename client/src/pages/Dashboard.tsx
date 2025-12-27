@@ -5,15 +5,16 @@ import "./bridge.css";
 const MINIMUM_WON = 5000;
 
 type WalletSnapshot = {
-  address: string;
-  staked: number;
-  donated: number;
+  account: string;
+  won: number;
+  source: "example" | "onchain";
 };
 
 const initialWallets: WalletSnapshot[] = [
-  { address: "0x9f12...8A1c", staked: 2800, donated: 900 },
-  { address: "0x42e8...1d0B", staked: 5200, donated: 400 },
-  { address: "0x88c1...A7f4", staked: 1500, donated: 2200 }
+  { account: "wonlaunchpad", won: 12850, source: "example" },
+  { account: "regenhub.won", won: 9100, source: "example" },
+  { account: "impactvault", won: 6400, source: "example" },
+  { account: "templeearth", won: 5050, source: "example" }
 ];
 
 const formatNumber = (value: number) =>
@@ -21,46 +22,72 @@ const formatNumber = (value: number) =>
     maximumFractionDigits: 0
   }).format(value);
 
+async function fetchWonBalance(account: string) {
+  const response = await fetch("https://proton.greymass.com/v1/chain/get_currency_balance", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      code: "w3won",
+      account,
+      symbol: "WON"
+    })
+  });
+
+  const payload = await response.json();
+  if (!Array.isArray(payload) || payload.length === 0) return 0;
+  const raw = payload[0] as string;
+  const numeric = Number(raw.split(" ")[0]);
+  return Number.isFinite(numeric) ? numeric : 0;
+}
+
 export default function DashboardPage() {
   const [wallets, setWallets] = useState<WalletSnapshot[]>(initialWallets);
-  const [address, setAddress] = useState("");
-  const [staked, setStaked] = useState("");
-  const [donated, setDonated] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [status, setStatus] = useState<string | null>(null);
+  const [checking, setChecking] = useState(false);
 
   const whitelistedCount = useMemo(
-    () =>
-      wallets.filter((wallet) => wallet.staked + wallet.donated >= MINIMUM_WON)
-        .length,
+    () => wallets.filter((wallet) => wallet.won >= MINIMUM_WON).length,
     [wallets]
   );
 
-  const handleAddWallet = () => {
-    setStatus(null);
-    const parsedStaked = Number(staked);
-    const parsedDonated = Number(donated);
+  const eligibleWallets = useMemo(
+    () => wallets.filter((wallet) => wallet.won >= MINIMUM_WON),
+    [wallets]
+  );
 
-    if (!address.trim()) {
-      setStatus("Add a wallet address to track.");
+  const handleCheckWallet = async () => {
+    const trimmed = accountName.trim();
+    if (!trimmed) {
+      setStatus("Enter a Proton account name to check.");
       return;
     }
 
-    if (Number.isNaN(parsedStaked) || Number.isNaN(parsedDonated)) {
-      setStatus("Stake and donation amounts must be valid numbers.");
-      return;
+    try {
+      setChecking(true);
+      setStatus("Checking on-chain balance...");
+      const balance = await fetchWonBalance(trimmed);
+      if (balance >= MINIMUM_WON) {
+        setWallets((prev) => {
+          const existing = prev.filter((wallet) => wallet.account !== trimmed);
+          return [{ account: trimmed, won: balance, source: "onchain" }, ...existing];
+        });
+        setStatus(
+          `On-chain balance detected (${formatNumber(balance)} WON). Added to whitelist view.`
+        );
+      } else {
+        setStatus(
+          `On-chain balance is ${formatNumber(balance)} WON. Needs ${formatNumber(
+            MINIMUM_WON - balance
+          )} more to be whitelisted.`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("Unable to check the chain right now. Please try again in a moment.");
+    } finally {
+      setChecking(false);
     }
-
-    const nextWallet: WalletSnapshot = {
-      address: address.trim(),
-      staked: Math.max(parsedStaked, 0),
-      donated: Math.max(parsedDonated, 0)
-    };
-
-    setWallets((prev) => [nextWallet, ...prev]);
-    setAddress("");
-    setStaked("");
-    setDonated("");
-    setStatus("Wallet added. Whitelist status recalculated.");
   };
 
   return (
@@ -76,11 +103,11 @@ export default function DashboardPage() {
               />
               <span className="font-display font-bold text-xl">We Won</span>
             </div>
-            <p className="bridge-eyebrow">Launchpad Dashboard</p>
-            <h1 className="bridge-title">Investor Whitelisting</h1>
+            <p className="bridge-eyebrow">Whitelist</p>
+            <h1 className="bridge-title">WON whitelist status</h1>
             <p className="bridge-subhead">
-              Track WON staking plus donation totals per wallet and auto-whitelist
-              supporters who meet the launchpad threshold.
+              Only wallets that meet on-chain WON balance requirements show here. Use WharfKit to
+              connect a Proton wallet and refresh the whitelist record from chain.
             </p>
           </div>
           <div className="bridge-nav-links">
@@ -95,103 +122,85 @@ export default function DashboardPage() {
 
         <div className="bridge-card">
           <div className="bridge-banner">
-            Auto-whitelist threshold: <strong>{formatNumber(MINIMUM_WON)} WON</strong>
-            . New token sales automatically include qualified wallets.
+            Auto-whitelist threshold: <strong>{formatNumber(MINIMUM_WON)} WON</strong>. On-chain
+            balances on XPR drive access status.
           </div>
 
           <div className="bridge-pill-grid">
             <div>
-              <span>Total wallets tracked</span>
-              <strong>{formatNumber(wallets.length)}</strong>
-            </div>
-            <div>
-              <span>Wallets eligible for launchpad</span>
+              <span>Whitelisted wallets</span>
               <strong>{formatNumber(whitelistedCount)}</strong>
             </div>
             <div>
-              <span>Minimum combined balance</span>
+              <span>Minimum on-chain WON</span>
               <strong>{formatNumber(MINIMUM_WON)} WON</strong>
+            </div>
+            <div>
+              <span>Record location</span>
+              <strong>On-chain (XPR)</strong>
             </div>
           </div>
 
           <div className="bridge-input-row">
             <div className="bridge-field">
               <label className="bridge-label" htmlFor="wallet-address">
-                Wallet address
+                Proton account (via WharfKit)
               </label>
               <input
                 id="wallet-address"
                 className="bridge-input"
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
-                placeholder="0x..."
+                value={accountName}
+                onChange={(event) => setAccountName(event.target.value)}
+                placeholder="e.g., wonlaunchpad"
               />
+              <p className="bridge-muted">
+                Connect with WharfKit, then paste your Proton account to refresh the on-chain
+                balance.
+              </p>
             </div>
-            <div className="bridge-field">
-              <label className="bridge-label" htmlFor="wallet-staked">
-                WON staked
-              </label>
-              <input
-                id="wallet-staked"
-                className="bridge-input"
-                type="number"
-                min="0"
-                value={staked}
-                onChange={(event) => setStaked(event.target.value)}
-                placeholder="0"
-              />
-            </div>
-            <div className="bridge-field">
-              <label className="bridge-label" htmlFor="wallet-donated">
-                WON donated
-              </label>
-              <input
-                id="wallet-donated"
-                className="bridge-input"
-                type="number"
-                min="0"
-                value={donated}
-                onChange={(event) => setDonated(event.target.value)}
-                placeholder="0"
-              />
-            </div>
-            <div className="bridge-field">
-              <label className="bridge-label" aria-hidden="true">
-                &nbsp;
-              </label>
-              <button className="bridge-primary" type="button" onClick={handleAddWallet}>
-                Add wallet
+            <div className="bridge-field" style={{ alignSelf: "flex-end" }}>
+              <button
+                className="bridge-primary"
+                type="button"
+                onClick={handleCheckWallet}
+                disabled={checking}
+              >
+                {checking ? "Checking..." : "Refresh on-chain whitelist"}
               </button>
+              <a
+                className="bridge-nav-link mt-2 inline-flex"
+                href="https://wharfkit.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Connect via WharfKit
+              </a>
             </div>
           </div>
 
           {status && <div className="bridge-banner success">{status}</div>}
 
           <div className="bridge-grid" style={{ marginTop: "16px" }}>
-            {wallets.map((wallet) => {
-              const total = wallet.staked + wallet.donated;
-              const whitelisted = total >= MINIMUM_WON;
+            {eligibleWallets.map((wallet) => {
+              const whitelisted = wallet.won >= MINIMUM_WON;
 
               return (
                 <div
-                  key={`${wallet.address}-${wallet.staked}-${wallet.donated}`}
+                  key={`${wallet.account}-${wallet.won}`}
                   className="bg-white border border-border rounded-2xl p-5 shadow-sm"
                 >
                   <p className="text-sm font-semibold text-primary">
-                    {wallet.address}
-                  </p>
-                  <p className="bridge-muted">Stake: {formatNumber(wallet.staked)} WON</p>
-                  <p className="bridge-muted">
-                    Donated: {formatNumber(wallet.donated)} WON
+                    {wallet.account}
                   </p>
                   <p className="text-base font-semibold mt-2">
-                    Total: {formatNumber(total)} WON
+                    Balance: {formatNumber(wallet.won)} WON
                   </p>
+                  <p className="bridge-muted">Source: {wallet.source === "onchain" ? "Chain lookup" : "Example"}</p>
                   <div
                     className={`bridge-banner ${whitelisted ? "success" : "error"}`}
                   >
                     {whitelisted
-                      ? "Whitelisted for the next launchpad sale."
+                      ? "Whitelisted for launchpad access."
                       : "Not yet eligible for auto-whitelist."}
                   </div>
                 </div>

@@ -1,39 +1,8 @@
-import { LiFiWidget, type WidgetConfig } from "@lifi/widget";
-import { useMemo } from "react";
 import { Link } from "wouter";
-import { chainByKey, supportedChains } from "@/lib/layerzeroChains";
 import "./bridge.css";
 
 export default function Buy() {
-  const wonSymbol = chainByKey.ethereum.tokenSymbol || "WON";
-  const alcorUrl = "https://proton.alcor.exchange/analytics/tokens/won-w3won";
-  const toTokens = useMemo(
-    () =>
-      supportedChains.map((chain) => ({
-        address: chain.oftAddress,
-        chainId: chain.chainId
-      })),
-    []
-  );
-
-  const config: WidgetConfig = {
-    integrator: "WON",
-    variant: "wide",
-    appearance: "light",
-    toChain: chainByKey.ethereum.chainId,
-    toToken: chainByKey.ethereum.oftAddress,
-    chains: { allow: supportedChains.map((c) => c.chainId) },
-    tokens: {
-      include: toTokens.map((token) => ({
-        address: token.address,
-        chainId: token.chainId,
-        decimals: 18,
-        symbol: wonSymbol,
-        name: wonSymbol,
-        priceUSD: "0"
-      }))
-    }
-  };
+  const alcorUrl = "https://proton.alcor.exchange/swap?input=XPR-eosio.token&output=WON-w3won";
 
   return (
     <div className="bridge-shell">
@@ -49,63 +18,49 @@ export default function Buy() {
               <span className="font-display font-bold text-xl">We Won</span>
             </div>
             <p className="bridge-eyebrow">Acquire WON</p>
-            <h1 className="bridge-title">Buy WON across chains</h1>
+            <h1 className="bridge-title">Buy WON on Proton</h1>
             <p className="bridge-subhead">
-              Use LiFi to bridge and swap into WON on Ethereum, L2s, and alt L1s with one flow.
+              Trade directly on Proton with the Alcor swap. Cross-chain flows are paused while WON
+              operates solely on XPR.
             </p>
           </div>
           <div className="bridge-nav-links">
             <Link href="/" className="bridge-nav-link">
               Back home
             </Link>
-            <Link href="/bridge" className="bridge-nav-link">
-              Bridge
+            <Link href="/whitelist" className="bridge-nav-link">
+              Whitelist
             </Link>
           </div>
         </div>
 
-        <div className="bridge-buy-grid">
-          <section className="bridge-card bridge-buy-card">
-            <div className="bridge-buy-header">
-              <div>
-                <p className="bridge-eyebrow">Proton Exchange</p>
-                <h2 className="bridge-title">Buy WON on Alcor</h2>
-                <p className="bridge-subhead">
-                  Connect your Proton wallet and trade WON directly on the Alcor DEX.
-                </p>
-              </div>
-              <a
-                href={alcorUrl}
-                className="bridge-nav-link"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open in Alcor
-              </a>
+        <section className="bridge-card bridge-buy-card">
+          <div className="bridge-buy-header">
+            <div>
+              <p className="bridge-eyebrow">Proton Exchange</p>
+              <h2 className="bridge-title">Swap WON on Alcor</h2>
+              <p className="bridge-subhead">
+                Connect your Proton wallet and trade WON directly on the Alcor DEX.
+              </p>
             </div>
-            <div className="bridge-embed">
-              <iframe
-                title="WON on Alcor Exchange"
-                src={alcorUrl}
-                loading="lazy"
-                allow="clipboard-read; clipboard-write"
-              />
-            </div>
-          </section>
-
-          <section className="bridge-card bridge-buy-card" style={{ padding: "0", overflow: "hidden" }}>
-            <div className="bridge-buy-header" style={{ padding: "22px 22px 0" }}>
-              <div>
-                <p className="bridge-eyebrow">Cross-chain</p>
-                <h2 className="bridge-title">Buy WON across chains</h2>
-                <p className="bridge-subhead">
-                  Use LiFi to bridge and swap into WON from Ethereum, L2s, and alt L1s.
-                </p>
-              </div>
-            </div>
-            <LiFiWidget {...config} />
-          </section>
-        </div>
+            <a
+              href={alcorUrl}
+              className="bridge-nav-link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open in Alcor
+            </a>
+          </div>
+          <div className="bridge-embed">
+            <iframe
+              title="WON on Alcor Exchange"
+              src={alcorUrl}
+              loading="lazy"
+              allow="clipboard-read; clipboard-write"
+            />
+          </div>
+        </section>
       </div>
     </div>
   );

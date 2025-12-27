@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { CheckCircle2 } from "lucide-react";
-import { useState } from "react";
 import "./bridge.css";
 
 type FlowField = {
@@ -15,14 +14,12 @@ type Flow = {
   title: string;
   desc: string;
   fields: FlowField[];
-  cta: string;
 };
 
 const flows: Flow[] = [
   {
     title: "Carbon Credit Vault (ERC-4626)",
     desc: "Deposit carbon credits, name your vault, and show how many tons you are compounding.",
-    cta: "Preview vault",
     fields: [
       { label: "Your name", placeholder: "Amina" },
       { label: "Project name", placeholder: "Cahuita mangrove credits" },
@@ -38,7 +35,6 @@ const flows: Flow[] = [
   {
     title: "Fair-trade Redeemable Land-Base-Backed Value Systems Batch (ERC-6960)",
     desc: "Tokenize a redeemable, interchangeable land-base-backed value systems batch with layered certifications and who stewarded it.",
-    cta: "Issue batch token",
     fields: [
       { label: "Batch name", placeholder: "Land-Base Value System - Valley Lot #12" },
       { label: "Farmer / co-op", placeholder: "Bribri Collective" },
@@ -58,7 +54,6 @@ const flows: Flow[] = [
   {
     title: "Automated Donations (ERC-995)",
     desc: "Attach a donation stream to every transfer in a social token.",
-    cta: "Route donations",
     fields: [
       { label: "Token name", placeholder: "Community Care Token" },
       { label: "Symbol", placeholder: "CARE" },
@@ -69,7 +64,6 @@ const flows: Flow[] = [
   {
     title: "Abundant Liquidity Pools",
     desc: "Seed liquidity with clear intent and who is funded.",
-    cta: "Create pool",
     fields: [
       { label: "Pool name", placeholder: "Eco-village launch pool" },
       { label: "Initial liquidity amount", type: "number", placeholder: "10,000" },
@@ -84,8 +78,6 @@ const flows: Flow[] = [
 ];
 
 export default function TokenizationPage() {
-  const [activeForm, setActiveForm] = useState<number | null>(null);
-
   return (
     <div className="bridge-shell">
       <div className="bridge-page">
@@ -98,7 +90,8 @@ export default function TokenizationPage() {
             <p className="bridge-eyebrow">Tokenization Protocols</p>
             <h1 className="bridge-title">Launch Your Impact Asset</h1>
             <p className="bridge-subhead">
-              Use these simple forms to tokenize real-world impact projects. Enter your own name, amounts, and destinations just like on the live tokenization page.
+              Example tokenization flows only. We removed live inputs so you can focus on the patterns
+              before opening a production build.
             </p>
           </div>
           <div className="bridge-nav-links">
@@ -122,46 +115,19 @@ export default function TokenizationPage() {
                       {flow.title}
                     </h3>
                     <p className="bridge-muted mb-4">{flow.desc}</p>
-                    {activeForm === index ? (
-                      <form className="space-y-4">
-                        {flow.fields.map((field) => (
-                          <div key={field.label}>
-                            <label className="block text-sm font-medium mb-1">{field.label}</label>
-                            {field.type === "select" ? (
-                              <select className="bridge-select w-full">
-                                {field.options?.map((option) => (
-                                  <option key={option} value={option}>
-                                    {option}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <input
-                                type={field.type ?? "text"}
-                                placeholder={field.placeholder ?? `Enter ${field.label.toLowerCase()}`}
-                                className="w-full p-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                              />
-                            )}
-                            {field.helper && (
-                              <p className="bridge-muted text-xs mt-1">{field.helper}</p>
-                            )}
-                          </div>
-                        ))}
-                        <button
-                          type="button"
-                          className="w-full bg-primary text-primary-foreground py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-                        >
-                          {flow.cta}
-                        </button>
-                      </form>
-                    ) : (
-                      <button
-                        onClick={() => setActiveForm(index)}
-                        className="text-primary hover:underline text-sm"
-                      >
-                        Fill in details
-                      </button>
-                    )}
+                    <div className="space-y-2">
+                      {flow.fields.map((field) => (
+                        <div key={field.label} className="text-sm">
+                          <span className="font-semibold">{field.label}:</span>{" "}
+                          <span className="text-muted-foreground">
+                            {field.placeholder || "Example value"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="bridge-muted mt-3 text-xs">
+                      Example only. Deployments reopen with production staking and licensing checks.
+                    </p>
                   </div>
                 </div>
               </div>

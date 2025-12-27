@@ -46,6 +46,7 @@ function AppRouter() {
         <Route path="/stablecoin" component={StablecoinPage} />
         <Route path="/tokenization" component={TokenizationPage} />
         <Route path="/dashboard" component={DashboardPage} />
+        <Route path="/whitelist" component={DashboardPage} />
         <Route path="/projects/submit" component={ProjectFormPage} />
         <Route path="/prioritization" component={PrioritizationPage} />
         <Route path="/apy" component={ApyCalculatorPage} />

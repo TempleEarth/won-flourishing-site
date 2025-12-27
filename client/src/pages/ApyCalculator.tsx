@@ -165,9 +165,6 @@ export default function ApyCalculatorPage() {
             <Link href="/" className="bridge-nav-link">
               Back home
             </Link>
-            <Link href="/bridge" className="bridge-nav-link">
-              Bridge
-            </Link>
           </div>
         </div>
 
@@ -266,8 +263,8 @@ export default function ApyCalculatorPage() {
               <p className="bridge-eyebrow">Display on dashboard</p>
               <p className="bridge-muted">
                 Embed this module on the website or analytics view to illustrate how WON
-                compounding funds regeneration. Data feeds can be swapped for live oracle
-                inputs as they go on-chain.
+                compounding funds regeneration. Data feeds are ready to swap for live oracle
+                inputs as they go on-chain so APY stays in sync with XPR activity.
               </p>
             </div>
           </aside>

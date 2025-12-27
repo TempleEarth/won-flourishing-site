@@ -14,34 +14,58 @@ type Region = {
 const regions: Region[] = [
   {
     id: "latam",
-    name: "Latin America",
-    focus: "Agroforestry co-ops + water resilience",
+    name: "Latin America (LatAm)",
+    focus: "The global leader in nature-based solutions (NbS) and a thriving hub for crypto-utility.",
     staked: 1240000,
     goal: 2000000,
     projects: ["Barichara Regeneration Fund", "Tota Sacred Lake", "Amazon soil hubs"]
   },
   {
-    id: "east-africa",
-    name: "East Africa",
-    focus: "Mangrove restoration + solar micro-grids",
+    id: "africa",
+    name: "Africa",
+    focus: 'The frontier for "leapfrog" technologies in energy and climate finance.',
     staked: 860000,
     goal: 1500000,
     projects: ["Youth Pawa Mangroves", "Kilimanjaro reforestation", "Lake Victoria biochar"]
   },
   {
-    id: "south-asia",
-    name: "South Asia",
-    focus: "Sacred grove protection + regenerative farms",
+    id: "apac",
+    name: "Asia-Pacific (APAC)",
+    focus: "The global manufacturing engine for transition hardware and adaptation innovation.",
     staked: 540000,
     goal: 1200000,
     projects: ["AERF Myforest Program", "Western Ghats soil labs", "Himalayan food forests"]
+  },
+  {
+    id: "mena",
+    name: "Middle East & North Africa (MENA)",
+    focus: 'Pivoting from "Oil States" to "Energy Exporters" via massive capital deployment.',
+    staked: 430000,
+    goal: 1100000,
+    projects: ["Sahara solar hubs", "Red Sea mangrove belts"]
+  },
+  {
+    id: "europe",
+    name: "Europe",
+    focus: 'The regulatory superpower and "Headquarters" for ReFi protocols.',
+    staked: 370000,
+    goal: 900000,
+    projects: ["Regen Network pilots", "Forest commons", "Local energy co-ops"]
+  },
+  {
+    id: "na",
+    name: "North America",
+    focus: "Tech-driven optimization and investment capital.",
+    staked: 290000,
+    goal: 850000,
+    projects: ["Appalachian soil regen", "Climate tech labs"]
   }
 ];
 
 const stats = [
   { label: "Total WON staked", value: "2.64M" },
   { label: "Regions in queue", value: "6" },
-  { label: "Next allocation cycle", value: "12 days" }
+  { label: "Next allocation cycle", value: "1 project / month" }
 ];
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -65,8 +89,9 @@ export default function StakePage() {
             <p className="bridge-eyebrow">Stake to Prioritize</p>
             <h1 className="bridge-title">Route WON toward the regions you want funded first.</h1>
             <p className="bridge-subhead">
-              Stake WON to elevate regional priorities. Each cycle, the highest-staked regions unlock
-              faster funding for local impact projects and new eco-village launches.
+              Stake WON to elevate regional priorities. Each monthly cycle, the highest-staked
+              region unlocks a single project to prioritize on-chain, then the slate resets for the
+              next month.
             </p>
           </div>
           <div className="bridge-nav-links">
@@ -76,6 +101,14 @@ export default function StakePage() {
             <Link href="/stake/projects" className="bridge-nav-link">
               Impact projects
             </Link>
+            <a
+              href="https://templeearth.cc/prioritization"
+              className="bridge-nav-link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Prioritization flow
+            </a>
           </div>
         </div>
 
@@ -104,7 +137,7 @@ export default function StakePage() {
                 </button>
               </div>
               <p className="bridge-muted">
-                Staked WON signals which regions receive next-wave project funding.
+                Staked WON signals which region gets the single monthly project allocation.
               </p>
             </div>
             <div className="bridge-field">
@@ -125,7 +158,8 @@ export default function StakePage() {
               Signal priority stake
             </button>
             <div className="bridge-banner" style={{ marginTop: 0 }}>
-              Wallet connection and on-chain staking will open with the next deployment.
+              Wallet connection and on-chain staking will open with the next deployment of the WON
+              staking contract on XPR.
             </div>
           </div>
 

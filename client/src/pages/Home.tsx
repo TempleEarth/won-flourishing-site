@@ -109,17 +109,11 @@ export default function Home() {
               <Link href="/map" className="hover:text-primary transition-colors">
                 Map
               </Link>
-              <Link href="/projects/submit" className="hover:text-primary transition-colors">
-                Submit Project
-              </Link>
-              <Link href="/dashboard" className="hover:text-primary transition-colors">
-                Dashboard
+              <Link href="/whitelist" className="hover:text-primary transition-colors">
+                Whitelist
               </Link>
               <Link href="/trust-graph" className="hover:text-primary transition-colors">
                 Trust Graph
-              </Link>
-              <Link href="/bridge" className="hover:text-primary transition-colors">
-                Bridge
               </Link>
               <Link href="/apy" className="hover:text-primary transition-colors">
                 APY Calculator
@@ -138,9 +132,6 @@ export default function Home() {
               </Link>
               <Link href="/tokenization" className="hover:text-primary transition-colors">
                 Tokenization
-              </Link>
-              <Link href="/prioritization" className="hover:text-primary transition-colors">
-                Prioritization
               </Link>
             </div>
             {showJoin && (
@@ -203,12 +194,6 @@ export default function Home() {
                 >
                   View the Map <ArrowUpRight className="w-5 h-5" />
                 </Link>
-                <Link
-                  href="/bridge"
-                  className="bg-secondary text-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-secondary/80 transition-all flex items-center gap-2 border border-border"
-                >
-                  Launch Bridge <ArrowUpRight className="w-5 h-5" />
-                </Link>
                 <a
                   href="https://t.me/templeearth"
                   target="_blank"
@@ -265,6 +250,12 @@ export default function Home() {
                   <p className="text-sm font-semibold text-primary mb-1">Compounding flywheel</p>
                   <p className="text-muted-foreground">
                     Fees, LP rewards, and staking yields recycle into new tokenizations and buy pressure, reinforcing the regenerative loop instead of extractive drift.
+                  </p>
+                </div>
+                <div className="glass p-5 rounded-2xl border border-border">
+                  <p className="text-sm font-semibold text-primary mb-1">Everywhere payments (coming)</p>
+                  <p className="text-muted-foreground">
+                    Impact tokens in the WON stack are being wired to Crassula card-issuing connectors (Visa/Mastercard) so contributors can pay anywhere while keeping impact-linked rewards.
                   </p>
                 </div>
               </div>
@@ -496,13 +487,13 @@ export default function Home() {
                   Stewarded core. Open integrations.
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Our Liquity-inspired Forkonomics model keeps the Won stack coordinated under a single BUSL-1.1 license. Production use requires an agreement; non-production exploration is free. Change License: GPL-2.0-or-later on January 1, 2029.
+                  Our Liquity-inspired Forkonomics model keeps the Won stack coordinated under a single BUSL-1.1 license. Production use requires an agreement and a GitHub pull request; non-production exploration is free.
                 </p>
 
                 <div className="mt-6 space-y-3 text-sm text-muted-foreground">
                   {[
-                    "One license across the stack: BUSL-1.1 (Change License: GPL-2.0-or-later on 1/1/2029).",
-                    "Additional Use Grant: None. Production deployments require a license agreement with Temple Earth.",
+                    "One license across the stack: BUSL-1.1 for all services and integrations.",
+                    "Production deployments require a GitHub pull request to request and record the license grant.",
                     "Friendly fork program expects security audits for modifications plus alignment allocations to original users."
                   ].map((item, i) => (
                     <div key={i} className="flex gap-3 items-start">
@@ -514,13 +505,13 @@ export default function Home() {
 
                 <div className="mt-8 flex flex-wrap gap-4">
                   <a
-                    href="mailto:licensing@templeearth.cc"
+                    href="https://github.com/templeearth/won/compare"
                     className="bg-primary text-primary-foreground px-5 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
                   >
                     Request Production License <ArrowUpRight className="w-4 h-4" />
                   </a>
                   <a
-                    href="mailto:licensing@templeearth.cc?subject=Friendly%20Fork%20Program"
+                    href="https://github.com/templeearth/won"
                     className="border border-border px-5 py-3 rounded-full font-semibold text-sm hover:border-primary/60 hover:text-primary transition-colors inline-flex items-center gap-2"
                   >
                     Join Friendly Forks <ArrowUpRight className="w-4 h-4" />
@@ -537,7 +528,7 @@ export default function Home() {
                   {
                     title: "Entire Stack",
                     badge: "BUSL-1.1",
-                    desc: "Production license required. Change License: GPL-2.0-or-later on 1/1/2029.",
+                    desc: "Production license captured via GitHub PR with the stewarding team.",
                     icon: Shield
                   },
                   {
@@ -555,7 +546,7 @@ export default function Home() {
                   {
                     title: "Contact",
                     badge: "Licensing",
-                    desc: "Reach out at licensing@templeearth.cc to request production access.",
+                    desc: "Open a GitHub PR or issue to initiate a production access review.",
                     icon: Users
                   }
                 ].map((card, i) => (

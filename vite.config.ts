@@ -5,9 +5,16 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
+const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
+const basePath =
+  process.env.VITE_BASE_PATH ??
+  (process.env.GITHUB_ACTIONS === "true" && repoName
+    ? `/${repoName}/`
+    : "/");
+
 export default defineConfig({
-  // Use root-relative assets so custom domains (e.g., templeearth.cc) load correctly
-  base: "/",
+  // Keep GitHub Pages happy by prefixing assets with the repo name; can be overridden via VITE_BASE_PATH
+  base: basePath,
   plugins: [
     react(),
     runtimeErrorOverlay(),

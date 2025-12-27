@@ -32,8 +32,8 @@ const projects: Project[] = [
     update: "Floating gardens underway; youth crews mapped shoreline." 
   },
   {
-    id: "east-africa-1",
-    region: "east-africa",
+    id: "africa-1",
+    region: "africa",
     name: "Youth Pawa Mangroves",
     focus: "Community-led mangrove restoration",
     target: "50 hectares",
@@ -41,8 +41,8 @@ const projects: Project[] = [
     update: "Seed collection and nursery setup in progress."
   },
   {
-    id: "east-africa-2",
-    region: "east-africa",
+    id: "africa-2",
+    region: "africa",
     name: "Kilimanjaro Reforestation",
     focus: "Forest protection and replanting",
     target: "75 hectares",
@@ -50,8 +50,8 @@ const projects: Project[] = [
     update: "Satellite MRV baseline complete; planting cohort recruited."
   },
   {
-    id: "south-asia-1",
-    region: "south-asia",
+    id: "apac-1",
+    region: "apac",
     name: "AERF Myforest Program",
     focus: "Sacred grove protection",
     target: "300 communities",
@@ -59,8 +59,8 @@ const projects: Project[] = [
     update: "Stewardship pledges collected from village circles."
   },
   {
-    id: "south-asia-2",
-    region: "south-asia",
+    id: "apac-2",
+    region: "apac",
     name: "Western Ghats Soil Labs",
     focus: "Regenerative soil monitoring",
     target: "20 micro-labs",
@@ -70,9 +70,12 @@ const projects: Project[] = [
 ];
 
 const regionLabels: Record<string, string> = {
-  latam: "Latin America",
-  "east-africa": "East Africa",
-  "south-asia": "South Asia"
+  latam: "Latin America (LatAm)",
+  africa: "Africa",
+  apac: "Asia-Pacific (APAC)",
+  mena: "Middle East & North Africa (MENA)",
+  europe: "Europe",
+  na: "North America"
 };
 
 export default function StakeProjectsPage() {
@@ -98,8 +101,8 @@ export default function StakeProjectsPage() {
             <p className="bridge-eyebrow">Impact projects</p>
             <h1 className="bridge-title">{regionName} funding queue</h1>
             <p className="bridge-subhead">
-              Review the impact projects that rise as this region gets more WON stakes. Each stake
-              moves the queue toward deployment and reporting.
+              Review the impact projects that rise as this region gets more WON stakes. The top
+              staked region selects a single monthly project; others queue for the following cycle.
             </p>
           </div>
           <div className="bridge-nav-links">

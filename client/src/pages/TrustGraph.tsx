@@ -46,6 +46,16 @@ type TrustNode = {
   signals: TrustSignals;
 };
 
+type Vouch = {
+  id: string;
+  person: string;
+  handle?: string;
+  reason: string;
+  stake: number;
+  endorser?: string;
+  quality: number;
+};
+
 type ScoreResponse = {
   scores: Array<{ id: string; score: number; confidence: number }>;
 };
@@ -187,6 +197,33 @@ export default function TrustGraph() {
   const [impactFilter, setImpactFilter] = useState("All");
   const [scores, setScores] = useState<Record<string, { score: number; confidence: number }>>({});
   const [scoreError, setScoreError] = useState<string | null>(null);
+  const [vouchForm, setVouchForm] = useState({
+    person: "",
+    handle: "",
+    reason: "",
+    stake: "250",
+    endorser: trustNodes[0]?.name ?? ""
+  });
+  const [vouches, setVouches] = useState<Vouch[]>([
+    {
+      id: "vouch-1",
+      person: "Amina Otieno",
+      handle: "amina.otieno",
+      reason: "Coordinated the Kilimanjaro nursery crew; reliable reporting.",
+      stake: 750,
+      endorser: "Mangrove Guardians",
+      quality: 78
+    },
+    {
+      id: "vouch-2",
+      person: "Diego Ramirez",
+      handle: "diego.r",
+      reason: "Delivered MRV data packets on time for two epochs.",
+      stake: 1200,
+      endorser: "Regen Ledger",
+      quality: 85
+    }
+  ]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -278,6 +315,43 @@ export default function TrustGraph() {
     });
     return edgeList;
   }, [visibleIds]);
+
+  const computeQuality = (stake: number, hasEndorser: boolean) => {
+    const base = 50;
+    const stakeBoost = Math.min(35, Math.sqrt(Math.max(stake, 0)));
+    const endorsementBoost = hasEndorser ? 10 : 0;
+    return Math.min(100, Math.round(base + stakeBoost + endorsementBoost));
+  };
+
+  const handleVouchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const trimmedPerson = vouchForm.person.trim();
+    const trimmedReason = vouchForm.reason.trim();
+    const stakeValue = Number(vouchForm.stake);
+    if (!trimmedPerson || !trimmedReason || Number.isNaN(stakeValue)) {
+      setScoreError("Add a person, a reason, and a WON stake to submit a vouch.");
+      return;
+    }
+    setScoreError(null);
+    const quality = computeQuality(stakeValue, Boolean(vouchForm.endorser));
+    const newVouch: Vouch = {
+      id: typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `${Date.now()}`,
+      person: trimmedPerson,
+      handle: vouchForm.handle.trim() || undefined,
+      reason: trimmedReason,
+      stake: Math.max(stakeValue, 0),
+      endorser: vouchForm.endorser || undefined,
+      quality
+    };
+    setVouches((prev) => [newVouch, ...prev]);
+    setVouchForm((prev) => ({
+      ...prev,
+      person: "",
+      handle: "",
+      reason: "",
+      stake: "250"
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -431,6 +505,109 @@ export default function TrustGraph() {
                   <div key={role} className="flex items-center gap-2">
                     <span className="inline-flex h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
                     <span>{role}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-border/60 bg-card/50 p-6 shadow-lg">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Vouch (Trustgraph)</p>
+                  <h2 className="text-xl font-semibold">Stake WON to boost a vouch</h2>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Frontend aligned with the trustgraph spec (github.com/trustgraph/trustgraph). Use WON to lift
+                    vouch quality; Visa/Mastercard utility unlocks soon via Crassula connectors.
+                  </p>
+                </div>
+                <span className="text-sm text-muted-foreground">Proof-of-vouch</span>
+              </div>
+              <form className="mt-4 space-y-3" onSubmit={handleVouchSubmit}>
+                <div className="grid grid-cols-1 gap-3">
+                  <label className="text-xs font-semibold text-muted-foreground">
+                    Person or org
+                    <input
+                      className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                      value={vouchForm.person}
+                      onChange={(event) => setVouchForm((prev) => ({ ...prev, person: event.target.value }))}
+                      placeholder="e.g., Amina Otieno"
+                    />
+                  </label>
+                  <label className="text-xs font-semibold text-muted-foreground">
+                    Handle (optional)
+                    <input
+                      className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                      value={vouchForm.handle}
+                      onChange={(event) => setVouchForm((prev) => ({ ...prev, handle: event.target.value }))}
+                      placeholder="proton / telegram / email"
+                    />
+                  </label>
+                </div>
+                <label className="text-xs font-semibold text-muted-foreground">
+                  Reason
+                  <textarea
+                    className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                    value={vouchForm.reason}
+                    onChange={(event) => setVouchForm((prev) => ({ ...prev, reason: event.target.value }))}
+                    rows={2}
+                    placeholder="What did they deliver? What evidence do you have?"
+                  />
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="text-xs font-semibold text-muted-foreground">
+                    WON stake (improves quality)
+                    <input
+                      type="number"
+                      min="0"
+                      className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                      value={vouchForm.stake}
+                      onChange={(event) => setVouchForm((prev) => ({ ...prev, stake: event.target.value }))}
+                    />
+                  </label>
+                  <label className="text-xs font-semibold text-muted-foreground">
+                    Endorser (optional)
+                    <select
+                      className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                      value={vouchForm.endorser}
+                      onChange={(event) => setVouchForm((prev) => ({ ...prev, endorser: event.target.value }))}
+                    >
+                      <option value="">None</option>
+                      {trustNodes.map((node) => (
+                        <option key={node.id} value={node.name}>
+                          {node.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>
+                    Quality score factors: base evidence + sqrt(WON) stake + endorser bonus.
+                  </span>
+                  <button
+                    type="submit"
+                    className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground"
+                  >
+                    Submit vouch
+                  </button>
+                </div>
+              </form>
+              <div className="mt-4 space-y-3">
+                {vouches.map((vouch) => (
+                  <div key={vouch.id} className="rounded-2xl border border-border/40 bg-background p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold">
+                          {vouch.person} {vouch.handle && <span className="text-muted-foreground">@{vouch.handle}</span>}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">{vouch.reason}</p>
+                      </div>
+                      <div className="text-right text-xs">
+                        <p className="font-semibold">Quality {vouch.quality}/100</p>
+                        <p className="text-muted-foreground">Stake {vouch.stake} WON</p>
+                        {vouch.endorser && <p className="text-muted-foreground">Endorser {vouch.endorser}</p>}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

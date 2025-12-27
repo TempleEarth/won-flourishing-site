@@ -6,13 +6,16 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster";
 import "./map.css";
-import { projectCategories } from "@/data/projectCategories";
-import type { Project } from "@shared/schema";
-
+import {
+  categoryLookup,
+  projectCategories,
+  type CategoryGroupKey
+} from "@/data/projectCategories";
 type MapNode = {
   id: string;
   name: string;
-  type: keyof typeof categories | string;
+  type: string;
+  group?: CategoryGroupKey;
   location: string;
   lat: number;
   lng: number;
@@ -20,6 +23,11 @@ type MapNode = {
 };
 
 const categories = projectCategories;
+const fallbackGroup: CategoryGroupKey = "Communities";
+const withGroup = (node: MapNode): MapNode => ({
+  ...node,
+  group: categoryLookup[node.type] ?? fallbackGroup
+});
 
 const nodes: MapNode[] = [
   // Platform-tagged sample sites
@@ -766,7 +774,8 @@ const nodes: MapNode[] = [
 ];
 
 function buildPopup(node: MapNode) {
-  const color = categories[node.type]?.color ?? "#72f2c0";
+  const group = categoryLookup[node.type] ?? node.group ?? fallbackGroup;
+  const color = categories[group].color;
   return `
     <div style="min-width:220px;font-family:'Space Grotesk',sans-serif;color:#0f172a;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
@@ -786,9 +795,8 @@ export default function MapPage() {
   const markerIndexRef = useRef<Map<string, L.CircleMarker>>(new Map());
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [submittedNodes, setSubmittedNodes] = useState<MapNode[]>([]);
-  const [activeTypes, setActiveTypes] = useState<Set<string>>(
-    () => new Set(Object.keys(categories))
+  const [activeTypes, setActiveTypes] = useState<Set<CategoryGroupKey>>(
+    () => new Set(Object.keys(categories) as CategoryGroupKey[])
   );
 
   useEffect(() => {
@@ -820,39 +828,15 @@ export default function MapPage() {
     };
   }, []);
 
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        const response = await fetch("/api/projects");
-        if (!response.ok) return;
-        const payload = (await response.json()) as Project[];
-        const mapped = payload.map((project) => ({
-          id: project.id,
-          name: project.name,
-          type: project.type,
-          location: project.location,
-          lat: project.lat,
-          lng: project.lng,
-          desc: project.desc
-        }));
-        setSubmittedNodes(mapped);
-      } catch {
-        // Ignore fetch errors; map still renders static nodes.
-      }
-    };
-
-    loadProjects();
+  const allNodes = useMemo(() => {
+    return nodes.map(withGroup);
   }, []);
-
-  const allNodes = useMemo(
-    () => [...nodes, ...submittedNodes],
-    [submittedNodes]
-  );
 
   const filteredNodes = useMemo(() => {
     const q = query.trim().toLowerCase();
     return allNodes.filter((node) => {
-      const matchesType = activeTypes.has(node.type);
+      const group = node.group ?? ("Communities" as CategoryGroupKey);
+      const matchesType = activeTypes.has(group);
       const searchable = `${node.name} ${node.location} ${node.desc} ${node.type}`.toLowerCase();
       const matchesQuery = !q || searchable.includes(q);
       return matchesType && matchesQuery;
@@ -868,7 +852,8 @@ export default function MapPage() {
     markerIndexRef.current.clear();
 
     filteredNodes.forEach((node) => {
-      const color = categories[node.type]?.color ?? "#72f2c0";
+      const group = node.group ?? fallbackGroup;
+      const color = categories[group].color;
       const marker = L.circleMarker([node.lat, node.lng], {
         radius: 9,
         weight: 2,
@@ -892,7 +877,7 @@ export default function MapPage() {
     marker.openPopup();
   }, []);
 
-  const toggleType = (type: string) => {
+  const toggleType = (type: CategoryGroupKey) => {
     setActiveTypes((prev) => {
       const next = new Set(prev);
       if (next.has(type)) next.delete(type);
@@ -929,9 +914,6 @@ export default function MapPage() {
           <p>Sample of mapped sites across Restor.eco, Giveth, Karma HQ, Toucan, and more.</p>
         </div>
         <div className="map-actions">
-          <Link href="/" className="map-link">
-            Back home
-          </Link>
           <Link href="/projects/submit" className="map-link">
             Submit project
           </Link>
@@ -967,19 +949,26 @@ export default function MapPage() {
               {Object.entries(categories).map(([type, meta]) => (
                 <label
                   key={type}
-                  className={`map-filter ${activeTypes.has(type) ? "active" : ""}`}
+                  className={`map-filter ${
+                    activeTypes.has(type as CategoryGroupKey) ? "active" : ""
+                  }`}
                 >
                   <input
                     type="checkbox"
-                    checked={activeTypes.has(type)}
-                    onChange={() => toggleType(type)}
+                    checked={activeTypes.has(type as CategoryGroupKey)}
+                    onChange={() => toggleType(type as CategoryGroupKey)}
                   />
                   <span
                     className="map-dot"
                     aria-hidden
                     style={{ backgroundColor: meta.color }}
                   />
-                  <span>{type}</span>
+                  <span>
+                    {meta.label}
+                    <small className="block text-[11px] text-slate-500">
+                      {meta.includes.join(" / ")}
+                    </small>
+                  </span>
                 </label>
               ))}
             </div>
@@ -1000,7 +989,8 @@ export default function MapPage() {
 
           <div className="map-list" id="list">
             {filteredNodes.map((node) => {
-              const color = categories[node.type]?.color ?? "#72f2c0";
+              const group = node.group ?? fallbackGroup;
+              const color = categories[group].color;
               return (
                 <button
                   key={node.id}
@@ -1014,7 +1004,7 @@ export default function MapPage() {
                         style={{ backgroundColor: color }}
                         aria-hidden
                       />
-                      {node.type}
+                      {node.type} - {group}
                     </span>
                     <span>{node.location}</span>
                   </div>
