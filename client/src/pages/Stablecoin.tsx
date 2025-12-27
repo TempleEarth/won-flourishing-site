@@ -26,13 +26,6 @@ export default function StablecoinPage() {
           </div>
 
           <div className="bridge-card">
-            <div className="bridge-banner">
-              Reference codebase on GitHub:{" "}
-              <a href="https://github.com/templeearth" target="_blank" rel="noreferrer">
-                TempleEarth organization
-              </a>
-              .
-            </div>
             <div className="bridge-embed" style={{ minHeight: "560px" }}>
               <iframe
                 src="https://amazonedollar.org/"
