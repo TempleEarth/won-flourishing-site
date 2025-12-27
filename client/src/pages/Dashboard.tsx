@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "wouter";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 
 const MINIMUM_WON = 5000;
@@ -91,34 +91,27 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                alt="We Won Logo"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+                  alt="We Won Logo"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">Whitelist</p>
+              <h1 className="bridge-title">WON whitelist status</h1>
+              <p className="bridge-subhead">
+                Only wallets that meet on-chain WON balance requirements show here. Use WharfKit to
+                connect a Proton wallet and refresh the whitelist record from chain.
+              </p>
             </div>
-            <p className="bridge-eyebrow">Whitelist</p>
-            <h1 className="bridge-title">WON whitelist status</h1>
-            <p className="bridge-subhead">
-              Only wallets that meet on-chain WON balance requirements show here. Use WharfKit to
-              connect a Proton wallet and refresh the whitelist record from chain.
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/" className="bridge-nav-link">
-              Back home
-            </Link>
-            <Link href="/tokenization" className="bridge-nav-link">
-              Tokenization
-            </Link>
-          </div>
-        </div>
 
         <div className="bridge-card">
           <div className="bridge-banner">
@@ -208,7 +201,8 @@ export default function DashboardPage() {
             })}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }

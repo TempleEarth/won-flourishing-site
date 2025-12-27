@@ -1,6 +1,6 @@
-import { Link } from "wouter";
 import { Download, LineChart } from "lucide-react";
 import { useMemo, useState } from "react";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 import "./apy.css";
 
@@ -142,42 +142,38 @@ export default function ApyCalculatorPage() {
   };
 
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                alt="We Won Logo"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+                  alt="We Won Logo"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">APY calculator</p>
+              <h1 className="bridge-title">WON yield estimates at a glance</h1>
+              <p className="bridge-subhead">
+                Pull your on-chain yield signal, plug in your holdings, and see how the
+                WON regenerative flywheel could compound across short and long timelines.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Source data:{" "}
+                <a
+                  href="https://proton.alcor.exchange/analytics/tokens/won-w3won"
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Alcor WON analytics
+                </a>
+              </p>
             </div>
-            <p className="bridge-eyebrow">APY calculator</p>
-            <h1 className="bridge-title">WON returns at a glance</h1>
-            <p className="bridge-subhead">
-              Pull your on-chain yield signal, plug in your holdings, and see how the
-              WON regenerative flywheel compounds across short and long timelines.
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Source data:{" "}
-              <a
-                href="https://proton.alcor.exchange/analytics/tokens/won-w3won"
-                className="underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Alcor WON analytics
-              </a>
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/" className="bridge-nav-link">
-              Back home
-            </Link>
-          </div>
-        </div>
 
         <div className="bridge-card apy-grid">
           <section className="apy-panel">
@@ -202,7 +198,7 @@ export default function ApyCalculatorPage() {
                   onChange={(event) => setAmountInput(event.target.value)}
                   placeholder="Enter your WON balance"
                 />
-                <p className="bridge-muted">We use monthly compounding to estimate yield.</p>
+                <p className="bridge-muted">We use monthly compounding to estimate yield. Estimates are illustrative only.</p>
               </div>
               <div className="bridge-field">
                 <label className="bridge-label">Projected value</label>
@@ -274,7 +270,7 @@ export default function ApyCalculatorPage() {
               <p className="bridge-eyebrow">Display on dashboard</p>
               <p className="bridge-muted">
                 Embed this module on the website or analytics view to illustrate how WON
-                compounding funds regeneration. Data feeds are ready to swap for live oracle
+                compounding could support regeneration. Data feeds are ready to swap for live oracle
                 inputs as they go on-chain so APY stays in sync with XPR activity.
               </p>
             </div>
@@ -282,5 +278,6 @@ export default function ApyCalculatorPage() {
         </div>
       </div>
     </div>
+    </SiteLayout>
   );
 }

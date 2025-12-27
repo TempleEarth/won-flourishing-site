@@ -1,5 +1,5 @@
-import { Link } from "wouter";
 import { CheckCircle2 } from "lucide-react";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 
 type FlowField = {
@@ -79,62 +79,56 @@ const flows: Flow[] = [
 
 export default function TokenizationPage() {
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="We Won Logo" className="w-9 h-9 rounded-full object-cover" />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="We Won Logo" className="w-9 h-9 rounded-full object-cover" />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">Tokenization Protocols</p>
+              <h1 className="bridge-title">Launch Your Impact Asset</h1>
+              <p className="bridge-subhead">
+                Example tokenization flows only. We removed live inputs so you can focus on the patterns
+                before opening a production build.
+              </p>
             </div>
-            <p className="bridge-eyebrow">Tokenization Protocols</p>
-            <h1 className="bridge-title">Launch Your Impact Asset</h1>
-            <p className="bridge-subhead">
-              Example tokenization flows only. We removed live inputs so you can focus on the patterns
-              before opening a production build.
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/" className="bridge-nav-link">
-              Back home
-            </Link>
-            <Link href="/stablecoin" className="bridge-nav-link">
-              Stablecoin
-            </Link>
-          </div>
-        </div>
 
-        <div className="bridge-card">
-          <div className="bridge-grid">
-            {flows.map((flow, index) => (
-              <div key={flow.title} className="bg-white border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-primary mt-1" />
-                  <div className="flex-1">
-                    <h3 className="bridge-title" style={{ fontSize: "20px", marginBottom: "8px" }}>
-                      {flow.title}
-                    </h3>
-                    <p className="bridge-muted mb-4">{flow.desc}</p>
-                    <div className="space-y-2">
-                      {flow.fields.map((field) => (
-                        <div key={field.label} className="text-sm">
-                          <span className="font-semibold">{field.label}:</span>{" "}
-                          <span className="text-muted-foreground">
-                            {field.placeholder || "Example value"}
-                          </span>
-                        </div>
-                      ))}
+          <div className="bridge-card">
+            <div className="bridge-grid">
+              {flows.map((flow, index) => (
+                <div key={flow.title} className="bg-white border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-1" />
+                    <div className="flex-1">
+                      <h3 className="bridge-title" style={{ fontSize: "20px", marginBottom: "8px" }}>
+                        {flow.title}
+                      </h3>
+                      <p className="bridge-muted mb-4">{flow.desc}</p>
+                      <div className="space-y-2">
+                        {flow.fields.map((field) => (
+                          <div key={field.label} className="text-sm">
+                            <span className="font-semibold">{field.label}:</span>{" "}
+                            <span className="text-muted-foreground">
+                              {field.placeholder || "Example value"}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="bridge-muted mt-3 text-xs">
+                        Example only. Deployments reopen with production staking and licensing checks.
+                      </p>
                     </div>
-                    <p className="bridge-muted mt-3 text-xs">
-                      Example only. Deployments reopen with production staking and licensing checks.
-                    </p>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }

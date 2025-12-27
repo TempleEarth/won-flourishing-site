@@ -1,5 +1,6 @@
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 
 type Region = {
@@ -74,40 +75,28 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 export default function StakePage() {
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                alt="We Won Logo"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+                  alt="We Won Logo"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">Stake to Prioritize</p>
+              <h1 className="bridge-title">Route WON toward the regions you want funded first.</h1>
+              <p className="bridge-subhead">
+                Stake WON to elevate regional priorities. Each monthly cycle, the highest-staked
+                region unlocks a single project to prioritize on-chain, then the slate resets for the
+                next month.
+              </p>
             </div>
-            <p className="bridge-eyebrow">Stake to Prioritize</p>
-            <h1 className="bridge-title">Route WON toward the regions you want funded first.</h1>
-            <p className="bridge-subhead">
-              Stake WON to elevate regional priorities. Each monthly cycle, the highest-staked
-              region unlocks a single project to prioritize on-chain, then the slate resets for the
-              next month.
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/" className="bridge-nav-link">
-              Back home
-            </Link>
-            <a
-              href="https://wharfkit.com/"
-              className="bridge-nav-link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Connect wallet (WharfKit)
-            </a>
-          </div>
-        </div>
 
         <div className="bridge-card">
           <div className="bridge-pill-grid">
@@ -217,7 +206,8 @@ export default function StakePage() {
             })}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }

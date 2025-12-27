@@ -20,6 +20,8 @@ import {
 import heroBg from "@assets/generated_images/hero_background_showing_digital_abundance_merging_with_nature.webp";
 import tokenImg from "@assets/generated_images/tokenization_concept_art.webp";
 import MapPage from "@/pages/Map";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -99,50 +101,7 @@ export default function Home() {
         }`}
       >
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 glass border-b-0">
-          <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <img src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi" alt="We Won Logo" className="w-8 h-8 rounded-full object-cover" />
-              <span className="font-display font-bold text-xl tracking-tight">We Won</span>
-            </div>
-            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-              <Link href="/map" className="hover:text-primary transition-colors">
-                Map
-              </Link>
-              <Link href="/whitelist" className="hover:text-primary transition-colors">
-                Whitelist
-              </Link>
-              <Link href="/apy" className="hover:text-primary transition-colors">
-                APY Calculator
-              </Link>
-              <Link href="/buy" className="hover:text-primary transition-colors">
-                Buy WON
-              </Link>
-              <Link href="/stake" className="hover:text-primary transition-colors">
-                Stake
-              </Link>
-              <Link href="/marketplace" className="hover:text-primary transition-colors">
-                Marketplace
-              </Link>
-              <Link href="/stablecoin" className="hover:text-primary transition-colors">
-                Stablecoin
-              </Link>
-              <Link href="/tokenization" className="hover:text-primary transition-colors">
-                Tokenization
-              </Link>
-            </div>
-            {showJoin && (
-              <a
-                href="https://t.me/templeearth"
-                target="_blank"
-                rel="noreferrer"
-                className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-medium text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-              >
-                Join the Movement
-              </a>
-            )}
-          </div>
-        </nav>
+        <SiteHeader showJoin={showJoin} />
 
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -173,12 +132,14 @@ export default function Home() {
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-wrap gap-4">
-                <Link
-                  href="/tokenization"
+                <a
+                  href="https://github.com/templeearth"
+                  target="_blank"
+                  rel="noreferrer"
                   className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-primary/90 transition-all hover:scale-105 shadow-xl shadow-primary/25 flex items-center gap-2"
                 >
                   Begin the Build <ArrowRight className="w-5 h-5" />
-                </Link>
+                </a>
                 <a
                   href="#stablecoin"
                   className="bg-white/50 backdrop-blur-sm border border-white/60 text-foreground px-8 py-4 rounded-full font-bold text-lg hover:bg-white/80 transition-all flex items-center gap-2"
@@ -205,10 +166,10 @@ export default function Home() {
                 className="glass border border-primary/30 bg-white/60 backdrop-blur-md p-6 rounded-2xl max-w-xl shadow-xl"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">
-                  Magic: Transfer Fee
+                  Built on Proton
                 </p>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Arbitrage bots pay the fee that funds regeneration. They race to close price gaps; we route the yield.
+                  WON is issued on XPR with stablecoin-backed reserves, giving communities a shared unit for coordinating impact and liquidity.
                 </p>
               </motion.div>
             </motion.div>
@@ -221,32 +182,32 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-                  ROI: How WON grows
+                  Value Alignment
                 </p>
                 <h3 className="font-display text-4xl md:text-5xl font-bold leading-tight mb-4">
-                  Regenerative umbrella that lifts the WON price.
+                  A liquidity flywheel designed to support long-term resilience.
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Each project tokenized contributes a percent fee and liquidity to the shared pool. Staking and DEX activity stack on top, letting communities of impact and every steward see upside as more ecovillages launch.
+                  Each project tokenized contributes fees and liquidity into a shared pool. Staking and DEX activity can add depth, helping communities coordinate stewardship as more ecovillages launch.
                 </p>
               </div>
               <div className="space-y-6">
                 <div className="glass p-5 rounded-2xl border border-border">
                   <p className="text-sm font-semibold text-primary mb-1">Project fees + liquidity</p>
                   <p className="text-muted-foreground">
-                    Every tokenized project routes a small percent fee and LP contribution into the WON umbrella pool. More launches = deeper liquidity = higher price support.
+                    Every tokenized project routes a small percent fee and LP contribution into the WON umbrella pool. More launches can deepen liquidity and support healthier market conditions.
                   </p>
                 </div>
                 <div className="glass p-5 rounded-2xl border border-border">
                   <p className="text-sm font-semibold text-primary mb-1">Staking & DEX fees</p>
                   <p className="text-muted-foreground">
-                    Staked WON and paired DEX liquidity earn trading fees; even a 0.3% pool with modest volume compounds yearly yield back to holders and the regen treasury.
+                    Staked WON and paired DEX liquidity may earn trading fees that can be shared with participants and the community treasury.
                   </p>
                 </div>
                 <div className="glass p-5 rounded-2xl border border-border">
                   <p className="text-sm font-semibold text-primary mb-1">Compounding flywheel</p>
                   <p className="text-muted-foreground">
-                    Fees, LP rewards, and staking yields recycle into new tokenizations and buy pressure, reinforcing the regenerative loop instead of extractive drift.
+                    Fees, LP rewards, and staking yields can be recycled into new tokenizations and liquidity programs as governed by stewards.
                   </p>
                 </div>
               </div>
@@ -357,17 +318,17 @@ export default function Home() {
 
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center mb-20">
-              <h2 className="font-display text-4xl md:text-6xl font-bold mb-6">Your Voice Determines Outcomes</h2>
+              <h2 className="font-display text-4xl md:text-6xl font-bold mb-6">Staking Prioritizes Outcomes</h2>
               <p className="text-xl text-white/70">
-                The democratic process affirms: your participation matters. Your voice shapes real outcomes in the physical world.
+                Staked WON signals which projects rise to the top of the queue. Stewardship weight guides review priority, funding sequences, and the rollout calendar.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { title: "Climate Restoration", desc: "Direct funding to reforestation, clean energy, and ecosystem recovery.", color: "bg-emerald-500" },
-                { title: "Economic Development", desc: "Support local businesses, job creation, and financial inclusion.", color: "bg-blue-500" },
-                { title: "Community Wellbeing", desc: "Invest in healthcare, education, and food security initiatives.", color: "bg-amber-500" }
+                { title: "Stake to Signal", desc: "Stake WON to express which initiatives deserve attention first.", color: "bg-emerald-500" },
+                { title: "Priority Queue", desc: "Higher-staked projects move forward faster in the tokenization pipeline.", color: "bg-blue-500" },
+                { title: "Transparent Outcomes", desc: "Progress updates and verification keep priorities accountable to stewards.", color: "bg-amber-500" }
               ].map((card, i) => (
                 <motion.div
                   key={i}
@@ -396,7 +357,7 @@ export default function Home() {
                   Stable Plus
                 </h2>
                 <p className="text-muted-foreground text-lg mb-8">
-                  The magic is a transfer fee paid mostly by arbitrage bots. They keep pricing aligned while their activity funds regeneration.
+                  WON is backed by stablecoins on XPR, designed to keep reserves transparent and community-directed.
                 </p>
                 <Link
                   href="/stablecoin"
@@ -408,10 +369,10 @@ export default function Home() {
 
               <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { step: "01", title: "Assets & Chains", desc: "Backed by USDC, DAI, and native LSTs across Ethereum, Arbitrum, Base, Optimism, and Avalanche.", reveal: true },
-                  { step: "02", title: "Magic: Transfer Fee", desc: "Arbitrage bots pay the fee that funds regeneration. They race to close price gaps; we route the yield.", reveal: true },
-                  { step: "03", title: "Pricing Mechanics", desc: "Backed at $1.00. Price can rise but never drops below $1.00. Over time it becomes mathematically harder to approach $1 even if every asset outside locked pools sold.", reveal: true },
-                  { step: "04", title: "The Vision", desc: "Your one-time gift of giving yourself an asset that appreciates also funds a world of abundance on a world tour tokenizing and connecting eco villages.", reveal: true }
+                  { step: "01", title: "Assets & Chains", desc: "WON is backed by stablecoins on XPR with on-chain reserves visible to stewards.", reveal: true },
+                  { step: "02", title: "Treasury Routing", desc: "Governance steers how fees and reserves support new tokenizations, liquidity, and community grants.", reveal: true },
+                  { step: "03", title: "Pricing Mechanics", desc: "Designed to track a $1 reference with buffers and controls; market prices can move above or below based on liquidity.", reveal: true },
+                  { step: "04", title: "The Vision", desc: "A shared unit of account that helps ecovillages coordinate funding, tokenization, and long-term stewardship.", reveal: true }
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -480,7 +441,7 @@ export default function Home() {
                 Ecosystem Stakeholder Tiers
               </p>
               <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                Stake WON, unlock shared upside.
+                Stake WON, shape shared priorities.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Supporters who donate or stake WON receive tiered benefits, visibility, and deeper access to the regenerative roadmap.
@@ -548,13 +509,13 @@ export default function Home() {
 
                 <div className="mt-8 flex flex-wrap gap-4">
                   <a
-                    href="https://github.com/templeearth/won/compare"
+                    href="https://github.com/templeearth"
                     className="bg-primary text-primary-foreground px-5 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
                   >
                     Request Production License <ArrowUpRight className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://github.com/templeearth/won"
+                    href="https://github.com/templeearth"
                     className="border border-border px-5 py-3 rounded-full font-semibold text-sm hover:border-primary/60 hover:text-primary transition-colors inline-flex items-center gap-2"
                   >
                     Join Friendly Forks <ArrowUpRight className="w-4 h-4" />
@@ -613,50 +574,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-foreground text-background py-16 border-t border-white/10 relative z-10">
-          <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-4 gap-12">
-              <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center gap-3 mb-6">
-                  <img
-                    src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                    alt="We Won Logo"
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <span className="font-display font-bold text-2xl">We Won</span>
-                </div>
-                <p className="text-white/50 max-w-sm mb-8 text-[17px] leading-relaxed">
-                  We already have what we need. The choice is to coordinate differently, letting abundance circulate through trust.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-bold mb-6 text-white text-2xl">Platform</h4>
-                <ul className="space-y-4 text-white/60 text-[17px] leading-relaxed">
-                  <li><Link href="/marketplace" className="hover:text-primary transition-colors">Marketplace</Link></li>
-                  <li><Link href="/stablecoin" className="hover:text-primary transition-colors">Stablecoin</Link></li>
-                  <li><Link href="/tokenization" className="hover:text-primary transition-colors">Tokenization</Link></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Governance</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-bold mb-6 text-white text-2xl">Community</h4>
-                <ul className="space-y-4 text-white/60 text-[17px] leading-relaxed">
-                  <li><a href="https://t.me/templeearth" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Telegram</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Github</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-16 text-center">
-              <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight">Explore the New Earth</h1>
-            </div>
-            <div className="border-t border-white/10 mt-16 pt-8 text-center text-white/30 text-sm">
-              (c) 2024 Won Flourishing Network. All rights reserved.
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
         <div className="h-28 md:h-36" aria-hidden />
       </div>
 
