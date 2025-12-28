@@ -113,7 +113,8 @@ const REGION_VAULT_ACCOUNTS: Record<string, string> = {
 const resolveVaultAccount = (regionId: string) => {
   const envVault = REGION_VAULT_ACCOUNTS[regionId];
   const defaultVault = DEFAULT_REGION_VAULTS[regionId as keyof typeof DEFAULT_REGION_VAULTS];
-  return envVault || defaultVault || STAKING_VAULT_ACCOUNT || "";
+  const fallbackDefault = DEFAULT_REGION_VAULTS.latam;
+  return envVault || defaultVault || STAKING_VAULT_ACCOUNT || fallbackDefault;
 };
 const WON_TOKEN_CONTRACT = (import.meta.env.VITE_WON_TOKEN_CONTRACT ?? "w3won").trim();
 const WON_TOKEN_SYMBOL = (import.meta.env.VITE_WON_TOKEN_SYMBOL ?? "WON").trim();
@@ -251,7 +252,7 @@ export default function StakePage() {
     }
     const vaultAccount = resolveVaultAccount(selectedRegion);
     if (!vaultAccount) {
-      setStakeError("Staking vault account is not configured for this region.");
+      setStakeError(`Staking vault account is not configured for region ${selectedRegion}.`);
       return;
     }
     const quantity = formatQuantity(stakeAmount);
