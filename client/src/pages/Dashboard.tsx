@@ -106,7 +106,7 @@ export default function DashboardPage() {
             <p className="bridge-eyebrow">Whitelist</p>
             <h1 className="bridge-title">WON whitelist status</h1>
             <p className="bridge-subhead">
-              Only wallets that meet on-chain WON balance requirements show here. Use WharfKit to
+              Only wallets that meet on-chain WON balance requirements show here. Use WebIO to
               connect a Proton wallet and refresh the whitelist record from chain.
             </p>
           </div>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
           <div className="bridge-input-row">
             <div className="bridge-field">
               <label className="bridge-label" htmlFor="wallet-address">
-                Proton account (via WharfKit)
+                Proton account (via WebIO)
               </label>
               <input
                 id="wallet-address"
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                 placeholder="e.g., wonlaunchpad"
               />
               <p className="bridge-muted">
-                Connect with WharfKit, then paste your Proton account to refresh the on-chain
+                Connect with WebIO, then paste your Proton account to refresh the on-chain
                 balance.
               </p>
             </div>
@@ -169,11 +169,11 @@ export default function DashboardPage() {
               </button>
               <a
                 className="bridge-nav-link mt-2 inline-flex"
-                href="https://wharfkit.com/"
+                href="https://webio.dev/"
                 target="_blank"
                 rel="noreferrer"
               >
-                Connect via WharfKit
+                Connect via WebIO
               </a>
             </div>
           </div>

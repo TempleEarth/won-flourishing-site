@@ -99,12 +99,12 @@ export default function StakePage() {
               Back home
             </Link>
             <a
-              href="https://wharfkit.com/"
+              href="https://webio.dev/"
               className="bridge-nav-link"
               target="_blank"
               rel="noreferrer"
             >
-              Connect wallet (WharfKit)
+              Connect wallet (WebIO)
             </a>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function StakePage() {
                 </button>
               </div>
               <p className="bridge-muted">
-                Connect with WharfKit, then stake WON to signal which region gets the single monthly project allocation.
+                Connect with WebIO, then stake WON to signal which region gets the single monthly project allocation.
               </p>
             </div>
             <div className="bridge-field">
@@ -156,7 +156,7 @@ export default function StakePage() {
             </button>
             <div className="bridge-banner" style={{ marginTop: 0 }}>
               Wallet connection and on-chain staking will open with the next deployment of the WON
-              staking contract on XPR. Stakes flow via WharfKit.
+              staking contract on XPR. Stakes flow via WebIO.
             </div>
           </div>
 
