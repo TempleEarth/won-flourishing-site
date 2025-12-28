@@ -118,7 +118,8 @@ const resolveVaultAccount = (regionId: string) => {
 };
 const WON_TOKEN_CONTRACT = (import.meta.env.VITE_WON_TOKEN_CONTRACT ?? "w3won").trim();
 const WON_TOKEN_SYMBOL = (import.meta.env.VITE_WON_TOKEN_SYMBOL ?? "WON").trim();
-const WON_TOKEN_DECIMALS = Number(import.meta.env.VITE_WON_TOKEN_DECIMALS ?? 4);
+// Proton stats show WON uses 6 decimals.
+const WON_TOKEN_DECIMALS = Number(import.meta.env.VITE_WON_TOKEN_DECIMALS ?? 6);
 const SESSION_STORAGE_KEY = "wharf-session";
 const WALLET_LOGIN_TIMEOUT_MS = 15000;
 
