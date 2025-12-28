@@ -110,6 +110,11 @@ const REGION_VAULT_ACCOUNTS: Record<string, string> = {
     (import.meta.env.VITE_WON_STAKING_ACCOUNT_NA ?? DEFAULT_REGION_VAULTS.na).trim() ||
     DEFAULT_REGION_VAULTS.na
 };
+const resolveVaultAccount = (regionId: string) => {
+  const envVault = REGION_VAULT_ACCOUNTS[regionId];
+  const defaultVault = DEFAULT_REGION_VAULTS[regionId as keyof typeof DEFAULT_REGION_VAULTS];
+  return envVault || defaultVault || STAKING_VAULT_ACCOUNT || "";
+};
 const WON_TOKEN_CONTRACT = (import.meta.env.VITE_WON_TOKEN_CONTRACT ?? "w3won").trim();
 const WON_TOKEN_SYMBOL = (import.meta.env.VITE_WON_TOKEN_SYMBOL ?? "WON").trim();
 const WON_TOKEN_DECIMALS = Number(import.meta.env.VITE_WON_TOKEN_DECIMALS ?? 4);
@@ -244,7 +249,7 @@ export default function StakePage() {
       await connectWallet();
       return;
     }
-    const vaultAccount = REGION_VAULT_ACCOUNTS[selectedRegion] || STAKING_VAULT_ACCOUNT;
+    const vaultAccount = resolveVaultAccount(selectedRegion);
     if (!vaultAccount) {
       setStakeError("Staking vault account is not configured for this region.");
       return;
@@ -404,9 +409,9 @@ export default function StakePage() {
                 )}
               </div>
             )}
-            {STAKING_VAULT_ACCOUNT && (
+            {resolveVaultAccount(selectedRegion) && (
               <p className="bridge-muted" style={{ marginTop: 8 }}>
-                Staking vault: {REGION_VAULT_ACCOUNTS[selectedRegion] || STAKING_VAULT_ACCOUNT}
+                Staking vault: {resolveVaultAccount(selectedRegion)}
               </p>
             )}
 
