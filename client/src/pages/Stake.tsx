@@ -82,6 +82,34 @@ const PROTON_CHAIN_ID =
   "384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0";
 const PROTON_CHAIN_URL = (import.meta.env.VITE_XPR_RPC_URL ?? "https://proton.greymass.com").trim();
 const STAKING_VAULT_ACCOUNT = (import.meta.env.VITE_WON_STAKING_ACCOUNT ?? "").trim();
+const DEFAULT_REGION_VAULTS = {
+  latam: "wonlatamv1",
+  africa: "wonafrica1",
+  apac: "wonapacv1",
+  mena: "wonmenav1",
+  europe: "woneurov1",
+  na: "wonnav11"
+};
+const REGION_VAULT_ACCOUNTS: Record<string, string> = {
+  latam:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_LATAM ?? DEFAULT_REGION_VAULTS.latam).trim() ||
+    DEFAULT_REGION_VAULTS.latam,
+  africa:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_AFRICA ?? DEFAULT_REGION_VAULTS.africa).trim() ||
+    DEFAULT_REGION_VAULTS.africa,
+  apac:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_APAC ?? DEFAULT_REGION_VAULTS.apac).trim() ||
+    DEFAULT_REGION_VAULTS.apac,
+  mena:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_MENA ?? DEFAULT_REGION_VAULTS.mena).trim() ||
+    DEFAULT_REGION_VAULTS.mena,
+  europe:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_EUROPE ?? DEFAULT_REGION_VAULTS.europe).trim() ||
+    DEFAULT_REGION_VAULTS.europe,
+  na:
+    (import.meta.env.VITE_WON_STAKING_ACCOUNT_NA ?? DEFAULT_REGION_VAULTS.na).trim() ||
+    DEFAULT_REGION_VAULTS.na
+};
 const WON_TOKEN_CONTRACT = (import.meta.env.VITE_WON_TOKEN_CONTRACT ?? "w3won").trim();
 const WON_TOKEN_SYMBOL = (import.meta.env.VITE_WON_TOKEN_SYMBOL ?? "WON").trim();
 const WON_TOKEN_DECIMALS = Number(import.meta.env.VITE_WON_TOKEN_DECIMALS ?? 4);
@@ -216,13 +244,14 @@ export default function StakePage() {
       await connectWallet();
       return;
     }
+    const vaultAccount = REGION_VAULT_ACCOUNTS[selectedRegion] || STAKING_VAULT_ACCOUNT;
+    if (!vaultAccount) {
+      setStakeError("Staking vault account is not configured for this region.");
+      return;
+    }
     const quantity = formatQuantity(stakeAmount);
     if (!quantity) {
       setStakeError("Enter a valid stake amount.");
-      return;
-    }
-    if (!STAKING_VAULT_ACCOUNT) {
-      setStakeError("Staking vault account is not configured.");
       return;
     }
     if (!WON_TOKEN_CONTRACT || !WON_TOKEN_SYMBOL) {
@@ -243,7 +272,7 @@ export default function StakePage() {
             authorization: [session.permissionLevel],
             data: {
               from: session.actor.toString(),
-              to: STAKING_VAULT_ACCOUNT,
+              to: vaultAccount,
               quantity,
               memo: `Stake ${selectedRegion.toUpperCase()}`
             }
@@ -377,7 +406,7 @@ export default function StakePage() {
             )}
             {STAKING_VAULT_ACCOUNT && (
               <p className="bridge-muted" style={{ marginTop: 8 }}>
-                Staking vault: {STAKING_VAULT_ACCOUNT}
+                Staking vault: {REGION_VAULT_ACCOUNTS[selectedRegion] || STAKING_VAULT_ACCOUNT}
               </p>
             )}
 
