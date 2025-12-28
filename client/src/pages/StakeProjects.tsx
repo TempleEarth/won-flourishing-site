@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 
 type Project = {
@@ -86,32 +86,27 @@ export default function StakeProjectsPage() {
   const filtered = projects.filter((project) => project.region === regionKey);
 
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                alt="We Won Logo"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+                  alt="We Won Logo"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">Impact projects</p>
+              <h1 className="bridge-title">{regionName} funding queue</h1>
+              <p className="bridge-subhead">
+                Review the impact projects that rise as this region gets more WON stakes. The top
+                staked region selects a single monthly project; others queue for the following cycle.
+              </p>
             </div>
-            <p className="bridge-eyebrow">Impact projects</p>
-            <h1 className="bridge-title">{regionName} funding queue</h1>
-            <p className="bridge-subhead">
-              Review the impact projects that rise as this region gets more WON stakes. The top
-              staked region selects a single monthly project; others queue for the following cycle.
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/stake" className="bridge-nav-link">
-              <ArrowLeft className="w-4 h-4" />
-              Back to regions
-            </Link>
-          </div>
-        </div>
 
         <div className="bridge-card">
           <div className="bridge-pill-grid">
@@ -151,7 +146,12 @@ export default function StakeProjectsPage() {
                 </div>
                 <div className="mt-3 flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">Stake WON to back this project</span>
-                  <button className="bridge-primary text-xs px-3 py-1">Stake WON</button>
+                  <Link
+                    href={`/stake?region=${regionKey}#stake-form`}
+                    className="bridge-primary text-xs px-3 py-1"
+                  >
+                    Stake WON
+                  </Link>
                 </div>
                 <div className="bridge-banner" style={{ marginTop: 12 }}>
                   {project.update}
@@ -160,7 +160,8 @@ export default function StakeProjectsPage() {
             ))}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }

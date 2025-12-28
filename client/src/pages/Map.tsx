@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "wouter";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
@@ -11,6 +10,7 @@ import {
   projectCategories,
   type CategoryGroupKey
 } from "@/data/projectCategories";
+import SiteLayout from "@/components/SiteLayout";
 type MapNode = {
   id: string;
   name: string;
@@ -776,13 +776,14 @@ const nodes: MapNode[] = [
 function buildPopup(node: MapNode) {
   const group = categoryLookup[node.type] ?? node.group ?? fallbackGroup;
   const color = categories[group].color;
+  const groupLabel = categories[group].label;
   return `
     <div style="min-width:220px;font-family:'Space Grotesk',sans-serif;color:#0f172a;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
         <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${color};"></span>
         <strong>${node.name}</strong>
       </div>
-      <div style="color:#3c475f;font-size:12px;margin-bottom:6px;">${node.location} - ${node.type}</div>
+      <div style="color:#3c475f;font-size:12px;margin-bottom:6px;">${node.location} · ${groupLabel}</div>
       <div style="color:#1c2335;font-size:13px;line-height:1.4;">${node.desc}</div>
     </div>
   `;
@@ -902,38 +903,38 @@ export default function MapPage() {
   }, [filteredNodes]);
 
   return (
-    <div className="map-page">
-      <header className="map-header">
-        <div className="map-title-block flex items-center gap-3">
-          <img
-            src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-            alt="We Won Logo"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-          <h1>Land-Based Regenerative Projects</h1>
-          <p>Sample of mapped sites across Restor.eco, Giveth, Karma HQ, Toucan, and more.</p>
-        </div>
-        <div className="map-actions">
-          <Link href="/projects/submit" className="map-link">
-            Submit project
-          </Link>
-          <button
-            className="map-link map-toggle"
-            onClick={() => setSidebarOpen((open) => !open)}
-          >
-            {sidebarOpen ? "Hide filters" : "Show filters"}
-          </button>
-        </div>
-      </header>
-
-      <div className="map-layout">
-        <aside className={`map-sidebar ${sidebarOpen ? "open" : ""}`}>
-          <div className="map-stats">
-            <span className="map-count">
-              {filteredNodes.length} mapped projects
-            </span>
-            <span className="map-pill">{regionLabel}</span>
+    <SiteLayout>
+      <div className="map-page">
+        <header className="map-header">
+          <div className="map-title-block flex items-center gap-3">
+            <img
+              src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+              alt="We Won Logo"
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            <div>
+              <h1>Land-Based Regenerative Projects</h1>
+              <p>Sample of mapped sites across Restor.eco, Giveth, Karma HQ, Toucan, and more.</p>
+            </div>
           </div>
+          <div className="map-actions">
+            <button
+              className="map-link map-toggle"
+              onClick={() => setSidebarOpen((open) => !open)}
+            >
+              {sidebarOpen ? "Hide filters" : "Show filters"}
+            </button>
+          </div>
+        </header>
+
+        <div className="map-layout">
+          <aside className={`map-sidebar ${sidebarOpen ? "open" : ""}`}>
+            <div className="map-stats">
+              <span className="map-count">
+                {filteredNodes.length} mapped projects
+              </span>
+              <span className="map-pill">{regionLabel}</span>
+            </div>
 
           <div className="map-controls">
             <label className="map-search">
@@ -1004,7 +1005,7 @@ export default function MapPage() {
                         style={{ backgroundColor: color }}
                         aria-hidden
                       />
-                      {node.type} - {group}
+                      {categories[group].label}
                     </span>
                     <span>{node.location}</span>
                   </div>
@@ -1019,5 +1020,6 @@ export default function MapPage() {
         <div className="map-canvas" ref={mapContainerRef} />
       </div>
     </div>
+    </SiteLayout>
   );
 }

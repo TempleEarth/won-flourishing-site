@@ -1,6 +1,6 @@
-import { Link } from "wouter";
 import { Download, LineChart } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import SiteLayout from "@/components/SiteLayout";
 import "./bridge.css";
 import "./apy.css";
 
@@ -12,7 +12,10 @@ const timelineOptions = [
 ];
 
 const compoundingPeriods = 12;
-const apyRate = 0.6;
+const DEFAULT_DISTRIBUTION_RATE = 0.06;
+const DEFAULT_WON_USD_PRICE = 1;
+const CHAIN_API = "https://proton.greymass.com/v1/chain";
+const ORACLE_REFRESH_MS = 24 * 60 * 60 * 1000;
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -34,10 +37,128 @@ function formatNumber(value: number) {
   return numberFormatter.format(value);
 }
 
+type OracleSnapshot = {
+  distributionRate: number;
+  wonUsdPrice: number;
+  source: string;
+};
+
+const normalizeRate = (value: number) => {
+  if (!Number.isFinite(value)) return DEFAULT_DISTRIBUTION_RATE;
+  const normalized = value > 1 ? value / 100 : value;
+  return Math.max(0, normalized);
+};
+
+const extractDistributionRate = (row: Record<string, unknown> | undefined) => {
+  if (!row) return null;
+  const keys = Object.keys(row);
+  const candidateKey = keys.find((key) => /rate|percent|distribution/i.test(key));
+  if (candidateKey) {
+    const rawValue = row[candidateKey];
+    if (typeof rawValue === "number") return normalizeRate(rawValue);
+    if (typeof rawValue === "string") {
+      const numeric = Number(rawValue.replace(/[^\d.]/g, ""));
+      if (Number.isFinite(numeric)) return normalizeRate(numeric);
+    }
+  }
+  return null;
+};
+
+const extractOraclePrice = (row: Record<string, unknown> | undefined) => {
+  if (!row) return null;
+  const candidateKeys = ["value", "median", "last", "price"];
+  for (const key of candidateKeys) {
+    const rawValue = row[key];
+    if (typeof rawValue === "number") return rawValue;
+    if (typeof rawValue === "string") {
+      const numeric = Number(rawValue);
+      if (Number.isFinite(numeric)) return numeric;
+    }
+  }
+  return null;
+};
+
+async function fetchOracleSnapshot(): Promise<OracleSnapshot> {
+  const defaultSnapshot = {
+    distributionRate: DEFAULT_DISTRIBUTION_RATE,
+    wonUsdPrice: DEFAULT_WON_USD_PRICE,
+    source: "Fallback baseline"
+  };
+
+  try {
+    const [distributionResponse, priceResponse] = await Promise.all([
+      fetch(`${CHAIN_API}/get_table_rows`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: "w3won",
+          table: "distribution",
+          scope: "w3won",
+          limit: 1
+        })
+      }),
+      fetch(`${CHAIN_API}/get_table_rows`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: "delphioracle",
+          table: "datapoints",
+          scope: "wonusd",
+          limit: 1,
+          reverse: true
+        })
+      })
+    ]);
+
+    const distributionPayload = await distributionResponse.json();
+    const pricePayload = await priceResponse.json();
+    const distributionRow = distributionPayload?.rows?.[0] as Record<string, unknown> | undefined;
+    const priceRow = pricePayload?.rows?.[0] as Record<string, unknown> | undefined;
+
+    const distributionRate =
+      extractDistributionRate(distributionRow) ?? DEFAULT_DISTRIBUTION_RATE;
+    const wonUsdPrice = extractOraclePrice(priceRow) ?? DEFAULT_WON_USD_PRICE;
+
+    return {
+      distributionRate,
+      wonUsdPrice,
+      source: "On-chain oracle snapshot"
+    };
+  } catch (error) {
+    console.error(error);
+    return defaultSnapshot;
+  }
+}
+
 export default function ApyCalculatorPage() {
   const [amountInput, setAmountInput] = useState("1000");
   const [activeTimeline, setActiveTimeline] = useState(timelineOptions[3]);
-  const [lastUpdated] = useState(() => new Date());
+  const [oracleSnapshot, setOracleSnapshot] = useState<OracleSnapshot>({
+    distributionRate: DEFAULT_DISTRIBUTION_RATE,
+    wonUsdPrice: DEFAULT_WON_USD_PRICE,
+    source: "Baseline reference"
+  });
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadOracle = async () => {
+      const snapshot = await fetchOracleSnapshot();
+      if (!cancelled) {
+        setOracleSnapshot(snapshot);
+        setLastUpdated(new Date());
+      }
+    };
+
+    loadOracle();
+    const interval = setInterval(loadOracle, ORACLE_REFRESH_MS);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, []);
 
   const principal = useMemo(() => {
     const cleaned = amountInput.replace(/,/g, "");
@@ -48,12 +169,17 @@ export default function ApyCalculatorPage() {
   const projections = useMemo(
     () =>
       timelineOptions.map((option) => {
-        const growth = Math.pow(1 + apyRate / compoundingPeriods, option.months);
+        const years = option.months / 12;
+        const periods = compoundingPeriods * years;
+        const growth = Math.pow(
+          1 + oracleSnapshot.distributionRate / compoundingPeriods,
+          periods
+        );
         const projectedValue = principal * growth;
         const netYield = projectedValue - principal;
         return { ...option, projectedValue, netYield };
       }),
-    [principal]
+    [oracleSnapshot.distributionRate, principal]
   );
 
   const activeProjection = projections.find(
@@ -69,7 +195,7 @@ export default function ApyCalculatorPage() {
       "Starting Amount (WON)",
       "Projected Value (WON)",
       "Net Yield (WON)",
-      "APY"
+      "Distribution Rate"
     ];
 
     const rows = projections.map((projection) => [
@@ -78,7 +204,7 @@ export default function ApyCalculatorPage() {
       principal.toFixed(2),
       projection.projectedValue.toFixed(2),
       projection.netYield.toFixed(2),
-      `${apyRate * 100}%`
+      `${(oracleSnapshot.distributionRate * 100).toFixed(2)}%`
     ]);
 
     const csvContent = [header, ...rows].map((row) => row.join(",")).join("\n");
@@ -120,7 +246,7 @@ export default function ApyCalculatorPage() {
         </head>
         <body>
           <h1>WON APY Projection</h1>
-          <p>Starting Amount: ${formatNumber(principal)} WON · APY: ${apyRate * 100}%</p>
+          <p>Starting Amount: ${formatNumber(principal)} WON · Distribution Rate: ${(oracleSnapshot.distributionRate * 100).toFixed(2)}%</p>
           <table>
             <thead>
               <tr>
@@ -142,52 +268,49 @@ export default function ApyCalculatorPage() {
   };
 
   return (
-    <div className="bridge-shell">
-      <div className="bridge-page">
-        <div className="bridge-header">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <img
-                src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
-                alt="We Won Logo"
-                className="w-9 h-9 rounded-full object-cover"
-              />
-              <span className="font-display font-bold text-xl">We Won</span>
+    <SiteLayout>
+      <div className="bridge-shell">
+        <div className="bridge-page">
+          <div className="bridge-header">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/QmaiJCdbAgC6vPXpMKQNNY5gbUVr7AKALuvdTELUpJSDWi"
+                  alt="We Won Logo"
+                  className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="font-display font-bold text-xl">We Won</span>
+              </div>
+              <p className="bridge-eyebrow">APY calculator</p>
+              <h1 className="bridge-title">WON yield estimates at a glance</h1>
+              <p className="bridge-subhead">
+                Pull the distribution rate from the on-chain oracle, plug in your holdings, and see
+                how holder rewards could compound across short and long timelines.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Oracle source:{" "}
+                <a
+                  href="https://proton.greymass.com/v1/chain/get_table_rows"
+                  className="underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Proton chain API
+                </a>
+              </p>
             </div>
-            <p className="bridge-eyebrow">APY calculator</p>
-            <h1 className="bridge-title">WON returns at a glance</h1>
-            <p className="bridge-subhead">
-              Pull your on-chain yield signal, plug in your holdings, and see how the
-              WON regenerative flywheel compounds across short and long timelines.
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Source data:{" "}
-              <a
-                href="https://proton.alcor.exchange/analytics/tokens/won-w3won"
-                className="underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Alcor WON analytics
-              </a>
-            </p>
           </div>
-          <div className="bridge-nav-links">
-            <Link href="/" className="bridge-nav-link">
-              Back home
-            </Link>
-          </div>
-        </div>
 
         <div className="bridge-card apy-grid">
           <section className="apy-panel">
             <div className="apy-panel-header">
               <div>
                 <p className="bridge-eyebrow">On-chain signal</p>
-                <h2 className="apy-title">~{apyRate * 100}% APY</h2>
+                <h2 className="apy-title">~{(oracleSnapshot.distributionRate * 100).toFixed(2)}% Distribution</h2>
                 <p className="bridge-muted">
-                  Updated {lastUpdated.toLocaleString()} · WON staking pool snapshot
+                  {lastUpdated ? `Updated ${lastUpdated.toLocaleString()}` : "Fetching oracle snapshot..."} · {oracleSnapshot.source}
                 </p>
+                <p className="bridge-muted">Oracle price: {formatCurrency(oracleSnapshot.wonUsdPrice)} per WON</p>
               </div>
               <LineChart className="w-10 h-10 text-teal-500" />
             </div>
@@ -202,20 +325,25 @@ export default function ApyCalculatorPage() {
                   onChange={(event) => setAmountInput(event.target.value)}
                   placeholder="Enter your WON balance"
                 />
-                <p className="bridge-muted">We use monthly compounding to estimate yield.</p>
+                <p className="bridge-muted">
+                  We use monthly compounding to estimate holder distributions and display USD using the latest oracle price.
+                  Estimates are illustrative only.
+                </p>
               </div>
               <div className="bridge-field">
                 <label className="bridge-label">Projected value</label>
                 <div className="apy-stat">
                   <span>{formatNumber(activeProjection?.projectedValue ?? 0)} WON</span>
-                  <small>{formatCurrency(activeProjection?.projectedValue ?? 0)}</small>
+                  <small>{formatCurrency((activeProjection?.projectedValue ?? 0) * oracleSnapshot.wonUsdPrice)}</small>
                 </div>
               </div>
               <div className="bridge-field">
                 <label className="bridge-label">Projected net yield</label>
                 <div className="apy-stat">
                   <span>{formatNumber(activeProjection?.netYield ?? 0)} WON</span>
-                  <small>+{formatCurrency(activeProjection?.netYield ?? 0)}</small>
+                  <small>
+                    +{formatCurrency((activeProjection?.netYield ?? 0) * oracleSnapshot.wonUsdPrice)}
+                  </small>
                 </div>
               </div>
             </div>
@@ -270,17 +398,10 @@ export default function ApyCalculatorPage() {
               Download PDF
             </button>
 
-            <div className="apy-data-card">
-              <p className="bridge-eyebrow">Display on dashboard</p>
-              <p className="bridge-muted">
-                Embed this module on the website or analytics view to illustrate how WON
-                compounding funds regeneration. Data feeds are ready to swap for live oracle
-                inputs as they go on-chain so APY stays in sync with XPR activity.
-              </p>
-            </div>
           </aside>
         </div>
       </div>
     </div>
+    </SiteLayout>
   );
 }
