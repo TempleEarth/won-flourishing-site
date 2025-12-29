@@ -120,6 +120,8 @@ const WON_TOKEN_CONTRACT = (import.meta.env.VITE_WON_TOKEN_CONTRACT ?? "w3won").
 const WON_TOKEN_SYMBOL = (import.meta.env.VITE_WON_TOKEN_SYMBOL ?? "WON").trim();
 // Proton stats show WON uses 6 decimals.
 const WON_TOKEN_DECIMALS = Number(import.meta.env.VITE_WON_TOKEN_DECIMALS ?? 6);
+const STAKING_ENABLED =
+  (import.meta.env.VITE_WON_STAKING_ENABLED ?? "false").toString().toLowerCase() === "true";
 const SESSION_STORAGE_KEY = "wharf-session";
 const WALLET_LOGIN_TIMEOUT_MS = 15000;
 
@@ -137,6 +139,7 @@ export default function StakePage() {
   const [transactionId, setTransactionId] = useState<string | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
+  const isStakingPaused = !STAKING_ENABLED;
 
   const chainDefinition = useMemo(
     () => ({
@@ -247,6 +250,10 @@ export default function StakePage() {
   };
 
   const handleStake = async () => {
+    if (isStakingPaused) {
+      setStakeError("Staking is currently paused. Check back soon.");
+      return;
+    }
     if (!session) {
       await connectWallet();
       return;
@@ -345,8 +352,9 @@ export default function StakePage() {
                     min="0"
                     value={stakeAmount}
                     onChange={(event) => setStakeAmount(event.target.value)}
+                    disabled={isStakingPaused}
                   />
-                  <button type="button" className="bridge-ghost">
+                  <button type="button" className="bridge-ghost" disabled={isStakingPaused}>
                     Max
                   </button>
                 </div>
@@ -361,6 +369,7 @@ export default function StakePage() {
                 className="bridge-select"
                 value={selectedRegion}
                 onChange={(event) => setSelectedRegion(event.target.value)}
+                disabled={isStakingPaused}
               >
                 {regions.map((region) => (
                   <option key={region.id} value={region.id}>
@@ -377,9 +386,15 @@ export default function StakePage() {
               className="bridge-primary"
               type="button"
               onClick={handleStake}
-              disabled={stakeStatus === "signing" || isConnecting}
+              disabled={isStakingPaused || stakeStatus === "signing" || isConnecting}
             >
-              {session ? "Stake WON" : isConnecting ? "Connecting..." : "Connect Proton wallet"}
+              {isStakingPaused
+                ? "Staking paused"
+                : session
+                  ? "Stake WON"
+                  : isConnecting
+                    ? "Connecting..."
+                    : "Connect Proton wallet"}
             </button>
             <div className="bridge-banner" style={{ marginTop: 0 }}>
               {connectionLabel
@@ -396,6 +411,11 @@ export default function StakePage() {
             {stakeError && (
               <div className="bridge-banner error" style={{ marginTop: 12 }}>
                 {stakeError}
+              </div>
+            )}
+            {isStakingPaused && (
+              <div className="bridge-banner" style={{ marginTop: 12 }}>
+                Staking is temporarily paused. We will reopen staking soon.
               </div>
             )}
             {stakeStatus === "signing" && (
